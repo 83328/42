@@ -2,4 +2,4 @@
 
 ## Authors
 - Attila Kekesi
-- Arthur Limpsen
+- Arthur Limpens
