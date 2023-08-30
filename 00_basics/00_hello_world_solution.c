@@ -8,7 +8,7 @@ Allowed functions:
 	write from <unistd.h>
 
 Compile:
-	cc -Wall -Wextra -Werror 00_hello_world.c -o hello_world
+	cc -Wall -Wextra -Werror 00_hello_world_solution.c -o hello_world
 
 Run:
 	./hello_world
