@@ -14,4 +14,10 @@ Run:
 	./hello_world
 */
 
-<YOUR CODE HERE>
+#include <unistd.h>
+
+int main(void)
+{
+	write(1, "Hello World", 11);
+	write(1, "\n", 1);
+}
