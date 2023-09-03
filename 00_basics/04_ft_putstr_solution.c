@@ -3,8 +3,7 @@ Put String
 
 Write a function that prints the given string.
 Make a main function that can get argument(s).
-If there is only one argument (argc=2), call the function with it and print a newline.
-In other case simply print a newline.
+Call the function with argument(s) and after every call print a new line.
 Your project must be written in accordance with the Norm of 42 (except for the 42 header).
 
 Function:
@@ -16,7 +15,7 @@ Allowed external functions:
 	write from <unistd.h>
 
 Compile:
-	cc -Wall -Wextra -Werror 03_ft_putstr.c -o ft_putstr
+	cc -Wall -Wextra -Werror 04_ft_putstr_solution.c -o ft_putstr
 
 Run:
 	./ft_putstr <your arguments>
@@ -24,14 +23,8 @@ Run:
 Tests:
 	./ft_putstr "Hello, World!"
 	./ft_putstr 42
-	./ft_putstr 42 -123454321
-	./ft_putstr
-	./ft_putstr ""
-	./ft_putstr "" ""
-	./ft_putstr ''
-	./ft_putstr '' ''
-	./ft_putstr "" "" ''
-	./ft_putstr " "
+	./ft_putstr 42 -123454321 AbC-1_3
+	./ft_putstr A "" B "" C '' D " "
 	./ft_putstr " " " "
 	./ft_putstr "NULL"
 	./ft_putstr "char *str"
@@ -39,4 +32,31 @@ Tests:
 	...
 */
 
-<YOUR CODE HERE>
+#include <unistd.h>
+
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write (1, &str[i], 1);
+		i++;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		ft_putstr(argv[i]);
+		ft_putstr("\n");
+		i++;
+	}
+	if (argc == 1)
+		ft_putstr("\n");
+}

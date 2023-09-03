@@ -16,7 +16,7 @@ Allowed external functions:
 	write from <unistd.h>
 
 Compile:
-	cc -Wall -Wextra -Werror 03_ft_putstr.c -o ft_putstr
+	cc -Wall -Wextra -Werror 03_ft_putstr_solution.c -o ft_putstr
 
 Run:
 	./ft_putstr <your arguments>
@@ -39,4 +39,23 @@ Tests:
 	...
 */
 
-<YOUR CODE HERE>
+#include <unistd.h>
+
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write (1, &str[i], 1);
+		i++;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		ft_putstr(argv[1]);
+	ft_putstr("\n");
+}
