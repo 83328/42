@@ -48,7 +48,14 @@ void ft_putstr(char *str)
 
 int main(int ac, char **av)
 {
-	if(ac >= 1)
-		ft_putstr(av[1]);
-	write(1, "\n", 1);
+	int i;
+
+	i = 1;
+	while(ac > i)
+	{
+		ft_putstr(av[i]);
+		write(1, "\n", 1);
+		i++;
+	}
+	return('\0');
 }
