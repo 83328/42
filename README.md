@@ -1,8 +1,6 @@
 # 42
 
 ## Authors
-- Attila Kekesi
-- Arthur Limpens
+- akekesi
+- alimpens
 
----testupload ---
-...and another day
