@@ -5,4 +5,4 @@
 - alimpens
 
 > [!NOTE]
-> Please feel free to use this code to learn
+> Please feel free to use this code to assist you during your learning journey!

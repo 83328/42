@@ -21,7 +21,7 @@ $>./add_prime_sum | cat -e
 0$
 $> */
 
-#include <unistd.h>
+/*#include <unistd.h>
 int is_prime(int num)
 {
 	int i = 3;
@@ -91,6 +91,83 @@ int main(int ac, char *av[])
 	write(1, "\n", 1);
 	return (0);
 }
+*/
+#include<unistd.h>
+
+int is_prime(int num)
+{
+	int i = 3;
+
+	if (num <= 1)
+		return (0);
+	if (num % 2 == 0 && num > 2)
+		return (0);
+	while (i < (num / 2))
+	{
+		if (num % i == 0)
+			return 0;
+		i += 2;
+	}
+	return 1;
+}
+
+void	ft_putchar(char c)
+{
+	write (1, &c, 1);
+}
+
+void	ft_putnbr(int nb)
+{
+	if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		nb = nb % 10;
+	}
+	if (nb < 9)
+	{
+		ft_putchar(nb + '0') ;
+	}
+}
+
+int ft_atoi(char *str)
+{
+int i = 0;
+int res = 0;
+int sign = 1;
+
+while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	i++;
+if(str[i] == '-')
+	sign = -1;
+if (str[i] == '-' || str[i] == '+')
+	i++;
+while(str[i] >= '0' && str[i] <= '9')
+	{
+	res = res*10+str[i] - '0';
+	i++;
+	}
+return(sign * res);
+}
+
+int main(int ac, char *av[])
+{
+	int sum = 0;
+	int nb;
+	
+	if (ac == 2)
+	{
+		nb = ft_atoi(av[1]);
+		while (nb > 0)
+			if (is_prime(nb--))
+				sum += (nb + 1);
+		ft_putnbr(sum);
+	}
+	else if (ac != 2)
+		ft_putnbr(0);
+	write(1, "\n", 1);
+	return (0);
+}
+
 
 /* 
 #include <unistd.h>

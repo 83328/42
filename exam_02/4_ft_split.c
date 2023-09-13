@@ -17,13 +17,22 @@ char    **ft_split(char *str); */
 #include <stdlib.h>
 #include <string.h>
 
+int ft_strlen(char *str)
+{
+	int	i = 0;
+
+	while (str[i])
+		i++;
+	return (i);
+}
+
 char **ft_split(char *str)
 {
     int i = 0;
     int j = 0;
     int k = 0;
     int word_count = 0;
-    int len = strlen(str);
+    int len = ft_strlen(str);
 
     while (i < len)
     {
@@ -61,3 +70,31 @@ char **ft_split(char *str)
     result[k] = NULL;
     return result;
 }
+
+/* 
+int main() 
+{
+    char input_string[] = "This is a test string";
+    char **words = ft_split(input_string);
+
+    if (words == NULL)
+    {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+
+    printf("Original string: \"%s\"\n", input_string);
+    printf("Split words:\n");
+
+    int i = 0;
+    while (words[i] != NULL)
+    {
+        printf("%d: \"%s\"\n", i + 1, words[i]);
+        free(words[i]); // Free memory allocated for individual words
+        i++;
+    }
+
+    free(words); // Free memory allocated for the array of words
+    return 0;
+}
+*/
