@@ -11,15 +11,15 @@ The function should be prototyped as follows:
 size_t	ft_strcspn(const char *s, const char *reject);
  */
  
- // !!! NOT PASSING THE TRIAL EXAM !!!
+ // include <stddef.h> for passing - not sure whether the real exam will allow
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
 
 size_t	ft_strcspn(const char *s, const char *reject)
 {
-	int     i = 0;
-	int j;
+	int	i = 0;
+	int	j;
 
 	while (s[i] != '\0')
 	{
