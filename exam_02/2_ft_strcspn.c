@@ -11,7 +11,7 @@ The function should be prototyped as follows:
 size_t	ft_strcspn(const char *s, const char *reject);
  */
  
- // include <stddef.h> for passing - not sure whether the real exam will allow
+ // include <stddef.h> for passing - needed since you have size_t in the prototype
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
