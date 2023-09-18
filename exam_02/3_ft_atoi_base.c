@@ -21,6 +21,62 @@ Your function must be declared as follows:
 int	ft_atoi_base(const char *str, int str_base);
 */
 
+//#include <stdio.h>
+
+int	ft_check(char c)
+{
+	if ('0' <= c && c <= '9')
+		return (c - '0');
+	else if ('a' <= c && c <= 'f')
+		return (c - 'a' + 10);
+	else if ('A' <= c && c <= 'F')
+		return (c - 'A' + 10);
+	return (0);
+}
+
+int	value_of(char c, int base)
+{
+	char digit[17] = "0123456789abcdef";
+	char digit2[17] = "0123456789ABCDEF";
+
+	while (base--)
+	{
+		if (digit[base] == c || digit2[base] == c)
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_atoi_base(const char *str, int str_base)
+{
+int i = 0;
+int result = 0;
+int sign = 1;
+
+while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	i++;
+if(str[i] == '-')
+	sign = -1;
+if (str[i] == '-' || str[i] == '+')
+	i++;
+while(value_of(str[i], str_base))
+	{
+	result = result * str_base + ft_check(str[i]);
+	i++;
+	}
+return (sign * result);
+}
+
+/* 
+int		main(void)
+{
+	printf("%d\n", ft_atoi_base("ff", 16));
+    //printf("%d\n", ft_atoi_base("FF", 10));
+	return 0;
+}
+*/
+
+/* 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -84,7 +140,8 @@ int		main(void)
 	printf("%d\n", ft_atoi_base("ff", 16));
     //printf("%d\n", ft_atoi_base("FF", 10));
 	return 0;
-}
+} 
+*/
 
 /* --- Attila ---
 

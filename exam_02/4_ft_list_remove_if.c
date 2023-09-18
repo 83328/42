@@ -42,7 +42,7 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 	ft_list_remove_if(&cur->next, data_ref, cmp);
 } */
 
-void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
+/* void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
 	if (!*begin_list || !begin_list)
 		return ;
@@ -57,6 +57,37 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 	}
 	cur = *begin_list;
 	ft_list_remove_if(&cur->next, data_ref, cmp);
+} 
+*/
+
+//------------------Corrected version, untested in real exam yet ------------
+
+#include <stdlib.h>
+
+typedef struct s_list {
+    void *data;
+    struct s_list *next;
+} t_list;
+
+
+void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
+{
+    if (!*begin_list || !cmp)
+        return;
+
+    t_list *cur = *begin_list;
+
+    if (cmp(cur->data, data_ref) == 0)
+    {
+        *begin_list = cur->next;
+        free(cur);
+        ft_list_remove_if(begin_list, data_ref, cmp);
+    }
+    else
+    {
+        cur = *begin_list;
+        ft_list_remove_if(&cur->next, data_ref, cmp);
+    }
 }
 
 //---------------------------------------------------------------------

@@ -2,7 +2,7 @@
 Expected files	: ft_strcspn.c
 Allowed functions: None
 ---------------------------------------------------------------
-
+ 
 Reproduce exactly the behavior of the function strcspn
 (man strcspn).
 
