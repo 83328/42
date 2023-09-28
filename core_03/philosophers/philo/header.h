@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:53:32 by alimpens          #+#    #+#             */
-/*   Updated: 2023/09/25 15:53:33 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:14:16 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ typedef struct s_phil
 	t_info			*info;
 }	t_phil;
 
-// 00_check.c
-int		check_args(int argc, char **argv);
-int		check_sub1(char **argv, int i);
+// checkers.c
+int		check_args(int ac, char **av);
+int		check_sub1(char **av, int i);
 int		check_sub2(char *str);
 int		check_digits(char *str);
 int		check_int(char *str);
@@ -64,7 +64,7 @@ void	free_info(t_info **info);
 void	make_forks(t_fork **forks, int n);
 void	free_forks(t_fork **forks, int n);
 
-// 03_phil.c
+// philo.c
 void	make_phils_sub1(t_phil **phils, int argc, char **argv);
 void	make_phils_sub2(t_phil **phils, t_info **info, t_fork **forks, int n);
 void	free_phils(t_phil **phils);
