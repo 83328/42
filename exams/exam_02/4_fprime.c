@@ -66,6 +66,44 @@ int main(int ac, char **av)
 	printf("\n");
 }
 
+#include<stdlib.h>
+#include<stdio.h>
+
+int main(int ac, char **av)
+{
+int nbr;
+int first = 1;
+int divider = 2;
+int flag = 0;
+
+if(ac == 2 && atoi(av[1]) > 0)
+{
+nbr = atoi(av[1]);
+	if(nbr == 1)
+		printf("1");
+	else
+	{
+		while(nbr != 1)
+		{
+			if(nbr % divider == 0)
+			{
+				if(flag == 1)
+				{
+					printf("*");
+				}
+				printf("%i", divider);
+				flag = 1;
+				nbr = nbr / divider;
+			}
+			else
+				divider++;
+		}
+
+	}
+}
+printf("\n");
+}
+
 /* 
 #include <stdio.h>
 #include <stdlib.h>

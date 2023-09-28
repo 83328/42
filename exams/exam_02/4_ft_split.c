@@ -71,7 +71,7 @@ char **ft_split(char *str)
     return result;
 }
 
-
+/* 
 int main() 
 {
     char input_string[] = "This is a test string";
@@ -97,3 +97,4 @@ int main()
     free(words); // Free memory allocated for the array of words
     return 0;
 }
+*/
