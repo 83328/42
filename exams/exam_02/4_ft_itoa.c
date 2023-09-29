@@ -137,6 +137,7 @@ int	main(void)
 {
 	int i = 0;
 	int min = 2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2;
+	//easier: in the terminal type: bc and then 2^32/2 or 2^31
 	int tab[5] = {-2147483648, -42, 0, 42, 2147483647};
 
 	while (i < 5)

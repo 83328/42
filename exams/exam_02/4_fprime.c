@@ -65,7 +65,7 @@ int main(int ac, char **av)
 	}
 	printf("\n");
 }
-
+/*
 #include<stdlib.h>
 #include<stdio.h>
 
@@ -103,7 +103,7 @@ nbr = atoi(av[1]);
 }
 printf("\n");
 }
-
+*/
 /* 
 #include <stdio.h>
 #include <stdlib.h>
