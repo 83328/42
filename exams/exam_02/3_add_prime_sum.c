@@ -92,6 +92,81 @@ int main(int ac, char *av[])
 	return (0);
 }
 */
+
+#include<unistd.h>
+
+int ft_atoi(char *str)
+{
+int i = 0;
+int sign = 1;
+int res = 0;
+
+while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	i++;
+if(str[i] == '-')
+	sign  = -1;
+if(str[i] == '-' || str[i] == '+')
+	i++;
+while(str[i] >= '0' && str[i] <= '9')
+	{
+	res = res * 10 + str[i] - '0';
+	i++;
+	}
+return(sign * res);
+}
+
+void ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void ft_putnbr(int nbr)
+{
+if(nbr > 9)
+	{
+	ft_putnbr(nbr/10);
+	nbr = nbr % 10;
+	}
+	ft_putchar(nbr + '0');
+}
+
+int is_prime(int nbr)
+{
+int i = 3;
+
+if(nbr <= 1)
+	return(0);
+else if(nbr % 2 == 0 && nbr > 2)
+	return(0);
+while(i < (nbr / 2))
+	{
+	if(nbr % i == 0)
+		return(0);
+	i = i+2;
+	}
+return(1);
+}
+
+int main(int ac, char **av)
+{
+	int sum = 0;
+	int nbr;
+	if(ac == 2)
+	{
+		nbr = ft_atoi(av[1]);
+		while(nbr > 1)
+		{
+			if(is_prime(nbr))
+				sum += (nbr);
+			nbr--;
+		}
+		ft_putnbr(sum);
+	}
+	else
+		write(1, "0", 1);
+	write(1, "\n", 1);
+}
+/*
 #include<unistd.h>
 
 int is_prime(int num)
@@ -168,7 +243,7 @@ int main(int ac, char *av[])
 	return (0);
 }
 
-
+*/
 /* 
 #include <unistd.h>
 #include <stdio.h>
