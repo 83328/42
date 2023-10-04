@@ -37,7 +37,7 @@ $>./tab_mult | cat -e
 $
 $> */
 
-#include <unistd.h>
+/* #include <unistd.h>
 
 int	ft_atoi(char *str)
 {
@@ -106,4 +106,74 @@ int	main(int argc, char *argv[])
 		}
 	}
 	return (0);
+} */
+//--------------------------------
+#include<unistd.h>
+
+int ft_atoi(char *str)
+{
+int i = 0;
+int result = 0;
+int sign = 1;
+
+while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	i++;
+if(str[i] == '-')
+	sign = -1;
+if(str[i] == '-' || str[i] == '+')
+	i++;
+while(str[i] >= '0' && str[i] <= '9')
+	{
+	result = result * 10 + str[i] - '0';
+	i++;
+	}
+return(sign * result);
+}
+
+void ft_putchar(char c)
+{
+write(1, &c, 1);
+}
+
+void ft_putnbr(int nbr)
+{
+if (nb == -2147483648)
+	{
+		ft_putchar('-');
+		ft_putchar('2');
+		nb = (nb % 1000000000 * -1);
+	}
+else if (nbr < 0)
+	{
+	write(1, "-", 1);
+//	ft_putchar ('-');
+	nbr = (nbr * -1);
+	}
+if(nbr/10 > 0)
+	ft_putnbr(nbr/10);
+ft_putchar(nbr % 10 + '0');
+}
+
+int main(int ac, char **av)
+{
+int i = 0;
+int nbr;
+if(ac != 2)
+	write(1, "\n", 1);
+else
+	{
+	i = 1;
+	nbr = ft_atoi(av[1]);
+	while(i <= 9)
+		{
+		ft_putnbr(i);
+		write(1, " x ", 3);
+		ft_putnbr(nbr);
+		write(1, " = ", 3);
+		ft_putnbr(i * nbr);
+		write(1, "\n", 1);
+		i = i + 1;
+		}
+	}
+return(0);
 }
