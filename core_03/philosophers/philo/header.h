@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:53:32 by alimpens          #+#    #+#             */
-/*   Updated: 2023/09/27 14:14:16 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:17:33 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	make_forks(t_fork **forks, int n);
 void	free_forks(t_fork **forks, int n);
 
 // philo.c
-void	make_phils_sub1(t_phil **phils, int argc, char **argv);
+void	make_phils_sub1(t_phil **phils, int ac, char **av);
 void	make_phils_sub2(t_phil **phils, t_info **info, t_fork **forks, int n);
 void	free_phils(t_phil **phils);
 

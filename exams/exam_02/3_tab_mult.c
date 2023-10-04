@@ -137,11 +137,11 @@ write(1, &c, 1);
 
 void ft_putnbr(int nbr)
 {
-if (nb == -2147483648)
+if (nbr == -2147483648)
 	{
 		ft_putchar('-');
 		ft_putchar('2');
-		nb = (nb % 1000000000 * -1);
+		nbr = (nbr % 1000000000 * -1);
 	}
 else if (nbr < 0)
 	{
