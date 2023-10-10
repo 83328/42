@@ -38,7 +38,7 @@ $ */
 int main(int ac, char **av)
 {
 	int nbr;
-	int first = 1;
+	int flag = 1;
 	int divider = 2;
 
 	if(ac == 2 && (nbr = atoi(av[1])) > 0)
@@ -51,12 +51,12 @@ int main(int ac, char **av)
 			{
 				if (nbr % divider == 0)
 				{
-					if (first)
-						first = 0;
+					if (flag == 1)
+						flag = 0;
 					else
 						printf("*");
 					printf("%i", divider);
-					nbr = nbr / divider;		
+					nbr = nbr / divider;
 				}
 				else
 					++divider;
@@ -65,6 +65,7 @@ int main(int ac, char **av)
 	}
 	printf("\n");
 }
+
 /*
 #include<stdlib.h>
 #include<stdio.h>
