@@ -42,7 +42,7 @@ char **ft_split(char *str)
 	    {
             word_count++;
             while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
-                            i++;
+                i++;
         }
     }
     char **result = (char**)malloc(sizeof(char*) * (word_count + 1));

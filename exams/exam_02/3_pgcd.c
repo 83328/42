@@ -25,7 +25,42 @@ $> ./pgcd | cat -e
 $ */
 
 
-#include <stdio.h>
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int ac, char **av)
+{
+int i;
+int j;
+int temp;
+int k;
+
+if(ac == 3)
+	{
+	i = atoi(av[1]);
+	j = atoi(av[2]);
+	
+	if(i >= j)
+		{
+		temp = i;
+		i = j;
+		j = temp;
+		}
+	k = i;
+	while(j%k != 0)
+	{
+		k--;
+		while(i%k != 0)
+			k--;
+	}
+	
+	printf("%i\n", k);
+	}
+else
+	printf("\n");
+}
+
+/* #include <stdio.h>
 #include <stdlib.h>
 
 int main(int argc, char const *argv[])
@@ -52,4 +87,4 @@ int main(int argc, char const *argv[])
 	}
 	printf("%d\n", string1);
 	return 0;
-}
+} */

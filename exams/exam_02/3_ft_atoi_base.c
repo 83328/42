@@ -23,48 +23,48 @@ int	ft_atoi_base(const char *str, int str_base);
 
 //#include <stdio.h>
 
-int	ft_check(char c)
+int value_of(char c, int base)
 {
-	if ('0' <= c && c <= '9')
-		return (c - '0');
-	else if ('a' <= c && c <= 'f')
-		return (c - 'a' + 10);
-	else if ('A' <= c && c <= 'F')
-		return (c - 'A' + 10);
-	return (0);
+char digit[17] = "0123456789abcdef";
+char digit2[17] = "0123456789ABCDEF";
+
+while(base--)
+	{
+	if(digit[base] == c || digit2[base] == c)
+		return(1);
+	}
+return(0);
 }
 
-int	value_of(char c, int base)
+int ft_check(char c)
 {
-	char digit[17] = "0123456789abcdef";
-	char digit2[17] = "0123456789ABCDEF";
-
-	while (base--)
-	{
-		if (digit[base] == c || digit2[base] == c)
-			return (1);
-	}
-	return (0);
+if(c >= '0' && c <= '9')
+	return(c-'0');
+else if (c > 'a' && c <= 'f')
+	return(c - 'a' + 10);
+else if (c > 'A' && c <= 'F')
+	return(c - 'A' + 10);
+return(0);
 }
 
 int	ft_atoi_base(const char *str, int str_base)
 {
 int i = 0;
-int result = 0;
+int res = 0;
 int sign = 1;
 
 while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 	i++;
 if(str[i] == '-')
 	sign = -1;
-if (str[i] == '-' || str[i] == '+')
+if(str[i] == '-' || str[i] == '+')
 	i++;
 while(value_of(str[i], str_base))
 	{
-	result = result * str_base + ft_check(str[i]);
+	res = res * str_base + ft_check(str[i]);
 	i++;
 	}
-return (sign * result);
+return(sign * res);
 }
 
 /* 
