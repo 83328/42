@@ -59,3 +59,40 @@ int	main(int ac, char **av)
 	}
 	write (1, "\n", 1);
 }
+/*
+int main(int ac, char **av)
+{
+int i = 0;
+int start = 0;
+int flag;
+
+if(ac == 2)
+{
+	while(av[1][i]==' ' || av[1][i] == '\t')
+		i++;
+	start = i;
+
+	while(av[1][i])
+		i++;
+	i--;
+	while(i > start)
+	{
+		while(av[1][i]!=' ' && av[1][i] != '\t' && av[1][i] != '\0')
+			i--;
+		i++;
+		flag = i;
+		while(av[1][i]!=' ' && av[1][i] != '\t' && av[1][i] != '\0')
+			{
+			write(1, &av[1][i], 1);
+			i++;
+			}
+		i = flag;
+		i--;
+		i--;
+		if(flag >= start+1)
+			write(1, " ", 1);
+	}
+}
+write(1, "\n", 1);
+}
+*/
