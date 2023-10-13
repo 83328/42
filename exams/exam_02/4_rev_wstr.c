@@ -25,41 +25,7 @@ $>
 */
 
 #include <unistd.h>
-#include <stdio.h>
 
-void	ft_rev_wstr(char *str)
-{
-	int	i = 0;
-	int	start = 0;
-	int end = 0;
-	int	flag;
-
-	while (str[i])
-		i++;
-	while (i >= 0)
-	{
-		i--;
-		end = i;
-		while (str[i] != ' ' && str[i] != '\t' && str[i])
-			i--;
-		start = i + 1;
-		flag = start;
-		while (start <= end)
-			write (1, &str[start++], 1);
-		if (flag != 0)
-			write (1, " ", 1);
-	}
-}
-
-int	main(int ac, char **av)
-{
-	if (ac == 2)
-	{
-		ft_rev_wstr(av[1]);
-	}
-	write (1, "\n", 1);
-}
-/*
 int main(int ac, char **av)
 {
 int i = 0;
@@ -95,4 +61,40 @@ if(ac == 2)
 }
 write(1, "\n", 1);
 }
-*/
+
+
+/* #include <unistd.h>
+#include <stdio.h>
+
+void	ft_rev_wstr(char *str)
+{
+	int	i = 0;
+	int	start = 0;
+	int end = 0;
+	int	flag;
+
+	while (str[i])
+		i++;
+	while (i >= 0)
+	{
+		i--;
+		end = i;
+		while (str[i] != ' ' && str[i] != '\t' && str[i])
+			i--;
+		start = i + 1;
+		flag = start;
+		while (start <= end)
+			write (1, &str[start++], 1);
+		if (flag != 0)
+			write (1, " ", 1);
+	}
+}
+
+int	main(int ac, char **av)
+{
+	if (ac == 2)
+	{
+		ft_rev_wstr(av[1]);
+	}
+	write (1, "\n", 1);
+} */
