@@ -62,6 +62,49 @@ if(ac == 2)
 write(1, "\n", 1);
 }
 
+/* #include <unistd.h>
+
+int main(int ac, char **av)
+{
+int i = 0;
+int start = 0;
+int flag = 0;
+int first_word;
+
+if(ac == 2)
+{
+while(av[1][i] == ' ' || av[1][i] == '\t')
+	i++;
+while(av[1][i] != ' ' && av[1][i] != '\t' && av[1][i] != '\0')
+	i++;
+first_word = i;
+i = 0;
+while(av[1][i])
+	i++;
+i--;
+while(i>0)
+	{
+	while(av[1][i] == ' ' || av[1][i] == '\t')
+		i--;
+
+
+	while(av[1][i] != ' ' && av[1][i] != '\t' && av[1][i] != '\0')
+		i--;
+	flag = i;
+	i++;
+	
+	while(av[1][i] != ' ' && av[1][i] != '\t' && av[1][i] != '\0')
+		{
+		write(1, &av[1][i], 1);
+		i++;
+		}
+	i = flag;
+	if(i > first_word-1)
+		write(1, " ", 1);
+	}
+}
+write(1, "\n", 1);
+} */
 
 /* #include <unistd.h>
 #include <stdio.h>

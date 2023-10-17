@@ -21,8 +21,63 @@ Your function must be declared as follows:
 int	ft_atoi_base(const char *str, int str_base);
 */
 
-//#include <stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+#include<stdio.h>
 
+int value_of(char c, int base)
+{
+char digit[17] = "0123456789abcdef";
+char digit2[17] = "0123456789ABCDEF";
+
+while(base--)
+	{
+	if(digit[base] == c || digit2[base] == c)
+		return(1);
+	}
+return(0);
+}
+
+int ft_check(char c)
+{
+if(c >= '0' && c <= '9')
+	return(c - '0');
+else if(c >= 'a' && c <= 'f')
+	return(c - 'a' + 10);
+else if(c >= 'A' && c <= 'F')
+	return(c - 'A' + 10);
+return(0);
+}
+
+int	ft_atoi_base(const char *str, int str_base)
+{
+int i = 0;
+int res = 0;
+int sign = 1;
+
+while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	i++;
+if(str[i] == '-')
+	sign = -1;
+if(str[i] == '-' || str[i] == '+')
+	i++;
+while(value_of(str[i], str_base))
+	{
+	res = res * str_base + ft_check(str[i]);
+	i++;
+	}
+return(sign * res);
+} 
+
+int		main(void)
+{
+	printf("%d\n", ft_atoi_base("a", 16));
+    //printf("%d\n", ft_atoi_base("FF", 10));
+	return 0;
+}
+
+//#include <stdio.h>
+/* 
 int value_of(char c, int base)
 {
 char digit[17] = "0123456789abcdef";
@@ -65,7 +120,7 @@ while(value_of(str[i], str_base))
 	i++;
 	}
 return(sign * res);
-}
+} */
 
 /* 
 int		main(void)
