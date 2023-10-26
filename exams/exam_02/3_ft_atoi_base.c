@@ -21,8 +21,6 @@ Your function must be declared as follows:
 int	ft_atoi_base(const char *str, int str_base);
 */
 
-#include<unistd.h>
-#include<stdlib.h>
 #include<stdio.h>
 
 int value_of(char c, int base)

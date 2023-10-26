@@ -5,8 +5,8 @@ Allowed functions:
 
 Write the following function:
 
-int		max(int* tab, unsigned int len);
-
+int		max(int* tab, unsig
+ned int len);
 The first parameter is an array of int, the second is the number of elements in
 the array.
 
