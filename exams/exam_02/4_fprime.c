@@ -32,6 +32,43 @@ $
 $> ./fprime 42 21 | cat -e
 $ */
 
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int ac, char **av)
+{
+	int div = 2;
+	int nbr;
+	int flag = 1;
+
+	if(ac == 2)
+	{
+		nbr=atoi(av[1]);
+		if (nbr == 1)
+			printf("1");
+		while(div < nbr+1)
+		{
+			if(nbr%div == 0)
+			{
+				if (flag == 1)
+				{	
+					flag = 0;
+					printf("%i", div);
+				}	
+				else
+					printf("*%i", div);
+				
+				nbr = nbr/div;
+			}
+			else
+				div++;
+		}
+	}
+		printf("\n");
+}
+
+
+/* 
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -64,7 +101,8 @@ int main(int ac, char **av)
 		}
 	}
 	printf("\n");
-}
+} 
+*/
 
 /*
 #include<stdlib.h>
