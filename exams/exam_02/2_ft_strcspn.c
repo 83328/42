@@ -12,6 +12,24 @@ size_t	ft_strcspn(const char *s, const char *reject);
  */
  
  // include <stddef.h> for passing - needed since you have size_t in the prototype
+
+#include<string.h>
+
+size_t	ft_strcspn(const char *s, const char *reject)
+{
+	int i = 0;
+	int j;
+	while(s[i])
+	{
+	j = 0;
+		if(s[i] == reject[j])
+			return(i);
+		i++;
+	}
+	return(i);
+}
+
+/* 
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
@@ -33,7 +51,8 @@ size_t	ft_strcspn(const char *s, const char *reject)
 		i++;
 	}
 	return (i);
-}
+} 
+*/
 
 int main(void)
 {

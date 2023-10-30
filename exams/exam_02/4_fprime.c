@@ -37,6 +37,38 @@ $ */
 
 int main(int ac, char **av)
 {
+int div = 2;
+int flag = 0;
+int nbr;
+
+if(ac == 2)
+{
+	nbr=atoi(av[1]);
+	if(nbr == 1)
+		printf("1");
+	while(div <= nbr)
+	{
+		if(nbr%div == 0)
+		{
+			if(flag == 1)
+				printf("*");
+			printf("%i", div);
+			flag = 1;
+		nbr = nbr/div;
+		}
+		else
+			div++;
+	}
+}
+printf("\n");
+}
+
+
+/* #include<stdio.h>
+#include<stdlib.h>
+
+int main(int ac, char **av)
+{
 	int div = 2;
 	int nbr;
 	int flag = 1;
@@ -66,7 +98,7 @@ int main(int ac, char **av)
 	}
 		printf("\n");
 }
-
+ */
 
 /* 
 #include <stdio.h>

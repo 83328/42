@@ -44,3 +44,17 @@ unsigned int lcm(unsigned int a, unsigned int b)
 		++n;
 	}
 }
+
+int main() 
+{
+    unsigned int num1, num2;
+
+    printf("Enter two positive integers: ");
+    scanf("%u %u", &num1, &num2);
+
+    unsigned int result = lcm(num1, num2);
+
+    printf("The least common multiple of %u and %u is %u\n", num1, num2, result);
+
+    return 0;
+}
