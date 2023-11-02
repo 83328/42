@@ -49,3 +49,32 @@ int main(int argc, char *argv[])
 	printf("\n");
 	return (0);
 }
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int ac, char **av)
+{
+	int i;
+	int j;
+	int op;
+	int res;
+	if(ac == 4)
+	{
+		i = atoi(av[1]);
+		j = atoi(av[3]);
+		op = av[2][0];
+		if(op == '+')
+			res = i + j;
+		else if (op == '-')
+			res = i - j;
+		else if (op == '/')
+			res = i / j;
+		else if (op == '*')
+			res = i * j;
+		else if (op == '%')
+			res = i % j;
+		printf("%i", res);
+	}
+	printf("\n");
+}

@@ -19,7 +19,7 @@ _____________
 	 \/
  0110  0100 */
 
-#include <stdio.h>
+/* #include <stdio.h>
 #include <unistd.h>
 
 unsigned char	reverse_bits_2(unsigned char octet)
@@ -72,4 +72,47 @@ int	main(void)
 	print_bits(reverse_bits(5));
 	printf("\n");
 	print_bits(reverse_bits_2(5));
-} 
+}  */
+
+
+#include<unistd.h>
+
+void	print_bits(unsigned char octet)
+{
+	int i = 8;
+	unsigned char bit;
+
+	write(1, "Prn :", 5);
+	while(i>0)
+	{
+		bit = ((octet >> i &1)+'0');
+	//	write(1, &bit, 1);
+		return(bit);
+		i--;
+	}
+}
+
+void	reverse_bits(unsigned char octet)
+{
+	int i = 0;
+	unsigned char res;
+
+	write(1, "Rev :", 5);
+	while(i<8)
+	{
+		res = ((octet >> i&1)+'0');
+	//	write(1, &res, 1);
+		return(res);
+		i++;
+	}
+}
+
+int main(void)
+{
+	unsigned char c = 4;
+	
+	print_bits(c);
+	write(1, "\n", 1);
+	reverse_bits(c);
+	write(1, "\n", 1);
+}

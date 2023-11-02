@@ -39,26 +39,23 @@ char    *ft_strdup(char *src)
 
 char    *ft_strdup(char *src)
 {
-int i = 0;
-int len;
-char *dest;
+	int i = 0;
+	int len;
+	char *dest;
 
-while(src[i])
-	i++;
-len = i;
-i = 0;
-dest = malloc(len + 1);
-//if(dest != NULL)
-//{
+	while(src[i])
+		i++;
+	len = i;
+	i = 0;
+	dest = malloc(len + 1);
+	
 	while(src[i])
 		{
 		dest[i] = src[i];
 		i++;
 		}
 	dest[i] = '\0';
-//}
-
-return(dest);
+	return(dest);
 }
 
 /* #include <stdlib.h>

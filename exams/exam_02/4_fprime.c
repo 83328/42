@@ -63,6 +63,34 @@ if(ac == 2)
 printf("\n");
 }
 
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int ac, char **av)
+{
+	int nbr;
+	int div;
+
+	if(ac == 2)
+	{
+		nbr = atoi(av[1]);
+		div = 2;
+
+		while(div <= nbr)
+		{
+			if(nbr%div == 0)
+			{
+				printf("%i", div);
+				if((div*2)<nbr)
+					printf("*");
+				nbr = nbr/div;
+			}
+			else
+				div++;
+		}
+	}
+	printf("\n");
+}
 
 /* #include<stdio.h>
 #include<stdlib.h>
