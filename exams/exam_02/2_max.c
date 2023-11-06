@@ -29,3 +29,20 @@ int max(int *tab, unsigned int len)
 	}
 	return result;
 }
+/* 
+#include<string.h>
+
+int		max(int* tab, unsigned int len)
+{
+	int i = 0;
+	int max = tab[i];
+	if(len == 0)
+		return(0);
+	while(i <= len)
+	{
+		if(tab[i] >= max)
+			max = tab[i];
+		i++;
+	}
+	return(max);
+} */
