@@ -5,34 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 16:00:46 by alimpens          #+#    #+#             */
-/*   Updated: 2023/10/04 10:17:33 by alimpens         ###   ########.fr       */
+/*   Created: 2023/11/10 14:31:43 by alimpens          #+#    #+#             */
+/*   Updated: 2023/11/10 14:33:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int check_args(int ac, char **av)
+int	check_args(int ac, char **av)
 {
-    int i;
+	int	i;
 
-    if(ac <= 4 || ac >= 5)
-    {
-        printf("Error\n");
-        return(0);
-    }
-    i = 1;
-    while(i < ac)
-    {
-        //write sub1
-        if(!check_sub1(av, i))
-        {
-            printf("Error\n");
-            return(0);
-        }
-        i++;
-    }
-    return(1);
+	if (ac < 5 || 6 < ac)
+	{
+		printf("Error\n");
+		return (0);
+	}
+	i = 1;
+	while (i < ac)
+	{
+		if (!check_sub1(av, i))
+		{
+			printf("Error\n");
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
 int	check_sub1(char **av, int i)

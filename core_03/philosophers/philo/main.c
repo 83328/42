@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 12:04:44 by alimpens          #+#    #+#             */
-/*   Updated: 2023/10/04 10:17:33 by alimpens         ###   ########.fr       */
+/*   Created: 2023/11/10 14:28:28 by alimpens          #+#    #+#             */
+/*   Updated: 2023/11/10 14:30:51 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ int	main(int ac, char **av)
 	t_phil		*phils;
 	pthread_t	*threads;
 
-	if(!check_args(ac, av))
-		return(0);
+	if (!check_args(ac, av))
+		return (0);
 	info = NULL;
 	forks = NULL;
 	phils = NULL;
 	threads = NULL;
 	n = ft_atoi(av[1]);
-	make_info(&info);
+	/* 
+    make_info(&info);
 	make_forks(&forks, n);
 	make_phils_sub1(&phils, ac, av);
 	make_phils_sub2(&phils, &info, &forks, n);
@@ -38,5 +39,6 @@ int	main(int ac, char **av)
 	free_forks(&forks, n);
 	free_phils(&phils);
 	free_threads(&threads);
-	free_info(&info);
+	free_info(&info); 
+    */
 }

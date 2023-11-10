@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:32:51 by alimpens          #+#    #+#             */
-/*   Updated: 2023/09/25 16:08:35 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:30:07 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,12 @@ int	ft_strlen(const char *str)
         i++;
     return(i);
 }
+
+int ft_isdigit(int c)
+{
+    if(c >= '0' && c <= '9')
+        return(1);
+    return(0);
+}
+
+//is ft_isspace needed?

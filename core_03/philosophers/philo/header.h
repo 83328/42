@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:53:32 by alimpens          #+#    #+#             */
-/*   Updated: 2023/10/04 10:17:33 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:18:43 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ int		check_sub2(char *str);
 int		check_digits(char *str);
 int		check_int(char *str);
 
+// functions.c
+int		ft_atoi(const char *str);
+int		ft_strlen(const char *str);
+int		ft_isdigit(int c);
+
 // 01_info.c
 void	make_info(t_info **info);
 void	free_info(t_info **info);
@@ -91,10 +96,6 @@ int		do_sleep(t_phil **phil);
 
 // do_think.c
 void	do_think(t_phil **phil);
-
-// functions.c
-int		ft_atoi(const char *str);
-int		ft_strlen(const char *str);
 
 // print.c
 void	print(t_phil **phil, char *message);
