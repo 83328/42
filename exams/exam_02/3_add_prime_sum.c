@@ -92,6 +92,79 @@ int main(int ac, char **av)
 		write(1, "0\n", 2);
 }
 
+/* #include<unistd.h>
+
+void put_nbr(int n)
+{
+char digit[] = "0123456789";
+if(n > 9)
+	put_nbr(n/10);
+write(1, &digit[n%10], 1);
+}
+
+int ft_atoi(char *str)
+{
+	int i = 0;
+	int sign = 1;
+	int res = 0;
+
+	while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if(str[i] == '-')
+		sign = -1;
+	if(str[i] == '-' || str[i] == '+')
+		i++;
+	while(str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return(sign * res);
+}
+
+int is_prime(int n)
+{
+int i = 2;
+
+if(n <= 1)
+	return(0);
+else if(n % 2 == 0 && n > 2)
+	return(0);
+while(i < (n / 2))
+	{
+	if(n % i == 0)
+		return(0);
+	i = i+2;
+	}
+return(1);
+}
+
+void add_prime_sum(int n)
+{
+	int i = 2;
+	int res = 0;
+	
+	while(n >= i)
+	{
+		if(is_prime(i) == 1)
+			res = res + i;
+		i++;
+	}
+	put_nbr(res);
+}
+
+int main(int ac, char **av)
+{
+	int i = 1;
+	if(ac == 2)
+	{
+		add_prime_sum(ft_atoi(av[i]));
+	}
+	else
+		write(1, "0", 1);
+	write(1, "\n", 1);
+} */
+
 /*#include <unistd.h>
 int is_prime(int num)
 {

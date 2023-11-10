@@ -69,7 +69,7 @@ int *rrange(int start, int end)
 
 #include <stdlib.h>
 
-int *ft_rrange(int start, int end)
+/* int *ft_rrange(int start, int end)
 {
 	int *range;
 	int i = 0;
@@ -88,4 +88,37 @@ int *ft_rrange(int start, int end)
 		}
 	}
 	return (range);
+} */
+
+int *ft_rrange(int start, int end)
+{
+	int *range;
+	int i = 0;
+	int n = end - start + 1;
+
+	if (start > end)
+		return (ft_rrange(end, start));
+	range = malloc(sizeof(int) * n);
+	if (range)
+	{
+		while (i < n)
+		{
+			range[i] = start;
+			start++;
+			i++;
+		}
+	}
+	return (range);
+}
+
+int		main(void)
+{
+	int		*tab;
+
+	tab = ft_rrange(3, 6);
+	printf("%d\n", tab[0]);
+	printf("%d\n", tab[1]);
+	printf("%d\n", tab[2]);
+	printf("%d\n", tab[3]);
+	//printf("%d\n", tab[3]);
 }

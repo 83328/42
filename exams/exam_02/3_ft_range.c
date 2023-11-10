@@ -36,6 +36,42 @@ int	*ft_range(int start, int end)
 	return (res);
 } */
 
+/* #include <stdio.h>
+#include <stdlib.h>
+
+int *ft_range(int start, int end)
+{
+	int *range;
+	int i = 0;
+	int n = end - start + 1;
+
+	if (start > end)
+		return (ft_range(end, start));
+	range = malloc(sizeof(int) * n);
+	if (range)
+	{
+		while (i < n)
+		{
+			range[i] = end;
+			end--;
+			i++;
+		}
+	}
+	return (range);
+}
+
+int		main(void)
+{
+	int		*tab;
+
+	tab = ft_range(3, 6);
+	printf("%d\n", tab[0]);
+	printf("%d\n", tab[1]);
+	printf("%d\n", tab[2]);
+	printf("%d\n", tab[3]);
+	//printf("%d\n", tab[3]);
+} */
+ 
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -81,3 +117,4 @@ int		main(void)
 	printf("%d\n", tab[3]);
 	//printf("%d\n", tab[3]);
 }
+ 
