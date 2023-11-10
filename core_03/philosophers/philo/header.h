@@ -6,19 +6,19 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:53:32 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/10 14:18:43 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:54:59 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <sys/time.h>
-#include <semaphore.h>
-#include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <pthread.h>
+# include <sys/time.h>
+# include <semaphore.h>
+# include <unistd.h>
 
 typedef struct s_info
 {

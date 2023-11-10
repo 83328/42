@@ -6,7 +6,7 @@
 #    By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 11:40:17 by alimpens          #+#    #+#              #
-#    Updated: 2023/11/10 14:28:11 by alimpens         ###   ########.fr        #
+#    Updated: 2023/11/10 14:57:39 by alimpens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ $(NAME): $(OBJS_PHILOSOPHERS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
-	$(RM) $(addprefix $(SRC_DIR)/, $(OBJS_PHILOSOPHERS))
+	$(RM) $(OBJS_PHILOSOPHERS)
 
 fclean: clean
 	$(RM) $(NAME)

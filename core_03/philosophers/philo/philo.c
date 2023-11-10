@@ -6,11 +6,11 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 11:17:14 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/10 14:35:29 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:54:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <header.h>
+#include "header.h"
 
 void	make_phils_sub1(t_phil **phils, int ac, char **av)
 {
