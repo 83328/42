@@ -6,7 +6,7 @@
 #    By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 11:40:17 by alimpens          #+#    #+#              #
-#    Updated: 2023/11/10 14:57:39 by alimpens         ###   ########.fr        #
+#    Updated: 2023/11/10 16:24:32 by alimpens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,6 @@ NAME = philo
 
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror
-
-RM = rm -rf
 
 DEPS = header.h
 SRC_DIR = philo
@@ -33,7 +31,7 @@ SRCS_PHILOSOPHERS = main.c \
 	do_think.c \
 	routine.c \
 	print.c \
-	time.c 
+	time.c
 
 OBJS_PHILOSOPHERS = $(addprefix $(SRC_DIR)/, $(SRCS_PHILOSOPHERS:.c=.o))
 
@@ -45,12 +43,3 @@ all: $(NAME)
 $(NAME): $(OBJS_PHILOSOPHERS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-clean:
-	$(RM) $(OBJS_PHILOSOPHERS)
-
-fclean: clean
-	$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: all clean fclean re
