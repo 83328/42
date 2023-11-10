@@ -19,6 +19,7 @@
 2. print_bits
 3. str_capitalizer
 4. rostring 
->[!NOTE] the subject is vague about how to handle multiple arguments - I passed with only taking into account 1 (if ac == 2).
+> [!NOTE]
+> the subject is vague about how to handle multiple arguments - I passed with only taking into account 1 (if ac == 2).
 
 Please feel free to use this code to assist you during your learning journey!
