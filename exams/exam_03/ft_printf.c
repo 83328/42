@@ -116,7 +116,7 @@ int conditions(const char *next, va_list *a, int *len)
 
 int	ft_printf(const char *str, ...)
 {
-	va_list ap;
+	va_list ap; //ap = argument pointer
 	int len = 0;
 	int error = 0;
 
@@ -145,5 +145,4 @@ int main()
 	printf("\n");
 	ft_printf("Hexadecimal for %d is %x\n", 42, 42);
 	printf("Hexadecimal for %d is %x\n", 42, 42);
-	
 }
