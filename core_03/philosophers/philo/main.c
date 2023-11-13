@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 14:28:28 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/10 14:54:54 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:03:16 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ int	main(int ac, char **av)
 	phils = NULL;
 	threads = NULL;
 	n = ft_atoi(av[1]);
-	/* 
-    make_info(&info);
+    printout(&info);
+
+/* 
 	make_forks(&forks, n);
 	make_phils_sub1(&phils, ac, av);
 	make_phils_sub2(&phils, &info, &forks, n);

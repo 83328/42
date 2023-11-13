@@ -6,7 +6,7 @@
 #    By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 11:40:17 by alimpens          #+#    #+#              #
-#    Updated: 2023/11/10 16:24:32 by alimpens         ###   ########.fr        #
+#    Updated: 2023/11/10 17:01:54 by alimpens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,15 @@ NAME = philo
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror
 
-DEPS = header.h
-SRC_DIR = philo
+# DEPS = header.h
+SRC_DIR = ./philo/
 
 SRCS_PHILOSOPHERS = main.c \
 	checkers.c \
-	philo.c \
-	functions.c
-#	01_info.c \
-	02_fork.c \
+	phil.c \
+	functions.c \
+	printout.c
+#	02_fork.c \
  	04_thread.c \
 	do_die.c \
 	do_eat.c \
@@ -42,4 +42,14 @@ all: $(NAME)
 
 $(NAME): $(OBJS_PHILOSOPHERS)
 	$(CC) $(CFLAGS) -o $@ $^
+
+clean:
+	rm -f $(OBJS_PHILOSOPHERS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
 
