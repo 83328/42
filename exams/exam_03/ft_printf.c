@@ -55,10 +55,8 @@ void ft_putstr(char *str, int *len)
 	 }
 }
 
-int ft_putnbr(int n, int *len)
+void ft_putnbr(int n, int *len)
 {
-	int res = 0;
-	
 	if(n == -2147483648)
 		ft_putstr("-2147483648", len);
 	else
@@ -68,48 +66,28 @@ int ft_putnbr(int n, int *len)
 			ft_putchar('-', len);
 			n = -n;
 		}
-		if(n > 9)
-		{
+		if (n > 9)
 			ft_putnbr(n / 10, len);
-			ft_putnbr(n % 10, len);
-		}
-		if(n < 10)
-		{
-			ft_putchar((n%10)+'0', len);
-		}
+		ft_putchar((n%10) + '0', len);
 	}
-	return(res);
 }
 
-int ft_puthex(int n, char c, int *len)
+void ft_puthex(int n, int *len)
 {
-	unsigned int	u = (unsigned int)n;
-	int		ret = 0;
-	
-	if (u >= 16)
-	{
-		ft_puthex(u / 16, c, len);
-		ft_puthex(u % 16, c, len);
-	}
-	else
-	{
-		if (c == 'x')
-			ret = ft_putchar("0123456789abcdef"[u % 16], len);
-	}
-	return (ret);
+	unsigned int	u = (unsigned int)n;	
+	if (n > 15)
+		ft_puthex(n / 16, len);
+	ft_putchar("0123456789abcdef"[u % 16], len);
 }
 
-int conditions(const char *next, va_list *args, int *len)
+void conditions(const char *next, va_list *args, int *len)
 {
-	int res = 0;
-	
 	if(*next == 's')
 		ft_putstr(va_arg(*args, char *), len);
 	else if (*next == 'd')
 		ft_putnbr(va_arg(*args, int), len);
 	else
-		ft_puthex(va_arg(*args, int), *next, len);
-	return(res);
+		ft_puthex(va_arg(*args, int), len);
 }
 
 int	ft_printf(const char *str, ...)
