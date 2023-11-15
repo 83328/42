@@ -29,14 +29,13 @@ call: ft_printf("Hexadecimal for %d is %x\n", 42, 42);
 out:Hexadecimal for 42 is 2a$
 */
 
-#include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
 
-int ft_putchar(char c, int *len)
+void ft_putchar(char c, int *len)
 {
 	*len = *len + 1;
-	return(write(1, &c, 1));
+	write(1, &c, 1);
 }
 
 void ft_putstr(char *str, int *len)
@@ -72,12 +71,11 @@ void ft_putnbr(int n, int *len)
 	}
 }
 
-void ft_puthex(int n, int *len)
+void ft_puthex(unsigned int n, int *len)
 {
-	unsigned int	u = (unsigned int)n;	
 	if (n > 15)
 		ft_puthex(n / 16, len);
-	ft_putchar("0123456789abcdef"[u % 16], len);
+	ft_putchar("0123456789abcdef"[n % 16], len);
 }
 
 void conditions(const char *next, va_list *args, int *len)
@@ -90,7 +88,7 @@ void conditions(const char *next, va_list *args, int *len)
 		ft_puthex(va_arg(*args, int), len);
 }
 
-int	ft_printf(const char *str, ...)
+int ft_printf(const char *str, ... )
 {
 	va_list args;
 	int len = 0;
@@ -109,7 +107,8 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return(len);
 }
-
+/*
+#include <stdio.h>
 int main()
 {
 	ft_printf("%s\n", "toto");
@@ -120,7 +119,10 @@ int main()
 	printf("\n");
 	ft_printf("Hexadecimal for %d is %x\n", 42, 42);
 	printf("Hexadecimal for %d is %x\n", 42, 42);
-}
+}*/
+
+
+
 
 /* #include <stdio.h>
 #include <stdarg.h>
@@ -239,3 +241,76 @@ int main()
 	ft_printf("Hexadecimal for %d is %x\n", 42, 42);
 	printf("Hexadecimal for %d is %x\n", 42, 42);
 } */
+
+/* 
+--------------------------------------------------------------------------------
+
+int ft_printf(char *str, ...)
+{
+	int len = 0;
+	va_list list;
+	va_start(list, str); //TO REMEMBER
+	while(*str)
+	{
+		if(*str == '%')
+		{
+			if(str[1] != 's' && str[1] != 'd' && str[1] != 'x')
+			{
+				len += write(1, str, 1);
+				++str;
+			}
+			else if(str[1] == 's')
+			{
+				len += print_str(va_arg(list, char *);
+				str += 2;
+			}
+			else if(str[1] == 'd')
+			{
+				len += print_num(va_arg(list, int), 10);
+				str += 2;
+			}
+			else if(str[1] == 'x')
+			{
+				len += print_num(va_arg(list, unsigned int), 16);
+				str += 2;
+			}
+		}
+		else
+		{
+			len += write(1, str, 1);
+			++str;
+		}
+	}
+	va_end(list);
+	return(len);
+}
+int print_str(char *str)
+{
+	int len = 0;
+	int i = 0;
+	
+	if(str == NULL)
+		str = "(null)";
+	while(str[i])
+	{
+		len += write(1, str, 1);
+		++i;
+	}
+	return(len);
+}
+int print_num(long long num, int bn)
+{
+	int len = 0;
+	char *base = "0123456789abcdef";
+	
+	if(num < 0)
+	{
+		len += write(1, "-", 1);
+		num = - num;
+	}
+	if(num / bn > 0)
+		len += print_num(num / bn, bn);	
+	len += write(1, base + (num % bn), 1);
+	return (len);
+}
+ */
