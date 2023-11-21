@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:32:51 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/10 14:54:53 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:53:10 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	result;
-	int	sign;
+	int			i;
+	long int	result;
 
 	i = 0;
-	sign = 1;
 	result = 0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-')
-		sign = -1;
+		return (0);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
@@ -32,24 +30,56 @@ int	ft_atoi(const char *str)
 		result = result * 10 + str[i] - '0';
 		i++;
 	}
-	return (sign * result);
+	if (result > 2147483647)
+		return (0);
+	return (result);
 }
 
-int	ft_strlen(const char *str)
+int	check_valid_input(char **str)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (str[i])
+	{
+		if (ft_atoi(str[i]) == 0)
+			return (0);
+		else if (ft_atoi(str[1]) > 200)
+			return (0);
 		i++;
-	return (i);
+	}
+	return (1);
 }
 
-int	ft_isdigit(int c)
+time_t	get_time(void)
 {
-	if (c >= '0' && c <= '9')
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL))
+	{
+		printf("gettimeofday() Failure\n");
 		return (1);
+	}
+	return ((tv.tv_sec * 1000) + tv.tv_usec / 1000);
+}
+
+int	ft_usleep(time_t time)
+{
+	time_t	start;
+
+	start = get_time();
+	while ((get_time() - start) < time)
+		usleep(time / 10);
 	return (0);
 }
 
-//is ft_isspace needed?
+void	print_msg(char *str, t_philo *philo, int id)
+{
+	time_t	time;
+
+	pthread_mutex_lock(philo->write_lock);
+	time = get_time() - philo->start_time;
+	if (!dead_flag_check(philo))
+		printf("%ld %d %s\n", time, id, str);
+	pthread_mutex_unlock(philo->write_lock);
+}
