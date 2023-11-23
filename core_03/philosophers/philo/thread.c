@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 14:28:28 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/20 14:08:28 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:41:17 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	*philo_routine(void	*philos)
 	return (NULL);
 }
 
-//create thread after some sleep
-//should also die while sleeping
 int	thread_create(t_data *data, pthread_mutex_t	*forks)
 {
 	pthread_t	checker;
