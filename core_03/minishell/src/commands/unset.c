@@ -6,7 +6,8 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:45:11 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/23 15:45:34 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:23:50 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../minishell.h"
