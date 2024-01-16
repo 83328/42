@@ -5,9 +5,9 @@ int global_sig = 0;
 void execute_command(char **split_input) 
 {
 	global_sig = 1;
+	extern char **environ;
 	pid_t pid = fork();
 	//char *path = getenv("PATH");
-
 	if (pid == -1)
 	{
 		perror("fork");
@@ -39,10 +39,8 @@ void execute_command(char **split_input)
 					av[ac] = strdup(split_input[i]);
 					ac++;
 				}
-
 				i++;
 			}
-
 			// Call the echo_command function
 			echo_command(ac, av);
 		}
@@ -55,16 +53,36 @@ void execute_command(char **split_input)
 			{
 				printf("%s\n", currentDir);
 				free(currentDir);
- 			 }
+			}
 			else
 				perror("pwd");
 		}
 		else if (strcmp(split_input[0], "cd") == 0)
 		{
-			printf("cd command goes here\n");
+			if (split_input[1] == NULL)
+			{
+				fprintf(stderr, "Usage: cd <directory>\n");
+			}
+			else
+			{
+				char *cd_args[] = {"cd", split_input[1], NULL};
+				cd_command(2, cd_args);
+			}
 		}
+		else if (strcmp(split_input[0], "env") == 0)
+		{
+        		env_command(environ);
+		}
+	else if (strcmp(split_input[0], "export") == 0)
+	{
+		if (split_input[1] != NULL)
+		{
+			export_command(split_input[1]);
+		}
+		else
+			env_command();
+	}
 		//Insert other commands here
-
 	}
 	else // Parent process
 	{

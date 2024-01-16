@@ -1,6 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# define MAX_ARGS 100
+# define MAX_ARGS 150
 
 #include <stddef.h>
 #include <stdlib.h>
@@ -23,13 +23,19 @@ typedef struct s_prompt
 	char	**prompt;
 }			t_prompt;
 
+void	perror_exit(const char *message);
 char    *line_expansion(char *input_line);
 //int		mod_execvp(const char *file, char *const argv[], char *PATH);
 char	*dollars_expansion(char *string);
 
-
 char* expand_var(char* string, char* value, int start, int var_len); 
 char* get_p_var(char* string, int start);
+
+//pathfuncs.c
+char    *alloc_full_path(const char *folder, const char *file);
+char    *find_command_path(const char *file, char *PATH);
+int		mod_execvp(const char *file, char *const argv[], char *PATH);
+char    *path_from_env(char *path_word, char **env);
 
 
 //test_utils
@@ -39,19 +45,21 @@ void printStringArray(char **strArray);
 int echo_command(int ac, char *av[]);
 int is_quote(char c);
 void process_quotes(char *token);
-
 int is_exit_command(const char* input);
 
 //pwd.c
 char* pwd(void);
 
 //env.c
+void env_command();
+
 
 //cd.c
+int cd_command(int argc, char *argv[]);
 
 //unset.c
 
 //export.c
-
+void export_command(char *variable);
 
 #endif

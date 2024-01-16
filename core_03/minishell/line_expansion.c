@@ -1,24 +1,5 @@
 #include "minishell.h"
 
-// char    *line_expansion(char *string)
-// {
-// 	char *cop_str;
-
-// 	cop_str = ft_strdup(string);
-// 	int i;
-
-// 	i = 0;
-// 	while(string[i])
-// 	{
-// 		if (string[i] == 39 || string[i] == 34 ) //single or double quotes
-// 		{
-			
-// 		}
-// 		i++;
-// 	}
-// 	return(string);
-// }
-
 char	*dollars_expansion(char *string)
 {
 	//char	*string_expanded; // return value
