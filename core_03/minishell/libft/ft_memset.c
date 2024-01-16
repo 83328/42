@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 15:45:04 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/24 16:34:34 by alimpens         ###   ########.fr       */
+/*   Created: 2023/01/19 10:43:33 by dgacic            #+#    #+#             */
+/*   Updated: 2023/01/19 10:43:36 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-int is_exit_command(const char* input)
+void	*ft_memset(void *p, int c, size_t n)
 {
-	// Check if the input is the exit command (case-insensitive)
-	return (strcasecmp(input, "exit\n") == 0 || strcasecmp(input, "exit\n") == 0);
+	unsigned char	*arr;
+	unsigned char	d;
+
+	arr = p;
+	d = c;
+	while (n-- > 0)
+	{
+		arr[n] = d;
+	}
+	return (arr);
 }

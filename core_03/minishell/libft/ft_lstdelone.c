@@ -1,13 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: dgacic <dgacic@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 15:45:07 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/23 18:23:41 by alimpens         ###   ########.fr       */
+/*   Created: 2023/11/14 02:29:14 by dgacic            #+#    #+#             */
+/*   Updated: 2023/11/14 02:29:16 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
+
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (!lst || !(*del))
+		return ;
+	del(lst->content);
+	free (lst);
+}

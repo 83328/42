@@ -1,13 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 15:45:11 by alimpens          #+#    #+#             */
-/*   Updated: 2023/11/23 18:23:50 by alimpens         ###   ########.fr       */
+/*   Created: 2024/01/10 14:13:30 by alimpens          #+#    #+#             */
+/*   Updated: 2024/01/15 13:43:12 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char* pwd(void)
+{
+  char cwd[PATH_MAX];
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+      return ft_strdup(cwd);
+    else
+    {
+      perror("pwd");
+      return NULL; 
+    }
+}
