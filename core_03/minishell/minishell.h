@@ -37,6 +37,7 @@ char    *find_command_path(const char *file, char *PATH);
 int		mod_execvp(const char *file, char *const argv[], char *PATH);
 char    *path_from_env(char *path_word, char **env);
 
+void sigint_handler(int sig);
 
 //test_utils
 void printStringArray(char **strArray);

@@ -16,8 +16,6 @@ void execute_command(char **split_input)
 
 	else if (pid == 0) // Child process
 	{
-		//execlp("/bin/sh", "sh", "-c", command, NULL);
-		//mod_execvp(split_input[0], split_input, path);
 		if (strcmp(split_input[0], "echo") == 0)
 		{
 			int i = 1;
@@ -44,7 +42,6 @@ void execute_command(char **split_input)
 			// Call the echo_command function
 			echo_command(ac, av);
 		}
-
 		else if (strcmp(split_input[0], "pwd") == 0)
 		{
 //			printf("pwd command goes here\n");
@@ -92,28 +89,6 @@ void execute_command(char **split_input)
 	}
 }
 
-void sigint_handler(int sig)
-{
-	if (sig == SIGINT && global_sig == 0)
-	{
-		// rl_on_new_line();
-		// rl_replace_line("", 0);  // Clear the current input line
-		// //printf("minishell $ ");
-		//rl_redisplay();
-		printf("\n");
-		printf("minishell $ ");
-		//printf("test2");
-	}
-	else if (sig == SIGINT && global_sig == 1)
-	{
-		//rl_on_new_line();// Move to a new line
-		//rl_redisplay();
-		printf("\n");
-	}
-	//printf("minishell $ ");  // Redisplay the prompt
-	//input = readline("minishell >> ");
-}
-
 int main() 
 {
 	char    *input;
@@ -151,7 +126,6 @@ int main()
 	free(input);
 	break;
 	}
-
 		// Execute the command
 		execute_command(split_input);
 		global_sig = 0;
