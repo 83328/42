@@ -59,6 +59,7 @@ void env_command();
 int cd_command(int argc, char *argv[]);
 
 //unset.c
+int unset_command(char *variable);
 
 //export.c
 void export_command(char *variable);

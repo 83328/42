@@ -30,7 +30,6 @@ void execute_command(char **split_input)
 			{
 				// Process quotes before strdup
 				process_quotes(split_input[i]);
-				
 				// Skip empty tokens after processing quotes
 				if (split_input[i][0] != '\0')
 				{
@@ -70,6 +69,10 @@ void execute_command(char **split_input)
 		{
         		env_command(environ);
 		}
+		else if (strcmp(split_input[0], "unset") == 0)
+		{
+        		unset_command(split_input[1]);
+		}
 	else if (strcmp(split_input[0], "export") == 0)
 	{
 		if (split_input[1] != NULL)
@@ -89,7 +92,7 @@ void execute_command(char **split_input)
 	}
 }
 
-int main() 
+int main()
 {
 	char    *input;
 	char    **split_input;
@@ -119,7 +122,6 @@ int main()
 		// {
 		// 	add_history(input);
 		// }
-
 		// // Check for exit command
 	if (ft_strcmp(split_input[0], "exit") == 0)
 	{
