@@ -17,14 +17,17 @@ not inbetween 2 quotes of the same kind
 - [ ] $? for exit status
 
 ## Checklist
+
+---
 | Command | User input | Expected result
 ---
-CD	cd ../../../../../..	pwd : /
+| CD | cd ../../../../../.. | pwd : / |
 ---
-CD	cd ~	pwd: ~
+| CD |	cd ~ | pwd: ~ |
 ---
 CD	cd	pwd: ~
 ---
+
 CD	cd ~/Desktop	pwd: ~/Desktop
 ---
 CD	unset HOME - cd ~	Error: HOME not set, EXIT 1
