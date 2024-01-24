@@ -2,6 +2,10 @@
 
 char	*dollars_expansion(char *string)
 {
+	if (!string || strlen(string) == 0)
+    {
+        return string;
+    }
 	//char	*string_expanded; // return value
 	char	*p_var; // potential environment variable after a $-sign.
 	char	*p_val;	// value of the env variable if it exists, else NULL.
@@ -35,8 +39,7 @@ char	*dollars_expansion(char *string)
 					break;
 				}
 			}
-			else
-				i++;
+			i++;
 		}
 	}
 	//string_expanded = ft_strdup(string);
@@ -71,7 +74,7 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 		j++;
 	}
 	j = 0;
-	while (j < (int)((ft_strlen(cop_str) - var_len - 1 - start)) )
+	while (j < (int)((ft_strlen(cop_str) - var_len - 1 - start)))
 	{
 		str[i] = cop_str[j + start + var_len + 1];
 		i++;
@@ -82,8 +85,6 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 	//printf("\n%s\n", value);
 	printf("\n%s\n", str);
 	//printf("\n%i\n", start);
-
-
 	return (str);
 }
 
@@ -114,7 +115,6 @@ char	*get_p_var(char *string, int start)
 
 	return(p_var);
 }
-
 
 // #include "minishell.h"
 

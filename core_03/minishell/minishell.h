@@ -44,9 +44,7 @@ void printStringArray(char **strArray);
 
 //echo.c
 int echo_command(int ac, char *av[]);
-int is_quote(char c);
-void process_quotes(char *token);
-int is_exit_command(const char* input);
+//int is_exit_command(const char* input);
 
 //pwd.c
 char* pwd(void);

@@ -1,0 +1,10 @@
+change expansion to leave the quotes in string
+mak
+write pipe split function that only splits by pipes that are
+not inbetween 2 quotes of the same kind
+
+split by space and detect redirection operators
+
+implement pipes and add redirection possibility
+
+unset path 
