@@ -20,13 +20,13 @@ not inbetween 2 quotes of the same kind
 
 | Command | User input | Expected result |
 |---------|------------|-----------------|
-| CD | `cd ~/Desktop` | `pwd: ~/Desktop` |
-| CD | `unset HOME - cd ~` | `Error: HOME not set, EXIT 1` |
-| CD | `export HOME=/Users/user42 - cd ~` | `pwd: ~` |
-| CD | `cd .. cool swag` | `pwd: ../` |
-| CD | `cd Eyooooo` | `bash: cd: Eyooooo: No such file or directory - EXIT 1` |
-| CD | `cd -` | `pwd: Last PWD` |
-| CD | `mkdir a - mkdir a/b - cd a/b - rm -r ../../a - cd ..` | `cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory - EXIT 0` |
+| - [ ] CD | `cd ~/Desktop` | `pwd: ~/Desktop` |
+| - [ ] CD | `unset HOME - cd ~` | `Error: HOME not set, EXIT 1` |
+| - [ ] CD | `export HOME=/Users/user42 - cd ~` | `pwd: ~` |
+| - [ ] CD | `cd .. cool swag` | `pwd: ../` |
+| - [ ] CD | `cd Eyooooo` | `bash: cd: Eyooooo: No such file or directory - EXIT 1` |
+| - [ ] CD | `cd -` | `pwd: Last PWD` |
+| - [ ] CD | `mkdir a - mkdir a/b - cd a/b - rm -r ../../a - cd ..` | `cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory - EXIT 0` |
 | ECHO | `echo` |  |
 | ECHO | `echo $NonExistingVar` |  |
 | ECHO | `echo $PATH` | `$PATH` |
@@ -104,14 +104,14 @@ not inbetween 2 quotes of the same kind
 | SUBST & REDIR | `export test="file1 file2" ; >"$test"` | `[file1 file2] created` |
 | SUBST & REDIR | `export test="file1 file2" ; >$test >hey` | `$test: ambiguous redir, hey n'est pas créé` |
 | SUBST & REDIR | `export test="file1 file2" ; >hey >$test` | `$test: ambiguous redir, hey est créé` |
-| SYNTHAX | `|` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour ; \|` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour > > out` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour > $test` | `"redirection ambigue" & exit 1` |
-| SYNTHAX | `echo bonjour > $test w/ test="o1 o2"` | `"redirection ambigue" & exit 1` |
-| SYNTHAX | `echo bonjour >>> test` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour \| \|` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour \|;` | `"synthax error" & exit 2` |
+| SYNTAX | `|` | `"synthax error" & exit 2` |
+| SYNTAX | `echo bonjour ; \|` | `"synthax error" & exit 2` |
+| SYNTAX | `echo bonjour > > out` | `"synthax error" & exit 2` |
+| SYNTAX | `echo bonjour > $test` | `"redirection ambigue" & exit 1` |
+| SYNTAX | `echo bonjour > $test w/ test="o1 o2"` | `"redirection ambigue" & exit 1` |
+| SYNTAX | `echo bonjour >>> test` | `"synthax error" & exit 2` |
+| SYNTAX | `echo bonjour \| \|` | `"synthax error" & exit 2` |
+| SYNTAX | `echo bonjour \|;` | `"synthax error" & exit 2` |
 | UNSET | `unset PATH ; echo $PATH` | `\n` |
 | UNSET | `unset PATH ; ls` | `bash: ls: No such file or directory. Exit 127` |
 | UNSET | `unset "" test` | `unset test et set $? à 1` |
