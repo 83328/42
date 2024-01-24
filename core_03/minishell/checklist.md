@@ -18,11 +18,11 @@ not inbetween 2 quotes of the same kind
 
 ## Checklist
 
-| Command | User input | Expected result |
-|---------|------------|-----------------|
-| - [ ] CD | `cd ~/Desktop` | `pwd: ~/Desktop` |
-| CD | `unset HOME - cd ~` | `Error: HOME not set, EXIT 1` |
-| CD | `export HOME=/Users/user42 - cd ~` | `pwd: ~` |
+| Check | Command | User input | Expected result |
+|-------|---------|------------|-----------------|
+| - [ ] | CD | `cd ~/Desktop` | `pwd: ~/Desktop` |
+| - [ ] | CD | `unset HOME - cd ~` | `Error: HOME not set, EXIT 1` |
+| - [ ] | CD | `export HOME=/Users/user42 - cd ~` | `pwd: ~` |
 | CD | `cd .. cool swag` | `pwd: ../` |
 | CD | `cd Eyooooo` | `bash: cd: Eyooooo: No such file or directory - EXIT 1` |
 | CD | `cd -` | `pwd: Last PWD` |
