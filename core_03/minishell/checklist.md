@@ -20,10 +20,10 @@ not inbetween 2 quotes of the same kind
 
 | Check | Command | User input | Expected result |
 |-------|---------|------------|-----------------|
-| [ ] | CD | `cd ~/Desktop` | `pwd: ~/Desktop` |
-| [ ] | CD | `unset HOME - cd ~` | `Error: HOME not set, EXIT 1` |
-| [ ] | CD | `export HOME=/Users/user42 - cd ~` | `pwd: ~` |
-| CD | `cd .. cool swag` | `pwd: ../` |
+|:white_check_mark:| CD | `cd ~/Desktop` | `pwd: ~/Desktop` |
+|:white_check_mark:| CD | `unset HOME - cd ~` | `Error: HOME not set, EXIT 1` |
+|:white_check_mark:| CD | `export HOME=/Users/user42 - cd ~` | `pwd: ~` |
+|:x:| `cd .. cool swag` | `pwd: ../` |
 | CD | `cd Eyooooo` | `bash: cd: Eyooooo: No such file or directory - EXIT 1` |
 | CD | `cd -` | `pwd: Last PWD` |
 | CD | `mkdir a - mkdir a/b - cd a/b - rm -r ../../a - cd ..` | `cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory - EXIT 0` |
