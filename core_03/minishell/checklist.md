@@ -72,17 +72,16 @@ not inbetween 2 quotes of the same kind
 | REDIR | `exit > hoi.txt` | `Should exit & creates hoi.txt` |
 | ENV | `env | grep OLDPWD` | `Should exits` |
 | REDIR | `cd .. > derp.txt` | `Does not change dir, which should happen` |
-
 | SIGNAL | `cat - [ PRESS CTRL + C ]` | `Should exit cat prompt - EXIT 130` |
 | SIGNAL | `cat - [ PRESS CTRL + \ ]` | `Should exit cat prompt - EXIT 131` |
 | SIGNAL | `cat - [ PRESS CTRL + D ]` | `Should exit cat prompt - EXIT 0` |
-| REDIR | `> file` | `Creates file` |
-| REDIR | `cat -e > test1 < test2` | `minishell: test2: No such file or directory - EXIT 1 or EXIT 2` |
+| REDIR | `\> file` | `Creates file` |
+| REDIR | `cat -e \> test1 < test2` | `minishell: test2: No such file or directory - EXIT 1 or EXIT 2` |
 | REDIR | `cat < test` | `minishell: test: No such file or directory - EXIT 1 or 2` |
-| REDIR | `echo 2 > out1 >> out2` | `Both files are created, but out1 is empty, and out2 has "2" in it - EXIT 0` |
-| REDIR | `echo 2 >> out1 > out2` | `Both files are created, but out1 is empty, and out2 has "2" in it - EXIT 0` |
-| REDIR | `echo test > file test1` | `= echo test test1 > file` |
-| REDIR | `Non_exist_cmd > salut` | `create file but error msg to STDERR` |
+| REDIR | `echo 2 \> out1 >> out2` | `Both files are created, but out1 is empty, and out2 has "2" in it - EXIT 0` |
+| REDIR | `echo 2 >> out1 \> out2` | `Both files are created, but out1 is empty, and out2 has "2" in it - EXIT 0` |
+| REDIR | `echo test \> file test1` | `= echo test test1 > file` |
+| REDIR | `Non_exist_cmd \> salut` | `create file but error msg to STDERR` |
 | ENV | `unset all envs - env` | `Prints nothing` |
 | ENV | `unset all envs - export lol` | `declare -x export="lol"` |
 | PIPES | `Infinite file` |  |
