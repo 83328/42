@@ -18,15 +18,11 @@ not inbetween 2 quotes of the same kind
 
 ## Checklist
 
----
-| Command | User input | Expected result
----
-| CD | cd ../../../../../.. | pwd : / |
----
-| CD |	cd ~ | pwd: ~ |
----
-CD	cd	pwd: ~
----
+| Command | User input | Expected result |
+|---------|------------|-----------------|
+| CD      | `cd ../../../../../..` | `pwd : /` |
+| CD      | `cd ~` | `pwd: ~` |
+| CD      | `cd` | `pwd: ~` |
 
 CD	cd ~/Desktop	pwd: ~/Desktop
 ---
