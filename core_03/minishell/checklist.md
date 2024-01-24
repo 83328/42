@@ -54,7 +54,7 @@ not inbetween 2 quotes of the same kind
 | PARSING | `""` | `Error - EXIT 126 or EXIT 127` |
 | PARSING | `echo "\s" ; echo "\\s"` | `should have the exact same output` |
 | PARSING | `echo "12\""` | `12"` |
-| PARSING | `echo "bip | bip ; coyotte > < "` | `[bip | bip ; coyotte >< ]` |
+| PARSING | `echo "bip \| bip ; coyotte > < "` | `[bip \| bip ; coyotte >< ]` |
 | PARSING | `echo \>` | `>` |
 | PARSING | `echo $USER$var$USER$USER$USERtest$USER` | `user42$USERuser42$USERtestuser42` |
 | PARSING | `echo bonjour \; ls` | `bonjour ; ls` |
@@ -64,13 +64,13 @@ not inbetween 2 quotes of the same kind
 | PARSING | `echo '"abc"'` | `"abc"` |
 | PARSING | `echo "" bonjour` | `[ bonjour]` |
 | PARSING | `export "test=ici"=coucou ; echo $test` | `test="ici=coucou"` |
-| PIPE | `cat | cat | cat | ls` | `Press enter 3 times` |
-| PIPE | `cat Makefile | grep pr | head -n 5 | cd file_not_exit` | `file_not_exist: no such file... exit status: 1` |
-| PIPE | `cat Makefile | grep pr | head -n 5 | hello` | `hello: cmd not found... exit status: 127` |
-| PIPE | `ls | exit` |  |
-| REDIR | `> test | echo blabla` | `blabla` |
+| PIPE | `cat \| cat \| cat \| ls` | `Press enter 3 times` |
+| PIPE | `cat Makefile \| grep pr \| head -n 5 \| cd file_not_exit` | `file_not_exist: no such file... exit status: 1` |
+| PIPE | `cat Makefile \| grep pr \| head -n 5 \| hello` | `hello: cmd not found... exit status: 127` |
+| PIPE | `ls \| exit` |  |
+| REDIR | `> test \| echo blabla` | `blabla` |
 | REDIR | `exit > hoi.txt` | `Should exit & creates hoi.txt` |
-| ENV | `env | grep OLDPWD` | `Should exits` |
+| ENV | `env \| grep OLDPWD` | `Should exits` |
 | REDIR | `cd .. > derp.txt` | `Does not change dir, which should happen` |
 | SIGNAL | `cat - [ PRESS CTRL + C ]` | `Should exit cat prompt - EXIT 130` |
 | SIGNAL | `cat - [ PRESS CTRL + \ ]` | `Should exit cat prompt - EXIT 131` |
@@ -85,8 +85,8 @@ not inbetween 2 quotes of the same kind
 | ENV | `unset all envs - env` | `Prints nothing` |
 | ENV | `unset all envs - export lol` | `declare -x export="lol"` |
 | PIPES | `Infinite file` |  |
-| SUBST | `export var="  truc" - echo $var | cat -e` | `[truc]` |
-| SUBST | `export var="truc  " - echo $var | cat -e` | `[truc]` |
+| SUBST | `export var="  truc" - echo $var \| cat -e` | `[truc]` |
+| SUBST | `export var="truc  " - echo $var \| cat -e` | `[truc]` |
 | SUBST | `echo "$tests""Makefile"` | `[Makefile]` |
 | SUBST | `echo "$tests"Makefile` | `[Makefile]` |
 | SUBST | `echo "$tests" "Makefile"` | `[ Makefile]` |
@@ -105,13 +105,13 @@ not inbetween 2 quotes of the same kind
 | SUBST & REDIR | `export test="file1 file2" ; >$test >hey` | `$test: ambiguous redir, hey n'est pas créé` |
 | SUBST & REDIR | `export test="file1 file2" ; >hey >$test` | `$test: ambiguous redir, hey est créé` |
 | SYNTHAX | `|` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour ; |` | `"synthax error" & exit 2` |
+| SYNTHAX | `echo bonjour ; \|` | `"synthax error" & exit 2` |
 | SYNTHAX | `echo bonjour > > out` | `"synthax error" & exit 2` |
 | SYNTHAX | `echo bonjour > $test` | `"redirection ambigue" & exit 1` |
 | SYNTHAX | `echo bonjour > $test w/ test="o1 o2"` | `"redirection ambigue" & exit 1` |
 | SYNTHAX | `echo bonjour >>> test` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour | |` | `"synthax error" & exit 2` |
-| SYNTHAX | `echo bonjour |;` | `"synthax error" & exit 2` |
+| SYNTHAX | `echo bonjour \| \|` | `"synthax error" & exit 2` |
+| SYNTHAX | `echo bonjour \|;` | `"synthax error" & exit 2` |
 | UNSET | `unset PATH ; echo $PATH` | `\n` |
 | UNSET | `unset PATH ; ls` | `bash: ls: No such file or directory. Exit 127` |
 | UNSET | `unset "" test` | `unset test et set $? à 1` |
@@ -120,4 +120,4 @@ not inbetween 2 quotes of the same kind
 | UNSET | `unset var` | `var1 ne doit pas etre unset` |
 | UNSET | `export $var=s\ -la ; l$var` |  |
 | UNSET | `/bin/echo bonjour` | `affiche bonjour` |
-| SPECIAL CASES | `cat wfeh | cat csijdsji | cat nfwir` |  |
+| SPECIAL CASES | `cat wfeh \| cat csijdsji \| cat nfwir` |  |
