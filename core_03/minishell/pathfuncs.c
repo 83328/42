@@ -6,13 +6,14 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:41:19 by dgacic            #+#    #+#             */
-/*   Updated: 2024/01/17 17:15:50 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:32:52 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void perror_exit(const char *message) {
+void perror_exit(const char *message)
+{
     perror(message);
     exit(EXIT_FAILURE);
 }

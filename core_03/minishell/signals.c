@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:44:36 by alimpens          #+#    #+#             */
-/*   Updated: 2024/01/17 14:44:53 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:03:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void sigint_handler(int sig)
 		//rl_redisplay();
 		printf("\n");
 		printf("minishell $ ");
-		//printf("test2");
 	}
 	else if (sig == SIGINT && global_sig == 1)
 	{

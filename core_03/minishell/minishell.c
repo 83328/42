@@ -2,11 +2,22 @@
 
 int global_sig = 0;
 
+int get_length(char **split_input)
+{
+    int length = 0;
+    while (split_input[length] != NULL)
+    {
+        length++;
+    }
+    return length;
+}
+
 void execute_command(char **split_input)
 {
     global_sig = 1;
     extern char **environ;
     pid_t pid = fork();
+    int length = get_length(split_input);
 
     if (pid == -1)
     {
@@ -15,66 +26,26 @@ void execute_command(char **split_input)
     }
     else if (pid == 0)
     { // Child process
-        if (strcmp(split_input[0], "echo") == 0)
-        {
-            int i = 1;
-            int ac = 0;
-            char *av[MAX_ARGS]; // Assuming MAX_ARGS is defined appropriately
-
-            // Copy the arguments into av array, including the command itself
-            av[ac] = strdup(split_input[0]); // Copy the command
-            if (av[ac] == NULL)
+       // if (split_input[0] != NULL)
+      //  {
+            if (strcmp(split_input[0], "echo") == 0)
             {
-                perror("strdup");
-                exit(EXIT_FAILURE);
+                echo_command_with_split_input(split_input, length);
             }
-            ac++;
-
-            while (split_input[i] != NULL)
+            else if (strcmp(split_input[0], "pwd") == 0)
             {
-                // Process quotes before strdup
-                // Skip empty tokens after processing quotes
-                if (split_input[i][0] != '\0')
+                char *currentDir = pwd();
+                if (currentDir)
                 {
-                    av[ac] = strdup(split_input[i]);
-                    if (av[ac] == NULL)
-                    {
-                        perror("strdup");
-                        // Free allocated memory before exiting
-                        while (ac > 0)
-                        {
-                            free(av[--ac]);
-                        }
-                        exit(EXIT_FAILURE);
-                    }
-                    ac++;
+                    printf("%s\n", currentDir);
+                    free(currentDir);
                 }
-                i++;
+                else
+                {
+                    perror("pwd");
+                }
             }
-            // Call the echo_command function
-            echo_command(ac, av);
-
-            // Free memory for each string in av
-            int j = 0;
-            while (j < ac)
-            {
-                free(av[j]);
-                j++;
-            }
-        }
-        else if (strcmp(split_input[0], "pwd") == 0)
-        {
-            char *currentDir = pwd();
-            if (currentDir)
-            {
-                printf("%s\n", currentDir);
-                free(currentDir);
-            }
-            else
-            {
-                perror("pwd");
-            }
-        }
+     //   }
         else if (strcmp(split_input[0], "cd") == 0)
         {
             if (split_input[1] == NULL)
@@ -110,12 +81,16 @@ void execute_command(char **split_input)
         {
             exit(EXIT_SUCCESS);
         }
-        
-        // Insert other commands here
-
+        else
+        {
+            // If the command is not a built-in command, execute it with execvp
+            if (execvp(split_input[0], split_input) == -1) {
+                perror("execvp");
+                exit(EXIT_FAILURE);
+            }
+        }
         // Exit the child process
-    exit(EXIT_SUCCESS);
-
+        exit(EXIT_SUCCESS);
     }
     else
     { // Parent process
@@ -148,10 +123,9 @@ int main()
 			printf("exit\n");
 			break;
 		}
-
 		expanded_input = dollars_expansion(input);
 
-        printf("\n expanded input: %s",expanded_input);
+        //printf("\n expanded input: %s",expanded_input);
 		split_input = ft_split(expanded_input, ' '); // more sophisticated
 		// // If the user entered a command, add it to the history
 		// if (input[0])
@@ -159,11 +133,11 @@ int main()
 		// 	add_history(input);
 		// }
 		// // Check for exit command
-	if (ft_strcmp(split_input[0], "exit") == 0)
-	{
-	free(input);
-	break;
-	}
+    if (split_input != NULL && split_input[0] != NULL && ft_strcmp(split_input[0], "exit") == 0)
+    {
+        free(input);
+        break;
+    }
 		// Execute the command
 		execute_command(split_input);
 		global_sig = 0;

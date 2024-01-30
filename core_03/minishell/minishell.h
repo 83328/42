@@ -23,27 +23,29 @@ typedef struct s_prompt
 	char	**prompt;
 }			t_prompt;
 
-void	perror_exit(const char *message);
+//minishell.c
+int	get_length(char **split_input);
+void execute_command(char **split_input);
 char    *line_expansion(char *input_line);
-//int		mod_execvp(const char *file, char *const argv[], char *PATH);
-char	*dollars_expansion(char *string);
 
+//strjoin_expansion.c
+char	*dollars_expansion(char *string);
 char* expand_var(char* string, char* value, int start, int var_len); 
-char* get_p_var(char* string, int start);
+char* get_p_var(char* string, int start); 
 
 //pathfuncs.c
+void	perror_exit(const char *message);
 char    *alloc_full_path(const char *folder, const char *file);
 char    *find_command_path(const char *file, char *PATH);
 int		mod_execvp(const char *file, char *const argv[], char *PATH);
 char    *path_from_env(char *path_word, char **env);
 
+//signals.c
 void sigint_handler(int sig);
-
-//test_utils
-void printStringArray(char **strArray);
 
 //echo.c
 int echo_command(int ac, char *av[]);
+void echo_command_with_split_input(char **split_input, int length);
 //int is_exit_command(const char* input);
 
 //pwd.c
@@ -51,7 +53,6 @@ char* pwd(void);
 
 //env.c
 void env_command();
-
 
 //cd.c
 int cd_command(int argc, char *argv[]);
