@@ -84,7 +84,8 @@ void execute_command(char **split_input)
         else
         {
             // If the command is not a built-in command, execute it with execvp
-            if (execvp(split_input[0], split_input) == -1) {
+            if (execvp(split_input[0], split_input) == -1)
+            {
                 perror("execvp");
                 exit(EXIT_FAILURE);
             }
@@ -139,6 +140,7 @@ int main()
         break;
     }
 		// Execute the command
+        printf("input: %s\n", input);
 		execute_command(split_input);
 		global_sig = 0;
 		//free(input);

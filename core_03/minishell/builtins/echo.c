@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:11:00 by alimpens          #+#    #+#             */
-/*   Updated: 2024/01/25 11:59:23 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:41:35 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void echo_command_with_split_input(char **split_input, int length)
 {
     int ac = 0;
     char *av[MAX_ARGS];
+    int i = 0;
 
-    for (int i = 0; i < length; i++)
+    while (i < length)
     {
         if (split_input[i][0] != '\0')
         {
@@ -64,12 +65,15 @@ void echo_command_with_split_input(char **split_input, int length)
             }
             ac++;
         }
+        i++;
     }
 
     echo_command(ac, av);
 
-    for (int j = 0; j < ac; j++)
+    int j = 0;
+    while (j < ac)
     {
         free(av[j]);
+        j++;
     }
 }

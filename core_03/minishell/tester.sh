@@ -12,7 +12,9 @@ run_test()
     echo -n "Testing $test_name "
 
     actual_output=$($SHELL_PROGRAM | $command_to_run)
-
+    #actual_output=$(echo "$command_to_run" | $SHELL_PROGRAM)
+    #actual_output=$(echo "$command_to_run" | $SHELL_PROGRAM | sed 's/^minishell $ //')
+    #actual_output=$(trim "$actual_output")
     if [ "$actual_output" = "$expected_output" ]; then
         echo "$(tput setaf 2)OK$(tput sgr0)"  # Green color for OK
     else
@@ -34,6 +36,8 @@ echo "----------------- Simple Commands ------------------"
 run_test "Spaces...." ""   "    "
 run_test "Tabs......" ""   $'\t\t\t'
 run_test "Empty....." ""   ""
+#run_test "ls 1......" "$(ls)" "ls"
+#run_test "ls 2......" "$(ls ~)" "ls ~"
 #echo "-------------------- Arguments ---------------------"
 echo "---------------------- echo -------------------------"
 run_test "echo 2...." "hello" "echo hello"
