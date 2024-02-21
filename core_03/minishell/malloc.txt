@@ -1,5 +1,0 @@
-list of all malloc's and functions that contain a malloc somewhere down the line:
-
-
-
-list of all free's and functions that contain a free somewhere down the line:

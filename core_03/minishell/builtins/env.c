@@ -1,22 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 15:19:45 by alimpens          #+#    #+#             */
-/*   Updated: 2024/01/16 15:13:56 by alimpens         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../minishell.h"
 
-void    env_command(char **env)
+void env_command()
 {
-    while (*env != NULL)
-    {
-        printf("%s\n", *env);
-        ++env;
-    }
+  extern char** environ;
+  int i = 0;
+  while (environ[i] != NULL)
+  {
+    printf("%s\n", environ[i]);
+    i++; 
+  }
 }
+

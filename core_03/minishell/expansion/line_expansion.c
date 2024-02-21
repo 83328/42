@@ -1,11 +1,55 @@
-#include "minishell.h"
+#include "../minishell.h"
+
+char	*expand_var(char *string, char *value, int start, int var_len);
+char	*get_p_var(char *string, int start);
+char	*dollars_expansion(char *string);
+
+char    *line_expansion(char *line)
+{
+	char	*cop_line;
+	char	*str;
+	char 	*app_str;
+	int		n;
+	int		i;
+
+	cop_line = ft_strdup(line);
+
+	i = 0;
+	n = 0;
+	while(cop_line[i] != 0 && cop_line[i] != 39 && cop_line[i] != 34) //not null, single quote, double quote
+	{
+		n++;
+		i++;
+	}
+	str = ft_strndup(cop_line, n);
+	str = dollars_expansion(str);
+	n = 0;
+	while(cop_line[i] != 0)
+	{
+		if (cop_line[i] == 39 || cop_line[i] == 34 ) //single or double quotes
+		{
+			if (cop_line[i] == 39)
+			{
+				i++;
+				app_str = copy_til_squote(cop_line, i);
+				i += ft_strlen(app_str) ; //-0 casue Nullterminator
+			}
+			else if (cop_line[i] == 34)
+			{
+				i++;
+				app_str = copy_til_dquote(cop_line, i);
+				i += ft_strlen(app_str) + 1; //-0 casue Nullterminator
+				app_str = dollars_expansion(app_str);
+			}
+			str = ft_concat(str, app_str);
+		}
+		i++;
+	}
+	return(str);
+}
 
 char	*dollars_expansion(char *string)
 {
-	if (!string || strlen(string) == 0)
-    {
-        return string;
-    }
 	//char	*string_expanded; // return value
 	char	*p_var; // potential environment variable after a $-sign.
 	char	*p_val;	// value of the env variable if it exists, else NULL.
@@ -24,10 +68,7 @@ char	*dollars_expansion(char *string)
 			{
 				still_dollars = 1;
 				p_var = get_p_var(string, i + 1); //test dollar sign end of string!
-				//printf("\ntest1");
-				//printf("\n%s",p_var);
 				p_val = getenv(p_var);
-				//printf("\ntest2");
 				if (p_val != NULL)
 				{
 					string = expand_var(string, p_val, i, ft_strlen(p_var)); // free the string it receives and give out a new string with only the first $-expand made 
@@ -39,7 +80,8 @@ char	*dollars_expansion(char *string)
 					break;
 				}
 			}
-			i++;
+			else
+				i++;
 		}
 	}
 	//string_expanded = ft_strdup(string);
@@ -53,18 +95,17 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 	int	i;
 	int j;
 	int	val_len;
-	char *cop_str;
+	char *cop_line;
 
 	val_len = ft_strlen(value);
-	//printf("%i", len);
 	i = 0;
 	j = 0;
-	cop_str = ft_strdup(str);
+	cop_line = ft_strdup(str);
 	free(str);
-    str = malloc(sizeof(char) * (ft_strlen(cop_str) + val_len + 1));
+    str = malloc(sizeof(char) * (ft_strlen(cop_line) + val_len + 1));
 	while (i < start)
 	{
-		str[i] = cop_str[i];
+		str[i] = cop_line[i];
 		i++;
 	}
 	while (i < val_len + start)
@@ -74,15 +115,14 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 		j++;
 	}
 	j = 0;
-	while (j < (int)((ft_strlen(cop_str) - var_len - 1 - start)))
+	while (j < (int)((ft_strlen(cop_line) - var_len - 1 - start)) )
 	{
-		str[i] = cop_str[j + start + var_len + 1];
+		str[i] = cop_line[j + start + var_len + 1];
 		i++;
 		j++;
 	}
 	str[i] = 0;
 
-	printf("\n%s\n", str);
 
 	return (str);
 }
