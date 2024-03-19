@@ -6,13 +6,21 @@ void sigint_handler(int sig)
 	{
 		rl_replace_line("", 0);  // Clear the current input line
 		printf("\n");
-		printf("minishell >> ");
+		printf("minishell ## ");
 	}
-	else if (sig == SIGINT && global_sig == 1)
+	else if (sig == SIGINT && global_sig == 1) //blocking command
 	{
 		//rl_on_new_line();// Move to a new line
 		//rl_redisplay();
 		printf("\n");
+	}
+	else if (sig == SIGINT && global_sig == 2) // heredoc
+	{
+		global_sig = 4;
+		//printf("minishell ## ");
+		rl_on_new_line();
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		//write(0, "\n", 1);
 	}
 }
 

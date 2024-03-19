@@ -15,6 +15,7 @@
 #include <linux/limits.h>
 #include "libft/libft.h"
 #include <signal.h>
+#include <sys/ioctl.h>
 
 # define STDIN 0
 # define STDOUT 1
@@ -27,13 +28,16 @@ extern int global_sig;
 
 typedef struct s_struct
 {
-	char	**envp_copy;
-	int		envp_copy_size;
+	char	**env_copy;
+	int		env_copy_size;
 	char    *input;
 	char	**split_by_space;
 	char    **reassembled_commands;
 	char	**input_by_pipes;
-	int		(*filefds)[2];
+	int		(*filefds)[2]; // pointer at [2] array
+	int		**pipefds;
+	pid_t	*pids;
+	char	*line;
 	int		unused_fds[8192];
 	int		ufd_i;
 	int		fdin;
@@ -48,10 +52,10 @@ typedef struct s_struct
 void	execute_command(char **split_by_space);
 void	sigint_handler(int sig);
 void	*signal_handling();
-void	envp_handling(char *envp[], t_struct *str);
+void	copy_env(char *envp[], t_struct *str);
 int		mod_execvp(const char *file, char *const argv[], char *PATH);
 void	perror_exit(char *msg);
-char**	copy_2d(char **envp, char **envp_copy);
+char	**copy_2d(char **envp, char **envp_copy);
 int		piping(int ac, char **av, char **env);
 void    open_files(t_struct *stru, int index);
 void    terminate_filefds(t_struct *stru, int index);
@@ -59,40 +63,53 @@ void    rem_redir(char **split_by_spaces);
 char    **pipe_split(char *input);
 char	**split_by_index(char *input, int *indices);
 char    **space_split(char *string);
-char    *line_expansion(char *line);
+char    *line_expansion(char *line, t_struct *stru);
 char	*copy_til_dquote(char *line, int i);
 char	*copy_til_squote(char *line, int i);
 char    *ft_concat(char *s1, char *s2);
-
-int		pipex_plus(int ac, char **av, char **env, t_struct *stru);
+char    *ft_getenv(const char* varname, char **env_copy);
 
 char	**remove_from_2d(char **array, int index);
 int		ft_array_len(char **array);
 
 char	*concat_strings(char** strings, int numStrings);
 void	redir_exec(char *command, char **env, int i, t_struct *stru);
-void	mod_execve(char *command, char **env);
+//void	mod_execve(char *command, char **env);
+void	mod_execve(char *command, char **env, t_struct *stru);
+void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *stru);
+void    export(char *name, char *value, t_struct *big);
+int		unset(char **envp, const char *varname);
+
+//builtins
+int is_builtin(char *cmd);
+
+//echo
+int echo_command(int ac, char *av[]);
+
+//pwd
+void pwd_command(void);
+
+//cd
+//char **cd_command(char **args, char **env);
+void update_env_var(char *var, char *new_value, char **envp);
+void cd_command(t_struct *stru, char *args[]);
+
+//env
+//void env_command();
+void	env_command(char **env_copy);
+
+//unset
+//int unset_command(char *variable);
+int unset_command(char **env_cp, const char *varname);
+
+//export
+//void export_command(char **args);
+void    export_command(char *name, char *value, t_struct *stru);
 
 //test_utils
 void	printStringArray(char **strArray);
 void    printIntArray(int *intArray);
 void	printFileContent(int fd);
-
-//testing
-int is_builtin(char *cmd);
-
-//builtins
-int echo_command(int ac, char *av[]);
-//int cd_command(int ac, char *av[]);
-void cd_command(int arg_count, char** args);
-//int pwd_command(char *av[]);
-void pwd_command();
-//int export_command(int ac, char *av[]);
-//void export_command(char *variable);
-void export_command(char **args);
-//int unset_command(int ac, char *av[]);
-int unset_command(char *variable);
-//int env_command(int ac, char *av[]);
-void env_command();
+void	error_exit(char *msg);
 
 #endif

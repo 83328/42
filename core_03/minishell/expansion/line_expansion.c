@@ -2,9 +2,9 @@
 
 char	*expand_var(char *string, char *value, int start, int var_len);
 char	*get_p_var(char *string, int start);
-char	*dollars_expansion(char *string);
+char	*dollars_expansion(char *string, t_struct *stru);
 
-char    *line_expansion(char *line)
+char    *line_expansion(char *line, t_struct *stru)
 {
 	char	*cop_line;
 	char	*str;
@@ -22,7 +22,7 @@ char    *line_expansion(char *line)
 		i++;
 	}
 	str = ft_strndup(cop_line, n);
-	str = dollars_expansion(str);
+	str = dollars_expansion(str, stru);
 	n = 0;
 	while(cop_line[i] != 0)
 	{
@@ -39,7 +39,7 @@ char    *line_expansion(char *line)
 				i++;
 				app_str = copy_til_dquote(cop_line, i);
 				i += ft_strlen(app_str) + 1; //-0 casue Nullterminator
-				app_str = dollars_expansion(app_str);
+				app_str = dollars_expansion(app_str, stru);
 			}
 			str = ft_concat(str, app_str);
 		}
@@ -48,7 +48,7 @@ char    *line_expansion(char *line)
 	return(str);
 }
 
-char	*dollars_expansion(char *string)
+char	*dollars_expansion(char *string, t_struct *stru)
 {
 	//char	*string_expanded; // return value
 	char	*p_var; // potential environment variable after a $-sign.
@@ -68,15 +68,15 @@ char	*dollars_expansion(char *string)
 			{
 				still_dollars = 1;
 				p_var = get_p_var(string, i + 1); //test dollar sign end of string!
-				p_val = getenv(p_var);
+				p_val = ft_getenv(p_var, stru->env_copy);
 				if (p_val != NULL)
 				{
-					string = expand_var(string, p_val, i, ft_strlen(p_var)); // free the string it receives and give out a new string with only the first $-expand made 
+					string = expand_var(string, p_val, i, ft_strlen(p_var)); // free the string it receives and give out a new string with only the first $-expand made
 					break;
 				}
 				else
 				{
-					string = expand_var(string, p_val, i, ft_strlen(p_var)); // free the string it receives and give out a new string with only the first $-expand made 
+					string = ft_strdup(""); // free the string it receives and give out a new string with only the first $-expand made
 					break;
 				}
 			}

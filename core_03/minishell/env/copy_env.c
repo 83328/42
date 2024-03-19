@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   copy_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 17:21:16 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/18 17:41:42 by alimpens         ###   ########.fr       */
+/*   Created: 2024/03/18 18:22:21 by alimpens          #+#    #+#             */
+/*   Updated: 2024/03/18 18:29:14 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	pwd_command(void)
+void	copy_env(char *envp[], t_struct *str)
 {
-	char	cwd[PATH_MAX];
+	int	size;
 
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	size = 0;
+	while (envp[size] != NULL)
 	{
-		printf("%s\n", cwd);
+		size++;
 	}
-	else
-	{
-		perror("getcwd() error");
-		return ;
-	}
+	str->env_copy_size = size + 1;
+	str->env_copy = ft_calloc((size + 1), (sizeof(char *)));
+	str->env_copy = copy_2d(envp, str->env_copy);
 }

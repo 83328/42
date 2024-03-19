@@ -12,6 +12,7 @@ void    printStringArray(char **strArray)
     }
     printf("\n");
 }
+
 void    printIntArray(int *intArray)
 {
     int i;

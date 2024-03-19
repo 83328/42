@@ -3,10 +3,14 @@
 
 char	*concat_strings(char** strings, int numStrings)
 {
-    // Check for valid input
-    if (strings == NULL || numStrings <= 0) 
-        return NULL;
+    char* result;
 
+    // Check for valid input
+    if (strings[0] == 0 || numStrings <= 0 || strings == NULL) 
+    {
+        result = ft_calloc(1,sizeof(char));
+        return (result);
+    }
     // Calculate total length of the concatenated string
     int totalLength = 0;
     int i = 0;
@@ -18,14 +22,15 @@ char	*concat_strings(char** strings, int numStrings)
     // Add space for the spaces between strings
     totalLength += numStrings - 1;
 
-    // Allocate memory for the concatenated string
-    char* result = (char*)malloc(totalLength + 1); // +1 for the null terminator
+    if (numStrings < 0)
+    {
+        return NULL; 
+    }
 
-    // Check for memory allocation failure
+    result = (char*)malloc(totalLength + 1); // +1 for the null terminator
     if (result == NULL)
     	return NULL;
 
-    // Copy the strings into the result buffer with spaces in between using a while loop
     int position = 0;
     i = 0;
 

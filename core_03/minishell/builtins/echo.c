@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 17:21:33 by alimpens          #+#    #+#             */
+/*   Updated: 2024/03/18 17:33:18 by alimpens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int echo_command(int ac, char *av[])
 {
     int no_newline = 0;
     int i;
-    i = 1;
 
-    if (ac > 1 && strcmp(av[1], "-n") == 0)
+    i = 1;
+    if (ac > 1 && ft_strcmp(av[1], "-n") == 0)
     {
         no_newline = 1;
         i++;
@@ -20,5 +32,5 @@ int echo_command(int ac, char *av[])
     }
     if (!no_newline)
         printf("\n");
-    return 0;
+    return (0);
 }

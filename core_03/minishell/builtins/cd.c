@@ -1,53 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 17:21:00 by alimpens          #+#    #+#             */
+/*   Updated: 2024/03/18 17:35:54 by alimpens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-/* int cd_command(int ac, char *av[])
+void	update_env_var(char *var, char *new_value, char **envp)
 {
-	int i = 0;
-	while (av[i] != NULL)
+	int		i;
+	char	*entry;
+
+	i = 0;
+	while ((entry = envp[i]) != NULL)
 	{
-		printf("Arguments for cd: %d: %s\n", i, av[i]);
+		if (ft_strncmp(entry, var, ft_strlen(var)) == 0)
+		{
+			printf("File path-b: %s\n", entry);
+			free(entry);
+			envp[i] = ft_strjoin(var, new_value);
+			printf("File path-a: %s\n", envp[i]);
+		}
 		i++;
 	}
+}
 
-	if (ac != 2)
-	{
-		return 1;
-	}
-	if (chdir(av[1]) != 0)
-	{
-		perror("chdir");
-		return 1;
-	}
-
-	return 0;
-} */
-
-void cd_command(int arg_count, char** args) 
+void	cd_command(t_struct *stru, char *args[])
 {
-  char cwd[PATH_MAX];
+	char	*old_pwd;
 
-  if (arg_count < 2) 
-  {
-    fprintf(stderr, "cd: expected 1 argument\n");
-    return;
-  }
-  if (arg_count > 2) 
-  {
-    fprintf(stderr, "cd: too many arguments\n");
-    return;
-  }
-	char* path = args[1];
-	if (chdir(path) != 0)
-  {
-    perror("chdir() error");
-    return;
-  }
-  if (getcwd(cwd, sizeof(cwd)) != NULL)
-  {
-    printf("%s\n", cwd);
-  }
-  else
-  {
-    perror("getcwd() error"); 
-  }
+	old_pwd = getcwd(NULL, 0);
+	if (args[1] == NULL || strcmp(args[1], "..") == 0)
+	{
+		char	*last_slash = strrchr(old_pwd, '/');
+		if (last_slash != NULL)
+		{
+			*last_slash = '\0'; 
+		}
+		chdir(old_pwd);
+	}
+	else
+	{
+		chdir(args[1]);
+	}
+	char	*current_dir = getcwd(NULL, 0);
+	update_env_var("PWD", current_dir, stru->env_copy);
+	free(old_pwd);
+	free(current_dir);
 }

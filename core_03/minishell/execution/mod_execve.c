@@ -103,53 +103,48 @@ char	*get_path (char *command, char **env)
 	return (command);
 }
 
-void	mod_execve(char *command, char **env)
+void	mod_execve(char *command, char **env, t_struct *stru)
 {
 	char	**args;
 	char	*path;
+	int		i;
+	int		result;
 
 	args = not_ft_split(command, ' ');
-// check for builtins here
-
-	int i = 0;
-	while (args[i] != NULL)
-	{
-		printf("Command %d: %s\n", i, args[i]);
-		i++;
-	}
-	printf("First arg: %s\n", args[0]);
+	i = 0;
+	result = 0;
 	if (is_builtin(args[0]))
 	{
 		printf("---- builtin detected ----\n");
-		if (strcmp(args[0], "echo") == 0)
-			echo_command(i, args);
-		else if (strcmp(args[0], "cd") == 0)
-			cd_command(i, args);
-		else if (strcmp(args[0], "pwd") == 0)
-			pwd_command(i, args);
-		else if (strcmp(args[0], "export") == 0)
+		if (ft_strcmp(args[0], "echo") == 0)
+			echo_command(ft_array_len(args), args);
+ 		else if (ft_strcmp(args[0], "cd") == 0)
 		{
-			export_command(args);
+			cd_command(stru, args);
+		}
+		else if (ft_strcmp(args[0], "pwd") == 0)
+			pwd_command();
+ 		else if (ft_strcmp(args[0], "export") == 0)
+		{
+			export_command(args[1], args[2], stru);
 			return;
 		}
-		else if (strcmp(args[0], "unset") == 0)
+		else if (ft_strcmp(args[0], "unset") == 0)
 		{
-			int i = 1;
+			i = 1;
 			while (args[i])
 			{
-				unset_command(args[i]);
+				unset_command(env, args[i]);
 				i++;
 			}
 			return;
 			}
-		else if (strcmp(args[0], "env") == 0)
-			env_command(i, args);
+		else if (ft_strcmp(args[0], "env") == 0)
+			env_command(env);
 		exit(0);
 	}
 	else
 	{
-// end check
-// handle exit status by right error code
 		if (ft_strichr(args[0], '/') > -1)
 			path = args[0];
 		else

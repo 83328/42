@@ -16,8 +16,8 @@ char	*copy_til_squote(char *line, int i) //copies the string using its own i-var
 	ret = ft_calloc(sizeof(char),n + 1);
 	while(line[i] != 39 && line[i] != 0)
 	{
-		// if (line[i] == 0)
-		// 	perror_exit("error: unclosed single quotes"); //already happens in count til quote but f it.
+		if (line[i] == 0)
+			perror_exit("error: unclosed single quotes"); //already happens in count til quote but f it.
 		ret[j] = line[i];
 		i++;
 		j++;
