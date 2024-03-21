@@ -21,7 +21,9 @@ char    *line_expansion(char *line, t_struct *stru)
 		n++;
 		i++;
 	}
+	printf("back-2 -->%s<--\n", cop_line);
 	str = ft_strndup(cop_line, n);
+	printf("back-1 -->%s<--\n", str);
 	str = dollars_expansion(str, stru);
 	n = 0;
 	while(cop_line[i] != 0)
@@ -42,9 +44,14 @@ char    *line_expansion(char *line, t_struct *stru)
 				app_str = dollars_expansion(app_str, stru);
 			}
 			str = ft_concat(str, app_str);
+//			n = i;
 		}
 		i++;
 	}
+//	app_str = ft_str_revndup(cop_line, n); //
+//	str = ft_concat(str,app_str);
+
+	printf("back-0 -->%s<--\n", str);
 	return(str);
 }
 
@@ -122,8 +129,6 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 		j++;
 	}
 	str[i] = 0;
-
-
 	return (str);
 }
 
@@ -136,7 +141,7 @@ char	*get_p_var(char *string, int start)
 
 	i = start;
 	var_len = 0;
-	while(string[i] != 0 && ft_isalnum(string[i]))
+	while(string[i] != 0 && (string[i] != ' ' && string[i] != 't' && string[i] != 'n' && string[i] != 'r' && string[i] != 'v' && string[i] != 'f')) //not "\0" or space
 	{
 		var_len++;
 		i++;
@@ -144,7 +149,7 @@ char	*get_p_var(char *string, int start)
 	p_var = malloc(sizeof(char *) * (var_len + 1));
 	i = start;
 	j = 0;
-	while(string[i] != 0 && ft_isalnum(string[i]))
+	while(string[i] != 0 && (string[i] != ' ' && string[i] != 't' && string[i] != 'n' && string[i] != 'r' && string[i] != 'v' && string[i] != 'f'))
 	{
 		p_var[j] = string[i];
 		i++;

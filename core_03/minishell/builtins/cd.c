@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:00 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/18 17:35:54 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:54:17 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,24 @@ void	update_env_var(char *var, char *new_value, char **envp)
 void	cd_command(t_struct *stru, char *args[])
 {
 	char	*old_pwd;
+	char	*home_path;
+	char	*last_slash;
+	char	*current_dir;
 
 	old_pwd = getcwd(NULL, 0);
+	home_path = getenv("HOME");
+	last_slash = strrchr(old_pwd, '/');
+	current_dir = getcwd(NULL, 0);
 	if (args[1] == NULL || strcmp(args[1], "..") == 0)
 	{
-		char	*last_slash = strrchr(old_pwd, '/');
 		if (last_slash != NULL)
-		{
 			*last_slash = '\0'; 
-		}
 		chdir(old_pwd);
 	}
+	else if (ft_strcmp(args[1], "~") == 0)
+		chdir(home_path);
 	else
-	{
 		chdir(args[1]);
-	}
-	char	*current_dir = getcwd(NULL, 0);
 	update_env_var("PWD", current_dir, stru->env_copy);
 	free(old_pwd);
 	free(current_dir);

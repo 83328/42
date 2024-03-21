@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+
+//
 void	builtins(int len, char **reassembled_commands, char **envp, t_struct *stru)
 {
     int     i;

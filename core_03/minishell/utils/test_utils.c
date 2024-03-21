@@ -7,7 +7,7 @@ void    printStringArray(char **strArray)
     i = 0;
     while (strArray[i] != NULL)
     {
-        printf("\nstrArr[%d] %s", i ,strArray[i]);
+        printf("\nstrArr[%d] #%s#", i ,strArray[i]);
         i++;
     }
     printf("\n");

@@ -67,6 +67,7 @@ void	quote_errors(char *input)
 	}
 }
 
+
 int main(int argc, char *argv[], char *envp[])
 {
 	t_struct	*stru;
@@ -81,7 +82,7 @@ int main(int argc, char *argv[], char *envp[])
 	stru->ufd_i = 0;
 	copy_env(envp, stru);
 	signal_handling();
-	export("EXIT_STATUS", ft_itoa(0), stru);
+	set("?", ft_itoa(0), stru);
 	while (1) 
 	{
 		stru->input = readline("minishell ## ");
@@ -91,7 +92,7 @@ int main(int argc, char *argv[], char *envp[])
 			break;
 		}
 		if (strcmp(stru->input, "") == 0)
-			continue; //should be called skip, because it skips the rest of this loop iteration
+			continue ;
 		if (strcmp(stru->input, "exit") == 0) //
 		{
 			printf("exit\n");
@@ -122,22 +123,38 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		terminate_filefds(stru, i);
 		stru->reassembled_commands[j] = NULL;
-
-
 		if (strcmp(stru->reassembled_commands[0], "") == 0)
 			continue; //should be called skip, because it skips the rest of this loop iteration
 		else if(strncmp(stru->reassembled_commands[0], "cd", 2) == 0 && i ==1)
 		{
 			cd_command(stru, stru->split_by_space);
 		}
+		else if (strncmp(stru->reassembled_commands[0], "echo", 4) == 0)
+		{
+				printf("reassembled_command -->%s<--\n", stru->reassembled_commands[0]);
+		// 		printf("echo --> %s\n", stru->reassembled_commands[1]);
+		 		echo_command(stru->reassembled_commands[0]);
+		}
+
+
+		else if (strncmp(stru->reassembled_commands[0], "export", 6) == 0)
+		{
+			export_command(stru->split_by_space[0], stru->split_by_space[1], stru);
+		}
+/* 		else if (strncmp(stru->reassembled_commands[0], "unset", 5) == 0)
+		{
+			unset_command(stru->split_by_space, stru);
+		} */
+
+
 		else
 		{
 			global_sig = 1;
 			subprocesses(len, stru->reassembled_commands, envp, stru);
 		}
 		global_sig = 0;
-		unset(stru->env_copy,"EXIT_STATUS"); //unsets previous exit status, should be done every run
-		export("EXIT_STATUS", ft_itoa(stru->exit_status), stru); // adds exit status to env, should be done every run
+		// unset(stru->env_copy,"?"); //unsets previous exit status, should be done every run
+		set("?", ft_itoa(stru->exit_status), stru); // adds exit status to env, should be done every run
 		//printStringArray(stru->env_copy); // OFT only for testing
 		wait(NULL);
 		free(stru->input);

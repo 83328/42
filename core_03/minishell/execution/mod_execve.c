@@ -110,37 +110,41 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 	int		i;
 	int		result;
 
+/* 	dprintf(2, "command-d: %s\n", command);
+	printf("command-0: %s\n", command); */
+
 	args = not_ft_split(command, ' ');
 	i = 0;
 	result = 0;
 	if (is_builtin(args[0]))
 	{
 		printf("---- builtin detected ----\n");
-		if (ft_strcmp(args[0], "echo") == 0)
-			echo_command(ft_array_len(args), args);
- 		else if (ft_strcmp(args[0], "cd") == 0)
+/* 		if (ft_strcmp(args[0], "echo") == 0)
+			echo_command(ft_array_len(args), args); */
+ 		if (ft_strcmp(args[0], "cd") == 0)
 		{
 			cd_command(stru, args);
 		}
 		else if (ft_strcmp(args[0], "pwd") == 0)
 			pwd_command();
- 		else if (ft_strcmp(args[0], "export") == 0)
+ 		/* else if (ft_strcmp(args[0], "export") == 0)
 		{
+			//export_new(command);
 			export_command(args[1], args[2], stru);
 			return;
-		}
+		} */
 		else if (ft_strcmp(args[0], "unset") == 0)
 		{
 			i = 1;
 			while (args[i])
 			{
-				unset_command(env, args[i]);
+				unset(env, args[i]);
 				i++;
 			}
 			return;
 			}
 		else if (ft_strcmp(args[0], "env") == 0)
-			env_command(env);
+			env_command(stru);
 		exit(0);
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: dgacic <dgacic@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 02:39:41 by dgacic            #+#    #+#             */
-/*   Updated: 2024/03/18 14:32:00 by alimpens         ###   ########.fr       */
+/*   Updated: 2023/11/10 02:39:43 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char			*ft_strdup(const char *s);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strcat(char *dest, const char *src);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
+int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strcpy(char *s1, const char *s2);
 size_t			ft_strlcpy(char *dest, const char *src, size_t size);
-int				ft_strcmp(const char *s1, const char *s2);
 size_t			ft_strlen(const char *str);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int				test(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
-int				ft_strncmp(const char *s1, const char *s2, int n);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strndup(const char *s, int n);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strtrim(char const *s1, char const *set);

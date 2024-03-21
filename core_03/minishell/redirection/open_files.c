@@ -80,7 +80,7 @@ void	open_files(t_struct *stru, int index) //potentially add the option of no sp
 				stru->filefds[index][1] = open(stru->split_by_space[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 				if (stru->filefds[index][1]  == -1)
 				{
-					printf("\nError opening file");
+					printf("Error opening file\n");
 					return;
 				}
 			}
@@ -99,7 +99,7 @@ void	open_files(t_struct *stru, int index) //potentially add the option of no sp
 				stru->filefds[index][1] = open(stru->split_by_space[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 				if (stru->filefds[index][1]  == -1)
 				{
-					printf("\nError opening file");
+					printf("Error opening file\n");
 					return;
 				}
 			}

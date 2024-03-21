@@ -1,6 +1,7 @@
 #include "../minishell.h"
 
 int count_til_squote(char *line, int i);
+
 char	*copy_til_squote(char *line, int i) //copies the string using its own i-var til it reaches a double quote,returns malloced str+0 (perror-exit if unclosed)
 {
 	int     n;
@@ -8,7 +9,6 @@ char	*copy_til_squote(char *line, int i) //copies the string using its own i-var
 	int		j;
 
 	j = 0;
-
 	n = count_til_squote(line, i);
 	// printf("\npassed count_til_squote");
 	// printf("\nresult of count_til_squote: %i", n);

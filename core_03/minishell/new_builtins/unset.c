@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int unset_command(char **env_cp, const char *varname)
+/* int unset(char **env_cp, const char *varname)
 {
     int i, j;
     int env_count = 0;
@@ -24,4 +24,4 @@ int unset_command(char **env_cp, const char *varname)
         }
     }
     return (1); // env var didnt exist
-}
+} */

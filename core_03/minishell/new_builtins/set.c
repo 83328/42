@@ -1,9 +1,9 @@
 #include "../minishell.h"
 
-void	resize_env_copy(t_struct *stru);
-char	**char2d_realloc(char **ptr, int size, int old_size);
+//void	resize_env_copy(t_struct *stru);
+//char	**char2d_realloc(char **ptr, int size, int old_size);
 
-void    export(char *name, char *value, t_struct *stru) //unsure of how to handle memory as of yet
+void    set(char *name, char *value, t_struct *stru) //unsure of how to handle memory as of yet
 {
 	char	*equ;
 	char	*val_dup;
@@ -26,7 +26,7 @@ void    export(char *name, char *value, t_struct *stru) //unsure of how to handl
 	}
 	stru->env_copy[i] = ft_strdup(new_var);
 	i++;
-	stru->env_copy[i] = NULL;
+	stru->env_copy[i] = 0;
 }
 
 /* void	resize_env_copy(t_struct *stru)
@@ -36,9 +36,9 @@ void    export(char *name, char *value, t_struct *stru) //unsure of how to handl
 	old_size = stru->env_copy_size;
 	stru->env_copy_size  = stru->env_copy_size * 2;
 	stru->env_copy = char2d_realloc(stru->env_copy, stru->env_copy_size, old_size);
-}
+} */
 
-char	**char2d_realloc(char **ptr, int new_size, int old_size)
+/* char	**char2d_realloc(char **ptr, int new_size, int old_size)
 {
 	char	**ret;
 

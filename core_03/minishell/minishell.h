@@ -50,11 +50,13 @@ typedef struct s_struct
 }			t_struct;
 
 void	execute_command(char **split_by_space);
-void	sigint_handler(int sig);
+void	standard_sigint_handler();
+void	sigint_handler_processes();
 void	*signal_handling();
 void	copy_env(char *envp[], t_struct *str);
 int		mod_execvp(const char *file, char *const argv[], char *PATH);
 void	perror_exit(char *msg);
+void	error_exit(char *msg);
 char	**copy_2d(char **envp, char **envp_copy);
 int		piping(int ac, char **av, char **env);
 void    open_files(t_struct *stru, int index);
@@ -68,6 +70,7 @@ char	*copy_til_dquote(char *line, int i);
 char	*copy_til_squote(char *line, int i);
 char    *ft_concat(char *s1, char *s2);
 char    *ft_getenv(const char* varname, char **env_copy);
+int		ft_heredoc(int index, t_struct *stru, char *delimiter);
 
 char	**remove_from_2d(char **array, int index);
 int		ft_array_len(char **array);
@@ -77,14 +80,20 @@ void	redir_exec(char *command, char **env, int i, t_struct *stru);
 //void	mod_execve(char *command, char **env);
 void	mod_execve(char *command, char **env, t_struct *stru);
 void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *stru);
-void    export(char *name, char *value, t_struct *big);
+void    set(char *name, char *value, t_struct *big);
 int		unset(char **envp, const char *varname);
+
+
+void	resize_env_copy(t_struct *stru);
+char	**char2d_realloc(char **ptr, int size, int old_size);
+char	*ft_str_revndup(const char *str, int n);
 
 //builtins
 int is_builtin(char *cmd);
 
 //echo
-int echo_command(int ac, char *av[]);
+// int echo_command(int ac, char *av[]);
+void echo_command(char *str);
 
 //pwd
 void pwd_command(void);
@@ -95,8 +104,7 @@ void update_env_var(char *var, char *new_value, char **envp);
 void cd_command(t_struct *stru, char *args[]);
 
 //env
-//void env_command();
-void	env_command(char **env_copy);
+void	env_command(t_struct *stru);
 
 //unset
 //int unset_command(char *variable);
@@ -105,6 +113,8 @@ int unset_command(char **env_cp, const char *varname);
 //export
 //void export_command(char **args);
 void    export_command(char *name, char *value, t_struct *stru);
+void	add_to_envcopy(char *name, char *value, t_struct *stru);
+void	rebuild_environ(char **env_copy, int size);
 
 //test_utils
 void	printStringArray(char **strArray);

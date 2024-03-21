@@ -76,7 +76,6 @@ int		*find_real_spaces(char *reduced_string)
 	int nth_space;
 	int num_spaces;
 
-
 	i = 0;
 	num_spaces = 0;
 	while (reduced_string[i])
@@ -110,7 +109,6 @@ int		*find_real_spaces(char *reduced_string)
 	//printIntArrayUntilMinusOne(real_space_indices);
 	return (real_space_indices);
 }
-
 
 char    **space_split(char *string) //reduces unquoted spaces to one space, splits by unquoted space
 {
