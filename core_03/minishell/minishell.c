@@ -11,7 +11,8 @@ void printIntArray2D(int (*arr)[2])
     }
 }
 
-void unsetEnvVar(char **envp, const char *varname) {
+void unsetEnvVar(char **envp, const char *varname)
+{
     int i, j;
     int env_count = 0;
 
@@ -67,7 +68,6 @@ void	quote_errors(char *input)
 	}
 }
 
-
 int main(int argc, char *argv[], char *envp[])
 {
 	t_struct	*stru;
@@ -82,8 +82,8 @@ int main(int argc, char *argv[], char *envp[])
 	stru->ufd_i = 0;
 	copy_env(envp, stru);
 	signal_handling();
-	set("?", ft_itoa(0), stru);
-	while (1) 
+	//set("?", ft_itoa(0), stru);
+	while (1)
 	{
 		stru->input = readline("minishell ## ");
 		if (!stru->input)
@@ -93,7 +93,7 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		if (strcmp(stru->input, "") == 0)
 			continue ;
-		if (strcmp(stru->input, "exit") == 0) //
+		if (strcmp(stru->input, "exit") == 0)
 		{
 			printf("exit\n");
 			break;
@@ -136,7 +136,6 @@ int main(int argc, char *argv[], char *envp[])
 		 		echo_command(stru->reassembled_commands[0]);
 		}
 
-
 		else if (strncmp(stru->reassembled_commands[0], "export", 6) == 0)
 		{
 			export_command(stru->split_by_space[0], stru->split_by_space[1], stru);
@@ -145,8 +144,6 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			unset_command(stru->split_by_space, stru);
 		} */
-
-
 		else
 		{
 			global_sig = 1;

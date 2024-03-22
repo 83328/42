@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:23 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/20 14:28:33 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:15:13 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int unset(char **env_cp, const char *varname)
 	int j;
 	int env_count = 0;
 
+	i = 0;
 	// Count the number of environment variables
 	while (env_cp[env_count] != NULL)
 		env_count++;
-	
-	i = 0;
 	while (i < env_count)
 	{
 		if (strncmp(env_cp[i], varname, ft_strlen(varname)) == 0 && env_cp[i][ft_strlen(varname)] == '=') {
@@ -42,7 +41,6 @@ int unset(char **env_cp, const char *varname)
 	}
 	return (1); // env var didnt exist
 }
-
 
 /* int unset_command(char *variable)
 {

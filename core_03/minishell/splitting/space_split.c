@@ -1,12 +1,15 @@
 #include "../minishell.h"
 
-void printIntArrayUntilMinusOne(int *arr) {
+void printIntArrayUntilMinusOne(int *arr)
+{
 	printf("[");
-	for (int i = 0; arr[i] != -1; i++) {
+	for (int i = 0; arr[i] != -1; i++)
+	{
 		printf("%d", arr[i]);
 
 		// Print a comma and space for all elements except the last one
-		if (arr[i + 1] != -1) {
+		if (arr[i + 1] != -1)
+		{
 			printf(", ");
 		}
 	}
@@ -31,6 +34,7 @@ char	*remove_trailing_space(char *string)
 	free(string);
 	return (clipped_string);
 }
+
 char    *space_reduce(char *string)
 {
 	char    *reduced_string;

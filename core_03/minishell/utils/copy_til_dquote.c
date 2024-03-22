@@ -8,7 +8,6 @@ char	*copy_til_dquote(char *line, int i) //copies the string using its own i-var
 	int		j;
 
 	j = 0;
-
 	n = count_til_dquote(line, i);
 	// printf("\npassed count_til_squote");
 	// printf("\nresult of count_til_squote: %i", n);
@@ -17,14 +16,14 @@ char	*copy_til_dquote(char *line, int i) //copies the string using its own i-var
 	while(line[i] != 34 && line[i] != 0)
 	{
 		if (line[i] == 0)
-			error_exit("error: unclosed single quotes"); //already happens in count til quote but f it.
+			error_exit("error: unclosed single quotes\n"); //already happens in count til quote but f it.
 		ret[j] = line[i];
 		i++;
 		j++;
 	}
 	if (ret[j - 1] == 0)
 	{
-		error_exit("error: unclosed double quotes");
+		error_exit("error: unclosed double quotes\n");
 	}
 	ret[j] = '\0';
 	return(ret);
