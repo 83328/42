@@ -47,11 +47,16 @@ typedef struct s_struct
 	int		filefdin;
 	int		filefdout;
 	int		exit_status;
+	int		*exit_statuses;
+	int		flag;
 }			t_struct;
 
 void	execute_command(char **split_by_space);
-void	standard_sigint_handler();
-void	sigint_handler_processes();
+// void	standard_sigint_handler();
+// void	sigint_handler_processes();
+void	sigint_handler_default(int sig); 
+void	sigint_handler_heredoc(int sig);
+void	sigint_handler_command(int sig);
 void	*signal_handling();
 void	copy_env(char *envp[], t_struct *str);
 int		mod_execvp(const char *file, char *const argv[], char *PATH);

@@ -1,0 +1,6 @@
+## REDIRECTION
+
+getting input from a file and redirecting to a file like
+< ab.txt > bb.txt
+
+

@@ -12,8 +12,8 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
         return (1);
     }
 
-	global_sig = 2;
-    while ((stru->line = readline("heredoc ## ")) != NULL && global_sig != 4) // add delimiter flag
+	signal(SIGINT, sigint_handler_heredoc);
+    while ((stru->line = readline("heredoc ## ")) != NULL && global_sig == 0) // add delimiter flag
 	{
 		if (strcmp(stru->line, "") == 0)
 		{
@@ -32,6 +32,7 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
         // Free the allocated memory for readline
         free(stru->line);
     }
+	signal(SIGINT, sigint_handler_default);
 	close(heredoc_fd);
 	heredoc_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
 	stru->filefds[index][0] = heredoc_fd;
@@ -62,7 +63,7 @@ void	open_files(t_struct *stru, int index) //potentially add the option of no sp
 				stru->filefds[index][0] = open(stru->split_by_space[i + 1], O_RDONLY);
 				if (stru->filefds[index][0] == -1)
 				{
-					printf("\nError opening file");
+					printf("\nError opening file\n");
 					return;
 				}
 			}

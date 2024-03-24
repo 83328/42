@@ -121,6 +121,16 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 		printf("---- builtin detected ----\n");
 /* 		if (ft_strcmp(args[0], "echo") == 0)
 			echo_command(ft_array_len(args), args); */
+
+		// else if (strncmp(stru->reassembled_commands[0], "echo", 4) == 0)
+		if (ft_strcmp(args[0], "echo") == 0)
+		{
+				printf("reassembled_command -->%s<--\n", stru->reassembled_commands[0]);
+		// 		printf("echo --> %s\n", stru->reassembled_commands[1]);
+		 		echo_command(command);
+		}
+
+
  		if (ft_strcmp(args[0], "cd") == 0)
 		{
 			cd_command(stru, args);

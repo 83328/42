@@ -118,26 +118,46 @@ int main(int argc, char *argv[], char *envp[])
 			while (stru->split_by_space[k])
 				k++;
 			stru->reassembled_commands[j] = line_expansion(concat_strings(stru->split_by_space,k),stru);
+			if (stru->reassembled_commands[j] == NULL) {
+				// printf("error: unclosed double quotes4\n");
+				break;
+			}
 			i++;
 			j++;
 		}
 		terminate_filefds(stru, i);
+		if (stru->reassembled_commands[j] == NULL){
+
+			// printf("probable segfault start1\n");
+			if (stru->reassembled_commands[0] == NULL){
+
+				// printf("probable segfault start2\n");
+				continue; //should be called skip, because it skips the rest of this loop iteration
+			}
+			// continue; //should be called skip, because it skips the rest of this loop iteration
+		}
 		stru->reassembled_commands[j] = NULL;
-		if (strcmp(stru->reassembled_commands[0], "") == 0)
+		// printf("\n\n\nprobable segfault start1\n\n\n");
+		if (!strcmp(stru->reassembled_commands[0], "")){
+
+			// printf("probable segfault start1\n");
 			continue; //should be called skip, because it skips the rest of this loop iteration
+		}
 		else if(strncmp(stru->reassembled_commands[0], "cd", 2) == 0 && i ==1)
 		{
+			// printf("probable segfault start\n");
 			cd_command(stru, stru->split_by_space);
 		}
-		else if (strncmp(stru->reassembled_commands[0], "echo", 4) == 0)
-		{
-				printf("reassembled_command -->%s<--\n", stru->reassembled_commands[0]);
-		// 		printf("echo --> %s\n", stru->reassembled_commands[1]);
-		 		echo_command(stru->reassembled_commands[0]);
-		}
+		// else if (strncmp(stru->reassembled_commands[0], "echo", 4) == 0)
+		// {
+		// 		printf("reassembled_command -->%s<--\n", stru->reassembled_commands[0]);
+		// // 		printf("echo --> %s\n", stru->reassembled_commands[1]);
+		//  		echo_command(stru->reassembled_commands[0]);
+		// }
 
 		else if (strncmp(stru->reassembled_commands[0], "export", 6) == 0)
 		{
+			// printf("probable segfault start3\n");
 			export_command(stru->split_by_space[0], stru->split_by_space[1], stru);
 		}
 /* 		else if (strncmp(stru->reassembled_commands[0], "unset", 5) == 0)
@@ -149,8 +169,9 @@ int main(int argc, char *argv[], char *envp[])
 			global_sig = 1;
 			subprocesses(len, stru->reassembled_commands, envp, stru);
 		}
+		// printf("segfault start3\n");
 		global_sig = 0;
-		// unset(stru->env_copy,"?"); //unsets previous exit status, should be done every run
+		unset(stru->env_copy,"?"); //unsets previous exit status, should be done every run
 		set("?", ft_itoa(stru->exit_status), stru); // adds exit status to env, should be done every run
 		//printStringArray(stru->env_copy); // OFT only for testing
 		wait(NULL);

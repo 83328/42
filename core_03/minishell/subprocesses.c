@@ -26,9 +26,11 @@ void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *s
 {
 	int     i;
 
+	global_sig = 1;
 	i = 0;
-
 	stru->pipefds = create_pipes(len - 1);
+	//signal(SIGQUIT, sigquit_handler_command);
+	signal(SIGINT, sigint_handler_command);
 	while (i < len)
 	{
 		stru->pids[i] = subprocess(i, reassembled_commands, envp, stru, len);
@@ -38,12 +40,27 @@ void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *s
 	i = 0;
 	//printpidArray(stru->pids,len);
 	close_fds(stru->pipefds, stru->filefds, stru->unused_fds, len);
+	stru->exit_statuses = calloc( len+1,sizeof(int));
 	while (stru->pids[i] != -1)
 	{
-		waitpid(stru->pids[i], &stru->exit_status, 0);
-		//dprintf(2,"ex: %d",stru->exit_status);
+		signal(SIGINT, SIG_IGN);
+		waitpid(stru->pids[i], &stru->exit_statuses[i], WUNTRACED);
+		// if (WIFEXITED(stru->exit_statuses[i]))
+		// 	stru->exit_statuses[i] = WEXITSTATUS(stru->exit_statuses[i]);
+		// else 
+		if (WIFSIGNALED(stru->exit_statuses[i]))
+		{
+			stru->exit_statuses[i] = WTERMSIG(stru->exit_statuses[i]) + 128;
+			stru->flag = stru->exit_statuses[i];
+		}
 		i++;
 	}
+	if (stru->flag == 130)
+		ft_putendl_fd("", 2);
+	stru->exit_statuses[i] = 0;
+	stru->exit_status = stru->exit_statuses[i-1];
+	signal(SIGINT, sigint_handler_default);
+	signal(SIGQUIT,SIG_IGN);
 	// free stuff maybe
 }
 
@@ -138,7 +155,7 @@ void	close_fds(int **pipefds, int (*filefds)[2], int unused_fds[8192], int len)
 		i++;
 	}
 	i = 0;
-	while (i < 8192)
+	while (unused_fds[i] != -1)
 	{
 		if (unused_fds[i] != 0)
 			close(unused_fds[i]);

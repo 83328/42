@@ -23,7 +23,9 @@ char	*copy_til_dquote(char *line, int i) //copies the string using its own i-var
 	}
 	if (ret[j - 1] == 0)
 	{
-		error_exit("error: unclosed double quotes\n");
+		// error_exit("error: unclosed double quotes2\n");
+		write(1,"error: unclosed double quotes\n",30);
+		return (NULL);
 	}
 	ret[j] = '\0';
 	return(ret);
@@ -42,7 +44,11 @@ int count_til_dquote(char *line, int i)
 		n++;
 	}
 	if (line[i - 1] == 0)
-		perror_exit("1error: unclosed double quotes");
+	{
+		// perror_exit("1error: unclosed double quotes");
+		write(1,"error: unclosed double quotes\n",30);
+		return (127);
+	}
 	return(n);
 }
 

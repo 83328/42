@@ -8,6 +8,7 @@ int *find_real_pipes(char *input)
 	int nth_pipe;
 	int num_pipes;
 
+
 	i = 0;
 	num_pipes = 0;
 	if (input[0] == '|')

@@ -21,9 +21,7 @@ char    *line_expansion(char *line, t_struct *stru)
 		n++;
 		i++;
 	}
-	printf("back-2 -->%s<--\n", cop_line);
 	str = ft_strndup(cop_line, n);
-	printf("back-1 -->%s<--\n", str);
 	str = dollars_expansion(str, stru);
 	n = 0;
 	while(cop_line[i] != 0)
@@ -40,18 +38,25 @@ char    *line_expansion(char *line, t_struct *stru)
 			{
 				i++;
 				app_str = copy_til_dquote(cop_line, i);
+				if (app_str == NULL){
+					// write(1,"error: unclosed double quotes3\n",30);
+					return (NULL); //error_exit("unclosed double quote, invalid input\n"
+				}
 				i += ft_strlen(app_str) + 1; //-0 casue Nullterminator
 				app_str = dollars_expansion(app_str, stru);
 			}
 			str = ft_concat(str, app_str);
-//			n = i;
+			n = i;
+		}
+		if (cop_line[i] != 39 && cop_line[i] != 34 )
+		{
+			app_str = ft_str_revndup(cop_line, n); // cause of quote
+			i += ft_strlen(app_str) - 1;
+			str = ft_concat(str,app_str);
 		}
 		i++;
 	}
-//	app_str = ft_str_revndup(cop_line, n); //
-//	str = ft_concat(str,app_str);
 
-	printf("back-0 -->%s<--\n", str);
 	return(str);
 }
 
@@ -129,6 +134,8 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 		j++;
 	}
 	str[i] = 0;
+
+
 	return (str);
 }
 
