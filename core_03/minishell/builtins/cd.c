@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:00 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/21 14:54:17 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:15:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	update_env_var(char *var, char *new_value, char **envp)
 	{
 		if (ft_strncmp(entry, var, ft_strlen(var)) == 0)
 		{
-			printf("File path-b: %s\n", entry);
 			free(entry);
 			envp[i] = ft_strjoin(var, new_value);
-			printf("File path-a: %s\n", envp[i]);
 		}
 		i++;
 	}

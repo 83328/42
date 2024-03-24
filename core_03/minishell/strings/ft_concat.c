@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_concat.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/24 19:39:14 by alimpens          #+#    #+#             */
+/*   Updated: 2024/03/24 19:43:52 by alimpens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char    *ft_concat(char *s1, char *s2) //frees mem at s1 and s2, allocates new mem for s1+s2, points s1 at it, returns s1

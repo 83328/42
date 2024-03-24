@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mod_execve.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/24 19:40:20 by alimpens          #+#    #+#             */
+/*   Updated: 2024/03/24 19:40:22 by alimpens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	ft_strichr(char *str, char c) // finds index of a given character in a string
@@ -110,31 +122,15 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 	int		i;
 	int		result;
 
-/* 	dprintf(2, "command-d: %s\n", command);
-	printf("command-0: %s\n", command); */
-
 	args = not_ft_split(command, ' ');
 	i = 0;
 	result = 0;
 	if (is_builtin(args[0]))
 	{
-		printf("---- builtin detected ----\n");
-/* 		if (ft_strcmp(args[0], "echo") == 0)
-			echo_command(ft_array_len(args), args); */
-
-		// else if (strncmp(stru->reassembled_commands[0], "echo", 4) == 0)
 		if (ft_strcmp(args[0], "echo") == 0)
-		{
-				printf("reassembled_command -->%s<--\n", stru->reassembled_commands[0]);
-		// 		printf("echo --> %s\n", stru->reassembled_commands[1]);
 		 		echo_command(command);
-		}
-
-
  		if (ft_strcmp(args[0], "cd") == 0)
-		{
 			cd_command(stru, args);
-		}
 		else if (ft_strcmp(args[0], "pwd") == 0)
 			pwd_command();
  		/* else if (ft_strcmp(args[0], "export") == 0)

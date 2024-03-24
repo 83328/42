@@ -6,17 +6,17 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:33 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 15:10:48 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:10:46 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void echo_command(char *str)
+void	echo_command(char *str)
 {
-	int i;
-	int j;
-	int print_newline;
+	int	i;
+	int	j;
+	int	print_newline;
 
 	i = 4;
 	j = 0;
@@ -24,7 +24,7 @@ void echo_command(char *str)
 	if (strncmp(str, "echo", 4) == 0)
 	{
 		if (str[i] == ' ' || str[i] == '\t')
-		i++;
+			i++;
 		if (strncmp(&str[i], "-n", 2) == 0)
 		{
 			print_newline = 0;

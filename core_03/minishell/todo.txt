@@ -4,3 +4,10 @@ getting input from a file and redirecting to a file like
 < ab.txt > bb.txt
 
 
+cat<file does not work with spaces
+
+
+why global sig? "$?" 
+
+
+~ should go home?

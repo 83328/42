@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/24 19:38:04 by alimpens          #+#    #+#             */
+/*   Updated: 2024/03/24 19:38:06 by alimpens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int global_sig = 0;
@@ -21,7 +33,6 @@ void unsetEnvVar(char **envp, const char *varname)
         env_count++;
     }
 
-    // Find the environment variable to unset
     for (i = 0; i < env_count; i++) {
         if (strncmp(envp[i], varname, strlen(varname)) == 0 && envp[i][strlen(varname)] == '=') {
             // Free memory for the variable
@@ -36,7 +47,7 @@ void unsetEnvVar(char **envp, const char *varname)
     }
 }
 
-void	quote_errors(char *input)
+int	quote_errors(char *input)
 {
 	int i;
 
@@ -51,7 +62,10 @@ void	quote_errors(char *input)
 			while(input[i] != 39)
 			{
 				if (input[i] == 0)
-					error_exit("unclosed single quote, invalid input\n");
+				{
+					ft_putendl_fd("unclosed single quote, invalid input", STDERR_FILENO);
+					return (1);
+				}
 				i++;
 			}
 		}
@@ -61,11 +75,15 @@ void	quote_errors(char *input)
 			while(input[i] != 34)
 			{
 				if (input[i] == 0)
-					error_exit("unclosed double quote, invalid input\n");
+				{
+					ft_putendl_fd("unclosed double quote, invalid input", STDERR_FILENO);
+					return (1);
+				}
 				i++;
 			}
 		}
 	}
+	return (0);
 }
 
 int main(int argc, char *argv[], char *envp[])
@@ -98,7 +116,11 @@ int main(int argc, char *argv[], char *envp[])
 			printf("exit\n");
 			break;
 		}
-		quote_errors(stru->input);
+		if (quote_errors(stru->input))
+		{
+			free(stru->input);
+			continue;
+		}
 		add_history(stru->input);
 		stru->input_by_pipes = pipe_split(stru->input);
 		i = 0;
@@ -126,54 +148,34 @@ int main(int argc, char *argv[], char *envp[])
 			j++;
 		}
 		terminate_filefds(stru, i);
-		if (stru->reassembled_commands[j] == NULL){
-
-			// printf("probable segfault start1\n");
-			if (stru->reassembled_commands[0] == NULL){
-
-				// printf("probable segfault start2\n");
+		if (stru->reassembled_commands[j] == NULL)
+		{
+			if (stru->reassembled_commands[0] == NULL)
+			{
 				continue; //should be called skip, because it skips the rest of this loop iteration
 			}
-			// continue; //should be called skip, because it skips the rest of this loop iteration
 		}
 		stru->reassembled_commands[j] = NULL;
-		// printf("\n\n\nprobable segfault start1\n\n\n");
-		if (!strcmp(stru->reassembled_commands[0], "")){
-
-			// printf("probable segfault start1\n");
+		if (!strcmp(stru->reassembled_commands[0], ""))
+		{
 			continue; //should be called skip, because it skips the rest of this loop iteration
 		}
 		else if(strncmp(stru->reassembled_commands[0], "cd", 2) == 0 && i ==1)
 		{
-			// printf("probable segfault start\n");
 			cd_command(stru, stru->split_by_space);
 		}
-		// else if (strncmp(stru->reassembled_commands[0], "echo", 4) == 0)
-		// {
-		// 		printf("reassembled_command -->%s<--\n", stru->reassembled_commands[0]);
-		// // 		printf("echo --> %s\n", stru->reassembled_commands[1]);
-		//  		echo_command(stru->reassembled_commands[0]);
-		// }
-
 		else if (strncmp(stru->reassembled_commands[0], "export", 6) == 0)
 		{
-			// printf("probable segfault start3\n");
-			export_command(stru->split_by_space[0], stru->split_by_space[1], stru);
+			export_command(stru->split_by_space[1], stru);
 		}
-/* 		else if (strncmp(stru->reassembled_commands[0], "unset", 5) == 0)
-		{
-			unset_command(stru->split_by_space, stru);
-		} */
 		else
 		{
 			global_sig = 1;
 			subprocesses(len, stru->reassembled_commands, envp, stru);
 		}
-		// printf("segfault start3\n");
 		global_sig = 0;
 		unset(stru->env_copy,"?"); //unsets previous exit status, should be done every run
 		set("?", ft_itoa(stru->exit_status), stru); // adds exit status to env, should be done every run
-		//printStringArray(stru->env_copy); // OFT only for testing
 		wait(NULL);
 		free(stru->input);
 	}

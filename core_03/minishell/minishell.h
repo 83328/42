@@ -79,6 +79,7 @@ int		ft_heredoc(int index, t_struct *stru, char *delimiter);
 
 char	**remove_from_2d(char **array, int index);
 int		ft_array_len(char **array);
+int	quote_errors(char *input);
 
 char	*concat_strings(char** strings, int numStrings);
 void	redir_exec(char *command, char **env, int i, t_struct *stru);
@@ -117,7 +118,8 @@ int unset_command(char **env_cp, const char *varname);
 
 //export
 //void export_command(char **args);
-void    export_command(char *name, char *value, t_struct *stru);
+//void    export_command(char *name, char *value, t_struct *stru);
+void    export_command(char *value, t_struct *stru);
 int		is_valid_identifier(char *s);
 void	add_to_env(t_struct *stru, char *new_var);
 //void	add_to_envcopy(char *name, char *value, t_struct *stru);

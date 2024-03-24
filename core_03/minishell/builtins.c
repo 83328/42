@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/24 19:37:31 by alimpens          #+#    #+#             */
+/*   Updated: 2024/03/24 19:37:32 by alimpens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-
-//
 void	builtins(int len, char **reassembled_commands, char **envp, t_struct *stru)
 {
     int     i;
@@ -12,7 +22,7 @@ void	builtins(int len, char **reassembled_commands, char **envp, t_struct *stru)
     {
         comm_no_args = get_comm(reassembled_commands[i]) //gets the first word (everything until first space)
         if (strncmp("",comm_no_args) ==)
-        {} // run builtin and return exit status
+        {}
         else if(strncmp("",comm_no_args) ==)
         {}
         else if(strncmp("",comm_no_args) ==)
