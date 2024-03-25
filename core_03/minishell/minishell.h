@@ -28,32 +28,24 @@ extern int global_sig;
 
 typedef struct s_struct
 {
-	char	**env_copy;
-	int		env_copy_size;
-	char    *input;
-	char	**split_by_space;
-	char    **reassembled_commands;
-	char	**input_by_pipes;
-	int		(*filefds)[2]; // pointer at [2] array
-	int		**pipefds;
-	pid_t	*pids;
-	char	*line;
-	int		unused_fds[8192];
+	char	**env_copy; //DONT FREE
+	int		env_copy_size; //DONT FREE
+	char    *input; //free
+	char	**split_by_space; //free
+	char    **reassembled_commands; //free
+	char	**input_by_pipes; //free
+	int		(*filefds)[2]; //free
+	int		**pipefds; //free
+	pid_t	*pids; //unsure
+	char	*line; //leave out
+	int		unused_fds[8192]; //free
 	int		ufd_i;
-	int		fdin;
-	int		fdout;
-	int		inpipe;
-	int		outpipe;
-	int		filefdin;
-	int		filefdout;
-	int		exit_status;
-	int		*exit_statuses;
-	int		flag;
+	int		exit_status; //leave out
+	int		*exit_statuses; //leave out
+	int		flag; //leave out
 }			t_struct;
 
 void	execute_command(char **split_by_space);
-// void	standard_sigint_handler();
-// void	sigint_handler_processes();
 void	sigint_handler_default(int sig); 
 void	sigint_handler_heredoc(int sig);
 void	sigint_handler_command(int sig);
@@ -79,7 +71,7 @@ int		ft_heredoc(int index, t_struct *stru, char *delimiter);
 
 char	**remove_from_2d(char **array, int index);
 int		ft_array_len(char **array);
-int	quote_errors(char *input);
+int		quote_errors(char *input);
 
 char	*concat_strings(char** strings, int numStrings);
 void	redir_exec(char *command, char **env, int i, t_struct *stru);
@@ -129,6 +121,18 @@ void	add_to_env(t_struct *stru, char *new_var);
 void	printStringArray(char **strArray);
 void    printIntArray(int *intArray);
 void	printFileContent(int fd);
-void	error_exit(char *msg);
 
+//utils.c
+void	error_exit(char *msg);
+void	free_loopend(t_struct *stru, int len);
+/*void	free_child(t_struct *stru);
+void	free_exit(t_struct *stru); */
+
+//freeing.c
+void	free(void *ptr);
+void	free_2d(char **array);
+void	freepidarr(t_struct *stru);
+void	free_2dint(int **array, int len);
+void	free_ufds(t_struct *stru);
+void	free_filefds(t_struct *stru);
 #endif

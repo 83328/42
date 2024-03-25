@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:20 by dgacic            #+#    #+#             */
-/*   Updated: 2023/01/19 10:46:24 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/03/25 16:48:33 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,57 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*substr;
+	char	*dst;
+	size_t	i;
 
-	substr = 0;
-	if (!s || ft_strlen(s) < start)
-		return (ft_strdup(""));
-	if (ft_strlen(s + start) < len)
-		len = ft_strlen(s + start);
-	substr = malloc(sizeof(char) * (len + 1));
-	if (!substr)
+	if (!s)
 		return (NULL);
-	ft_strlcpy(substr, s + start, len + 1);
-	return (substr);
+	if (ft_strlen(s) < start)
+	{
+		dst = malloc(sizeof(char));
+		if (!dst)
+			return (NULL);
+		dst[0] = '\0';
+		return (dst);
+	}
+	if (start + len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	dst = malloc(sizeof(char) * (len + 1));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		dst[i] = s[start + i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }
+
+/* char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*dst;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) < start)
+	{
+		dst = malloc(sizeof(char));
+		if (!dst)
+			return (NULL);
+		dst[0] = '\0';
+		return (dst);
+	}
+	if (start + len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	dst = malloc(sizeof(char) * (len + 1));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (i++ < len)
+		dst[i - 1] = s[start + i - 1];
+	dst[i - 1] = '\0';
+	return (dst);
+} */

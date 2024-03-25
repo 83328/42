@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:35 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:42:24 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:32:25 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int *find_real_pipes(char *input)
 			num_pipes++;
 		i++;
 	}
-	real_pipe_indices = ft_calloc(num_pipes, sizeof(int));
+	real_pipe_indices = ft_calloc(num_pipes + 1, sizeof(int));
 	i = 0;
 	nth_pipe = 0;
 	while (input[i])

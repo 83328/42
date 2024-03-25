@@ -6,13 +6,13 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:20 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:43:14 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:56:29 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    free_2d(char **array)
+/* void    free_2d(char **array)
 {
 		int i;
 
@@ -23,7 +23,7 @@ void    free_2d(char **array)
 				i++;
 		}
 		free(array);
-}
+} */
 
 int ft_array_len(char **array)
 {
@@ -58,6 +58,5 @@ char	**remove_from_2d(char **array, int index)
 		}
 		new_array[i-1] = NULL; 
 		free_2d(array);
-
-		return (new_array); // Return new array
+		return (new_array);
 }

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:40 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:39:41 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:57:31 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char    *space_reduce(char *string)
 	int		dquoteflag;
 	int     i;
 	int     j;
-	reduced_string = calloc(strlen(string) + 1, sizeof(char));
+	reduced_string = ft_calloc(strlen(string) + 1, sizeof(char));
 	i = 0;
 	j = 0;
 	squoteflag = -1;
@@ -100,7 +100,7 @@ int		*find_real_spaces(char *reduced_string)
 			num_spaces++;
 		i++;
 	}
-	real_space_indices = ft_calloc(num_spaces, sizeof(int));
+	real_space_indices = ft_calloc(num_spaces + 1, sizeof(int));
 	i = 0;
 	nth_space = 0;
 	while (reduced_string[i])

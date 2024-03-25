@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:37 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:38:38 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:28:27 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*copy_til_dquote(char *line, int i) //copies the string using its own i-var
 		return (NULL);
 	}
 	ret[j] = '\0';
-	return(ret);
+	return (ret);
 }
 
 int count_til_dquote(char *line, int i)
@@ -61,7 +61,7 @@ int count_til_dquote(char *line, int i)
 		write(1,"error: unclosed double quotes\n",30);
 		return (127);
 	}
-	return(n);
+	return (n);
 }
 
 // #include "../minishell.h"

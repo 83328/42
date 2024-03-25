@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:37:38 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:37:39 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:50:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void sigint_handler_default(int sig)
 		rl_replace_line("", 0);  // Clear the current input line
 		printf("\n");
 		printf("minishell ## ");
+		//free
 		global_sig = 0;
 	}
 }

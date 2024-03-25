@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:04 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:38:06 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:13:49 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int main(int argc, char *argv[], char *envp[])
 		while (stru->input_by_pipes[len])
 			len++;
 		stru->reassembled_commands = ft_calloc((len + 1 + 1),sizeof(char *));
-		stru->filefds = ft_calloc((2 * len) + 1, sizeof(int )); //pointer because it will be an array with one potential infile and one potential outile
+		stru->filefds = ft_calloc((2 * len) + 2, sizeof(int )); //pointer because it will be an array with one potential infile and one potential outile
 		stru->pids = ft_calloc( len + 1, sizeof(pid_t));
 		while (stru->input_by_pipes[i])			//needs to be parsed for redirection operators
 		{
@@ -176,8 +176,8 @@ int main(int argc, char *argv[], char *envp[])
 		global_sig = 0;
 		unset(stru->env_copy,"?"); //unsets previous exit status, should be done every run
 		set("?", ft_itoa(stru->exit_status), stru); // adds exit status to env, should be done every run
-		wait(NULL);
-		free(stru->input);
+		//wait(NULL);
+		free_loopend(stru, len);
 	}
-	return 0;
+	return (0);
 }

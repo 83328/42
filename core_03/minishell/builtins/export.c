@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:13 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:33:41 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:56:20 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	resize_env_copy(t_struct *stru)
 	}
 }
 
-char	**char2d_realloc(char **ptr, int new_size, int old_size)
+/* char	**char2d_realloc(char **ptr, int new_size, int old_size)
 {
 	char	**ret;
 	int		i;
@@ -80,4 +80,28 @@ char	**char2d_realloc(char **ptr, int new_size, int old_size)
 	if (i < new_size)
 	free(ptr);
 	return (ret);
+} */
+
+char **char2d_realloc(char **ptr, int new_size, int old_size)
+{
+	char	**ret;
+	int		i;
+
+	i = 0;
+	ret = ft_calloc(new_size, sizeof(char *));
+	if (ret == NULL)
+		perror_exit("calloc failed in char2d_realloc");
+	if (ptr == NULL)
+		perror_exit("pointer NULL fail in char2d");
+	if (!new_size)
+		perror_exit("no size fail in char2d");
+	while (i < old_size && i < new_size)
+	{
+		ret[i] = ptr[i];
+		i++;
+	}
+	if (ptr != NULL)
+		free(ptr);
+
+	return ret;
 }
