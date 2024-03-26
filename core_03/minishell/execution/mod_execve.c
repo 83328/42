@@ -6,13 +6,13 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:40:20 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:40:22 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:05:52 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_strichr(char *str, char c) // finds index of a given character in a string
+int	ft_strichr(char *str, char c)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ int	ft_strichr(char *str, char c) // finds index of a given character in a strin
 	return (-1);
 }
 
-char	*path_join (char *path, char *executable)
+char	*path_join(char *path, char *executable)
 {
 	char	*ret;
 	int		i;
@@ -43,7 +43,7 @@ char	*path_join (char *path, char *executable)
 	return (ret);
 }
 
-char	**not_ft_split (char *str, char sep)
+char	**not_ft_split(char *str, char sep)
 {
 	char	**tab;
 	int		count;
@@ -88,7 +88,7 @@ int	open_file(char *filename, int mode)
 		return (open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
 }
 
-char	*get_path (char *command, char **env)
+char	*get_path(char *command, char **env)
 {
 	char	*path;
 	char	*folder;
@@ -100,8 +100,7 @@ char	*get_path (char *command, char **env)
 		i++;
 	if (!env[i])
 		return (command);
-
-	path = env[i] + 5; //pointer at everything after PATH=, meaning the rest of the string
+	path = env[i] + 5;
 	while (path && ft_strichr(path, ':') > -1)
 	{
 		folder = ft_strndup(path, ft_strichr(path, ':'));
@@ -128,17 +127,11 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 	if (is_builtin(args[0]))
 	{
 		if (ft_strcmp(args[0], "echo") == 0)
-		 		echo_command(command);
- 		if (ft_strcmp(args[0], "cd") == 0)
+			echo_command(command);
+		if (ft_strcmp(args[0], "cd") == 0)
 			cd_command(stru, args);
 		else if (ft_strcmp(args[0], "pwd") == 0)
 			pwd_command();
- 		/* else if (ft_strcmp(args[0], "export") == 0)
-		{
-			//export_new(command);
-			export_command(args[1], args[2], stru);
-			return;
-		} */
 		else if (ft_strcmp(args[0], "unset") == 0)
 		{
 			i = 1;
@@ -147,8 +140,8 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 				unset(env, args[i]);
 				i++;
 			}
-			return;
-			}
+			return ;
+		}
 		else if (ft_strcmp(args[0], "env") == 0)
 			env_command(stru);
 		exit(0);

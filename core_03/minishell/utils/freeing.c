@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:13 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/25 16:30:02 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:55:50 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	free_2d(char **array)
 {
 	int	i;
+
 	i = 0;
 	if (array)
 	{
@@ -29,6 +30,7 @@ void	free_2d(char **array)
 void	free_2dint(int **array, int len)
 {
 	int	i;
+
 	i = 0;
 	if (array)
 	{
@@ -39,7 +41,6 @@ void	free_2dint(int **array, int len)
 		}
 	}
 }
-
 
 // void	free_ufds(t_struct *stru)
 // {
@@ -52,7 +53,6 @@ void	free_2dint(int **array, int len)
 // 	}
 // 	//free(stru->unused_fds[i]);
 // }
-
 
 // void	free_filefds(t_struct *stru)
 // {

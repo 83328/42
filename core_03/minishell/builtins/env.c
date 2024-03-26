@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:10 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:13:31 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:11:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	printenv(char **strArray)
 	i = 0;
 	while (strArray[i] != NULL)
 	{
-		printf("\nstrArr[%d] #%s#", i , strArray[i]);
+		printf("\nstrArr[%d] #%s#", i, strArray[i]);
 		i++;
 	}
 	printf("\n");

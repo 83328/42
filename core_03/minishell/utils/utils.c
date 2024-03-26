@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:54 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/25 17:52:04 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:05:47 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	perror_exit(char *msg)
 
 void	error_exit(char *msg)
 {
-	dprintf(2,"%s",msg);
+	dprintf(2, "%s", msg);
 	exit(EXIT_FAILURE);
 }
 

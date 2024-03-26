@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:48 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:39:49 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:35:49 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,54 +15,49 @@
 int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 {
 	const char	*filename = "heredoc_out.txt";
-	int 		heredoc_fd;
+	int			heredoc_fd;
 
 	heredoc_fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (heredoc_fd == -1) 
 	{
-        perror("Error opening heredoc");
-        return (1);
-    }
-
+		perror("Error opening heredoc");
+		return (1);
+	}
 	signal(SIGINT, sigint_handler_heredoc);
-    while ((stru->line = readline("heredoc ## ")) != NULL && global_sig == 0) // add delimiter flag
+	while ((stru->line = readline("heredoc ## ")) != NULL && global_sig == 0)
 	{
 		if (strcmp(stru->line, "") == 0)
 		{
 			write(heredoc_fd, "\n", 1);
-			continue; //should be called skip, because it skips the rest of this loop iteration
+			continue ;
 		}
-		//check delimiter and change flag
-        if (strcmp(stru->line, delimiter) == 0)
+		if (strcmp(stru->line, delimiter) == 0)
 		{
-            free(stru->line);  // Free the allocated memory for readline
-            break;       // Exit the loop when the delimiter is encountered
-        }
-        // Write the line to the file
-        write(heredoc_fd, stru->line, strlen(stru->line));
-        write(heredoc_fd, "\n", 1);
-        // Free the allocated memory for readline
-        free(stru->line);
-    }
+			free(stru->line);
+			break ;
+		}
+		write(heredoc_fd, stru->line, strlen(stru->line));
+		write(heredoc_fd, "\n", 1);
+		free(stru->line);
+	}
 	signal(SIGINT, sigint_handler_default);
 	close(heredoc_fd);
 	heredoc_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
 	stru->filefds[index][0] = heredoc_fd;
-    // Close the file
-    //close(heredoc_fd);
+	//close(heredoc_fd);
 	//free(line);
 	global_sig = 0;
-    return (0);
+	return (0);
 }
 
-void	open_files(t_struct *stru, int index) //potentially add the option of no space  
+void	open_files(t_struct *stru, int index)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (stru->split_by_space[i])
+	i = 0;
+	while (stru->split_by_space[i])
 	{
-		if (ft_strncmp(stru->split_by_space[i],"<<",2) == 0) // << heredoc
+		if (ft_strncmp(stru->split_by_space[i], "<<", 2) == 0)
 		{
 			ft_heredoc(index, stru, stru->split_by_space[i + 1]);
 		}
@@ -76,13 +71,13 @@ void	open_files(t_struct *stru, int index) //potentially add the option of no sp
 				if (stru->filefds[index][0] == -1)
 				{
 					printf("\nError opening file\n");
-					return;
+					return ;
 				}
 			}
 			else
 				printf("\nno file after <");
 		}
-		if (ft_strncmp(stru->split_by_space[i],">>",2) == 0) // >> append mode
+		if (ft_strncmp(stru->split_by_space[i], ">>", 2) == 0)
 		{
 			if (stru->split_by_space[i + 1])
 			{
@@ -94,7 +89,7 @@ void	open_files(t_struct *stru, int index) //potentially add the option of no sp
 				if (stru->filefds[index][1]  == -1)
 				{
 					printf("Error opening file\n");
-					return;
+					return ;
 				}
 			}
 			else
@@ -110,10 +105,10 @@ void	open_files(t_struct *stru, int index) //potentially add the option of no sp
 					stru->unused_fds[stru->ufd_i++] = stru->filefds[index][1];
 				}
 				stru->filefds[index][1] = open(stru->split_by_space[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-				if (stru->filefds[index][1]  == -1)
+				if (stru->filefds[index][1] == -1)
 				{
 					printf("Error opening file\n");
-					return;
+					return ;
 				}
 			}
 			else
@@ -123,9 +118,9 @@ void	open_files(t_struct *stru, int index) //potentially add the option of no sp
 	}
 }
 
-void    terminate_filefds(t_struct *stru, int index)
+void	terminate_filefds(t_struct *stru, int index)
 {
 	stru->unused_fds[stru->ufd_i] = -1;
-    stru->filefds[index][0] = -1;
-    stru->filefds[index][1] = -1;
+	stru->filefds[index][0] = -1;
+	stru->filefds[index][1] = -1;
 }

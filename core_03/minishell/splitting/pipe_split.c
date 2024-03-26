@@ -6,20 +6,19 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:35 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/25 13:32:25 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:11:45 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int *find_real_pipes(char *input)
+int	*find_real_pipes(char *input)
 {
-	int flag;
-	int i;
-	int *real_pipe_indices;
-	int nth_pipe;
-	int num_pipes;
-
+	int	flag;
+	int	i;
+	int	*real_pipe_indices;
+	int	nth_pipe;
+	int	num_pipes;
 
 	i = 0;
 	num_pipes = 0;
@@ -50,17 +49,17 @@ int *find_real_pipes(char *input)
 		}
 		i++;
 	}
-	if(input[i-1] == '|')
+	if (input[i -1] == '|')
 		perror_exit("ends on pipe"); 
 	real_pipe_indices[nth_pipe] = -1;
 	return (real_pipe_indices);
 }
 
-char    **pipe_split(char *input) //splits a string by pipes that are not inbetween 2 quotes of same kind
+char	**pipe_split(char *input)
 {
-	char    **split_by_pipes;
-	int     *real_pipe_indices; //array of indexes of real pipes
-	int     i;
+	char	**split_by_pipes;
+	int		*real_pipe_indices;
+	int		i;
 
 	i = 0;
 	real_pipe_indices = find_real_pipes(input);

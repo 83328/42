@@ -6,15 +6,15 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:27 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:43:25 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:03:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		int_array_len(int *array)
+int	int_array_len(int *array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i] != -1)
@@ -24,11 +24,11 @@ int		int_array_len(int *array)
 
 char	**split_by_index(char *input, int *real_indices)
 {
-	char **split_by_index;
-	int i;
-	int j;
-	int start;
-	int end;
+	char	**split_by_index;
+	int		i;
+	int		j;
+	int		start;
+	int		end;
 
 	i = 0;
 	j = 0;

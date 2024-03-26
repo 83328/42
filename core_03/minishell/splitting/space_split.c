@@ -6,54 +6,53 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:40 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/25 17:57:31 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:41:26 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void printIntArrayUntilMinusOne(int *arr)
+/* void	print_int_array_until_minus_one(int *arr)
 {
 	printf("[");
 	for (int i = 0; arr[i] != -1; i++)
 	{
 		printf("%d", arr[i]);
-
-		// Print a comma and space for all elements except the last one
 		if (arr[i + 1] != -1)
 		{
 			printf(", ");
 		}
 	}
 	printf("]\n");
-}
+} */
 
 char	*remove_trailing_space(char *string)
 {
 	char	*clipped_string;
 	int		i;
-	i = 0;
 
+	i = 0;
 	clipped_string = malloc(ft_strlen(string) + 1 *(sizeof(char)));
 	while (string[i])
 	{
 		clipped_string[i] = string[i];
 		i++;
 	}
-	if(clipped_string[i-1] == ' ')
-		clipped_string[i-1] = 0;
+	if (clipped_string[i -1] == ' ')
+		clipped_string[i -1] = 0;
 	clipped_string[i] = 0;
 	free(string);
 	return (clipped_string);
 }
 
-char    *space_reduce(char *string)
+char	*space_reduce(char *string)
 {
-	char    *reduced_string;
-	int     squoteflag;
+	char	*reduced_string;
+	int		squoteflag;
 	int		dquoteflag;
-	int     i;
-	int     j;
+	int		i;
+	int		j;
+
 	reduced_string = ft_calloc(strlen(string) + 1, sizeof(char));
 	i = 0;
 	j = 0;
@@ -84,13 +83,13 @@ char    *space_reduce(char *string)
 	return (reduced_string);
 }
 
-int		*find_real_spaces(char *reduced_string)
+int	*find_real_spaces(char *reduced_string)
 {
-	int flag;
-	int i;
-	int *real_space_indices;
-	int nth_space;
-	int num_spaces;
+	int	flag;
+	int	i;
+	int	*real_space_indices;
+	int	nth_space;
+	int	num_spaces;
 
 	i = 0;
 	num_spaces = 0;
@@ -119,14 +118,11 @@ int		*find_real_spaces(char *reduced_string)
 		}
 		i++;
 	}
-	// if(reduced_string[i-1] == ' ')
-	// 	real_space_indices[nth_space-1] = -1;
 	real_space_indices[nth_space] = -1;
-	//printIntArrayUntilMinusOne(real_space_indices);
 	return (real_space_indices);
 }
 
-char    **space_split(char *string) //reduces unquoted spaces to one space, splits by unquoted space
+char	**space_split(char *string)
 {
 	char	*reduced_string;
 	int		*real_space_indices;
@@ -134,7 +130,6 @@ char    **space_split(char *string) //reduces unquoted spaces to one space, spli
 
 	reduced_string = space_reduce(string);
 	real_space_indices = find_real_spaces(reduced_string);
-	//printIntArrayUntilMinusOne(real_space_indices);
-	split_by_spaces = split_by_index(reduced_string,real_space_indices);
+	split_by_spaces = split_by_index(reduced_string, real_space_indices);
 	return (split_by_spaces);
 }

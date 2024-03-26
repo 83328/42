@@ -6,50 +6,49 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/25 16:27:52 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:05:20 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    printStringArray(char **strArray)
+void	print_string_array(char **str_array)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (strArray[i] != NULL)
+	while (str_array[i] != NULL)
 	{
-		printf("\nstrArr[%d] #%s#", i ,strArray[i]);
+		printf("\nstrArr[%d] #%s#", i, str_array[i]);
 		i++;
 	}
 	printf("\n");
 }
 
-void    printIntArray(int *intArray)
+void	print_int_array(int *int_array)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (intArray[i] != -1)
+	while (int_array[i] != -1)
 	{
-		printf("\nintArr[%d] %i", i ,intArray[i]);
+		printf("\nintArr[%d] %i", i, int_array[i]);
 		i++;
 	}
 	printf("\n");
 }
 
-void    printFileContent(int fd)
+void	print_file_content(int fd)
 {
-	char buffer[4096];  // Adjust the buffer size as needed
-	ssize_t bytesRead;
+	char	buffer[4096];
+	ssize_t	bytesread;
 
-	// Read and print the content of the file until the end
-	while ((bytesRead = read(fd, buffer, sizeof(buffer))) > 0) {
-		write(STDOUT_FILENO, buffer, bytesRead);
+	while ((bytesread = read(fd, buffer, sizeof(buffer))) > 0)
+	{
+		write(STDOUT_FILENO, buffer, bytesread);
 	}
-
-	if (bytesRead == -1) {
-		// Handle error
+	if (bytesread == -1)
+	{
 		perror("Error reading file");
 	}
 	close(fd);

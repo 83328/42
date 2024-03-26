@@ -6,13 +6,13 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:14 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:43:52 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:00:38 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char    *ft_concat(char *s1, char *s2) //frees mem at s1 and s2, allocates new mem for s1+s2, points s1 at it, returns s1
+char	*ft_concat(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;
@@ -24,10 +24,10 @@ char    *ft_concat(char *s1, char *s2) //frees mem at s1 and s2, allocates new m
 	free(s1);
 	s1 = (char *)malloc(len1 + len2 + 1);
 	if (s1 == NULL)
-			perror_exit("Memory allocation failed");
-    ft_strcpy(s1, cop_s1);
+		perror_exit("Memory allocation failed");
+	ft_strcpy(s1, cop_s1);
 	free(cop_s1);
-    strcat(s1, s2);
+	strcat(s1, s2);
 	free(s2);
 	return (s1);
 }

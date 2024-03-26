@@ -6,20 +6,20 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:21 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:38:22 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:40:42 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    printpidArray(pid_t *pidArray,int len)
+void	printpidarray(pid_t *pidarray, int len)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < len)
 	{
-		printf("\npidArr[%d] %i", i ,pidArray[i]);
+		printf("\npidArr[%d] %i", i, pidarray[i]);
 		i++;
 	}
 	printf("\n");
@@ -32,6 +32,7 @@ void	dup_output(int **pipefds, int (*filefds)[2], char **reassembled_commands, i
 int		**create_pipes(int len);
 void	close_fds(int **pipefds, int (*filefds)[2], int unused_fds[8192], int len);
 //void	close_fds_child(int **pipefds, int (*filefds)[2], int unused_fds[8192], int pos, int len);
+
 void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *stru)
 {
 	int	i;
@@ -48,9 +49,9 @@ void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *s
 	}
 	stru->pids[i] = -1;
 	i = 0;
-	//printpidArray(stru->pids,len);
+	//printpidarray(stru->pids,len);
 	close_fds(stru->pipefds, stru->filefds, stru->unused_fds, len);
-	stru->exit_statuses = calloc( len+1,sizeof(int));
+	stru->exit_statuses = calloc(len +1, sizeof(int));
 	while (stru->pids[i] != -1)
 	{
 		signal(SIGINT, SIG_IGN);
@@ -73,7 +74,7 @@ void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *s
 	signal(SIGQUIT,SIG_IGN);
 }
 
-pid_t   subprocess(int pos, char **reassembled_commands, char **env, t_struct *stru, int len)
+pid_t	subprocess(int pos, char **reassembled_commands, char **env, t_struct *stru, int len)
 {
 	pid_t	pid;
 
@@ -86,10 +87,10 @@ pid_t   subprocess(int pos, char **reassembled_commands, char **env, t_struct *s
 		mod_execve(reassembled_commands[pos], env, stru);
 		perror_exit("child process failed");
 	}
-	return(pid);
+	return (pid);
 }
 
-void    dup_io(int **pipefds, int (*filefds)[2], char **reassembled_commands, int pos)
+void	dup_io(int **pipefds, int (*filefds)[2], char **reassembled_commands, int pos)
 {
 	dup_input(pipefds, filefds, pos);
 	dup_output(pipefds, filefds, reassembled_commands, pos);
@@ -100,28 +101,28 @@ void	dup_input(int **pipefds, int (*filefds)[2], int pos)
 	if (pos == 0)
 	{
 		if (filefds[0][0] != 0)
-			dup2(filefds[0][0],STDIN);
+			dup2(filefds[0][0], STDIN);
 	}
 	else
 	{
 		if (filefds[pos][0] != 0)
 			dup2(filefds[pos][0], STDIN);
 		else
-			dup2(pipefds[pos-1][0],STDIN);
+			dup2(pipefds[pos -1][0], STDIN);
 	}
 }
 
 void	dup_output(int **pipefds, int (*filefds)[2], char **reassembled_commands, int pos)
 {
-	if (reassembled_commands[pos+1] == 0)
+	if (reassembled_commands[pos +1] == 0)
 	{
 		if (filefds[pos][1])
-			dup2(filefds[pos][1],STDOUT);
+			dup2(filefds[pos][1], STDOUT);
 	}
 	else
 	{
-		if(filefds[pos][1])
-			dup2(filefds[pos][1],STDOUT);
+		if (filefds[pos][1])
+			dup2(filefds[pos][1], STDOUT);
 		else
 			dup2(pipefds[pos][1], STDOUT);
 	}
@@ -129,10 +130,10 @@ void	dup_output(int **pipefds, int (*filefds)[2], char **reassembled_commands, i
 
 int	**create_pipes(int len)
 {
-	int i;
-	int **pipefds;
+	int	i;
+	int	**pipefds;
 
-	pipefds = ft_calloc(sizeof(int*), len + 1);
+	pipefds = ft_calloc(sizeof(int *), len + 1);
 	i = 0;
 	while (i < len)
 	{
@@ -145,7 +146,7 @@ int	**create_pipes(int len)
 
 void	close_fds(int **pipefds, int (*filefds)[2], int unused_fds[8192], int len)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < len)
@@ -184,8 +185,6 @@ void	close_fds(int **pipefds, int (*filefds)[2], int unused_fds[8192], int len)
 // 		close(filefds[i][1]);
 // 		i++;
 // 	}
-
-
 // 	i = 0;
 // 	while (i < 8192)
 // 	{

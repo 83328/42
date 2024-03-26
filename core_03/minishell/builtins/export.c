@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:13 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/25 17:56:20 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:11:05 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	export_command(char *value, t_struct *stru)
 	i = 0;
 	new_var = value;
 	//new_var = ft_strjoin(ft_strjoin(name, "="), value);
-
 	if (!new_var)
 	{
 		fprintf(stderr, "Memory allocation failed\n");
@@ -37,7 +36,7 @@ void	export_command(char *value, t_struct *stru)
 			{
 				free(new_var);
 				fprintf(stderr, "Memory allocation failed\n");
-				return;
+				return ;
 			}
 		}
 	}
@@ -82,7 +81,7 @@ void	resize_env_copy(t_struct *stru)
 	return (ret);
 } */
 
-char **char2d_realloc(char **ptr, int new_size, int old_size)
+char	**char2d_realloc(char **ptr, int new_size, int old_size)
 {
 	char	**ret;
 	int		i;
@@ -102,6 +101,5 @@ char **char2d_realloc(char **ptr, int new_size, int old_size)
 	}
 	if (ptr != NULL)
 		free(ptr);
-
 	return ret;
 }
