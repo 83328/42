@@ -27,6 +27,5 @@ char	*ft_getenv(const char *varname, char **env_copy)
 		}
 		i++;
 	}
-	print_string_array(env_copy);
 	return (NULL);
 }

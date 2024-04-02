@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:18:53 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 13:24:58 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:32:59 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	copy_env(char *envp[], t_struct *str)
 	i = 0;
 	if (str->env_copy)
 	{
-		free_2d(str->env_copy); 
+		free_2d(str->env_copy);
 	}
 	while (envp[size] != NULL)
 	{

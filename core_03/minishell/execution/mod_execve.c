@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:40:20 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 14:05:52 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:12:12 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,8 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 	{
 		if (ft_strcmp(args[0], "echo") == 0)
 			echo_command(command);
-		if (ft_strcmp(args[0], "cd") == 0)
-			cd_command(stru, args);
+		//if (ft_strcmp(args[0], "cd") == 0)
+		//	cd_command(stru, args);
 		else if (ft_strcmp(args[0], "pwd") == 0)
 			pwd_command();
 		else if (ft_strcmp(args[0], "unset") == 0)

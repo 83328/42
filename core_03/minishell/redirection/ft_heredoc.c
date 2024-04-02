@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:19:51 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 14:33:28 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:20:09 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 		perror("Error opening heredoc");
 		return (1);
 	}
-	global_sig = 2;
-	while ((stru->line = readline("heredoc ## ")) != NULL && global_sig != 4) // add delimiter flag
+	g_global_sig = 2;
+	while ((stru->line = readline("heredoc ## ")) != NULL && g_global_sig != 4) // add delimiter flag
 	{
 		if (strcmp(stru->line, "") == 0)
 		{
@@ -44,6 +44,6 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 	heredoc_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
 	stru->filefds[index][0] = heredoc_fd;
 //free(line);
-	global_sig = 0;
+	g_global_sig = 0;
 	return (0);
 }

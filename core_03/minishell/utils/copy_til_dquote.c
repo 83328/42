@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:37 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 13:45:40 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:19:17 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	count_til_dquote(char *line, int i);
 
-char	*copy_til_dquote(char *line, int i)
+/* char	*copy_til_dquote(char *line, int i)
 {
 	int		n;
 	char	*ret;
@@ -25,7 +25,7 @@ char	*copy_til_dquote(char *line, int i)
 	ret = ft_calloc(sizeof(char), n + 1);
 	while (line[i] != 34 && line[i] != 0)
 	{
-		if (line[i] == 0)
+		if (line[i] == 0) // TODO: check whether it is needed here
 			error_exit("error: unclosed single quotes\n");
 		ret[j] = line[i];
 		i++;
@@ -34,6 +34,32 @@ char	*copy_til_dquote(char *line, int i)
 	if (ret[j - 1] == 0)
 	{
 		write(1, "error: unclosed double quotes\n", 30);
+		return (NULL);
+	}
+	ret[j] = '\0';
+	return (ret);
+} */
+char	*copy_til_dquote(char *line, int i)
+{
+	int		n;
+	char	*ret;
+	int		j;
+
+	j = 0;
+	n = count_til_dquote(line, i);
+	ret = ft_calloc(sizeof(char), n + 1);
+	if (ret == (NULL))
+		return (NULL);
+	while (line[i] != 34 && line[i] != '\0')
+	{
+		ret[j] = line[i];
+		i++;
+		j++;
+	}
+	if (line[i] == '\0')
+	{
+		write(1, "error: unclosed double quotes\n", 30);
+		free(ret);
 		return (NULL);
 	}
 	ret[j] = '\0';

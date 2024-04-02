@@ -46,5 +46,6 @@ char	**split_by_index(char *input, int *real_indices)
 	split_by_index[i] = ft_substr(input, start, end - start);
 	i++;
 	split_by_index[i] = NULL;
+	print_string_array(split_by_index);
 	return (split_by_index);
 }

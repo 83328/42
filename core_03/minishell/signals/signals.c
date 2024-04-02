@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:37:38 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 16:06:39 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:20:09 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sigint_handler_default(int sig)
 		printf("\n");
 		printf("minishell ## ");
 		//free
-		global_sig = 0;
+		g_global_sig = 0;
 	}
 }
 
@@ -31,7 +31,7 @@ void	sigint_handler_command(int sig)
 		//rl_on_new_line();// Move to a new line
 		//rl_redisplay();
 		printf("\n");
-		global_sig = 2;
+		g_global_sig = 2;
 	}
 }
 
@@ -39,7 +39,7 @@ void	sigint_handler_heredoc(int sig)
 {
 	if (sig == SIGINT)
 	{
-		global_sig = 2;
+		g_global_sig = 2;
 		rl_on_new_line();
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		//write(0, "\n", 1);

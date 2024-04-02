@@ -131,5 +131,7 @@ char	**space_split(char *string)
 	reduced_string = space_reduce(string);
 	real_space_indices = find_real_spaces(reduced_string);
 	split_by_spaces = split_by_index(reduced_string, real_space_indices);
+	free(reduced_string);
+	free(real_space_indices);
 	return (split_by_spaces);
 }

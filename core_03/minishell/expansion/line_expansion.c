@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:40:12 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 18:01:00 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:02:10 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,47 @@
 char	*expand_var(char *string, char *value, int start, int var_len);
 char	*get_p_var(char *string, int start);
 char	*dollars_expansion(char *string, t_struct *stru);
+
+// int	contains_quotes(char *line)
+// {
+// 	int	ret;
+// 	int	i;
+
+// 	i = 0;
+// 	ret = 0;
+
+// 	while (line[i])
+// 	{
+// 		if (line[i] == 39 || line[i] == 34)
+// 			ret = 1;
+// 		i++;
+// 	}
+// 	return (ret);
+// }
+
+// char	*line_expansion_new(char *line, t_struct *stru)
+// {
+// 	int		qflag;
+// 	int		i;
+// 	char	*str;
+
+// 	qflag = 0;
+// 	if (contains_quotes(line))
+// 		qflag = 1;
+// 	while (qflag == 1)
+// 	{
+// 		qflag == 0;
+// 		str = 
+// 		str = line_expansion_once(line, stru);
+// 		while (line[i])
+// 		{
+// 			if (line[i] == 39 || line[i] == 39)
+// 				qflag = 1;
+// 		}
+// 	}
+// 	return (line);
+// }
+
 
 char	*line_expansion(char *line, t_struct *stru)
 {
@@ -68,6 +109,8 @@ char	*line_expansion(char *line, t_struct *stru)
 		}
 		i++;
 	}
+	free(line);
+	free(cop_line);
 	return (str);
 }
 
@@ -86,6 +129,7 @@ char	*dollars_expansion(char *string, t_struct *stru)
 		i = 0;
 		while (string[i] != 0)
 		{
+//			if (string[i] == '$' && contains_echo(string) == 0)
 			if (string[i] == '$')
 			{
 				still_dollars = 1;
@@ -108,6 +152,15 @@ char	*dollars_expansion(char *string, t_struct *stru)
 	}
 	return (string);
 }
+
+/* int	contains_echo(char *str)
+{
+	if (ft_strncmp(str, "echo", 4) == 0)
+	{
+		return (1);
+	}
+	return (0);
+} */
 
 char	*expand_var(char *str, char *value, int start, int var_len)
 {
@@ -152,6 +205,7 @@ char	*get_p_var(char *string, int start)
 	int		j;
 
 	i = start;
+	j = 0;
 	var_len = 0;
 	while (string[i] != 0 && (string[i] != ' ' && string[i] != 't' && string[i] != 'n' && string[i] != 'r' && string[i] != 'v' && string[i] != 'f'))
 	{
@@ -160,7 +214,6 @@ char	*get_p_var(char *string, int start)
 	}
 	p_var = malloc(sizeof(char *) * (var_len + 1));
 	i = start;
-	j = 0;
 	while (string[i] != 0 && (string[i] != ' ' && string[i] != 't' && string[i] != 'n' && string[i] != 'r' && string[i] != 'v' && string[i] != 'f'))
 	{
 		p_var[j] = string[i];

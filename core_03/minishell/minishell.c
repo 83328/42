@@ -6,84 +6,53 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:04 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 18:33:50 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:44:37 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	global_sig = 0;
-
-/* void	print_int_array_2d(int (*arr)[2]) 
-{
-	while (arr[0][0] != -1 && arr[0][1] != -1) 
-	{
-		printf("\n[%d, %d]\n", arr[0][0], arr[0][1]);
-		arr++;
-	}
-}
-
-void	unsetEnvVar(char **envp, const char *varname)
-{
-	int	i;
-	int	j;
-	int	env_count;
-
-	env_count = 0;
-	while (envp[env_count] != NULL)
-	{
-		env_count++;
-	}
-
-	for (i = 0; i < env_count; i++)
-	{
-		if (strncmp(envp[i], varname, strlen(varname)) == 0 && envp[i][strlen(varname)] == '=') {
-			free(envp[i]);
-			for (j = i; j < env_count - 1; j++)
-			{
-				envp[j] = envp[j + 1];
-			}
-			envp[j] = NULL;
-			break;
-		}
-	}
-} */
+int	g_global_sig = 0;
 
 int	quote_errors(char *input)
 {
 	int	i;
 
 	i = 0;
-	while (input[i] != 0 && input[i] != 39 && input[i] != 34)
-		i++;
-	if (input[i] == 39 || input[i] == 34)
+	while(input[i])
 	{
-		if(input[i] == 39)
-		{
+		while (input[i] != 0 && input[i] != 39 && input[i] != 34)
 			i++;
-			while (input[i] != 39)
-			{
-				if (input[i] == 0)
-				{
-					ft_putendl_fd("unclosed single quote, invalid input", STDERR_FILENO);
-					return (1);
-				}
-				i++;
-			}
-		}
-		if (input[i] == 34)
+		if (input[i] == 39 || input[i] == 34)
 		{
-			i++;
-			while (input[i] != 34)
+			if(input[i] == 39)
 			{
-				if (input[i] == 0)
-				{
-					ft_putendl_fd("unclosed double quote, invalid input", STDERR_FILENO);
-					return (1);
-				}
 				i++;
+				while (input[i] != 39)
+				{
+					if (input[i] == 0)
+					{
+						ft_putendl_fd("unclosed single quote, invalid input", STDERR_FILENO);
+						return (1);
+					}
+					i++;
+				}
 			}
-		}
+			if (input[i] == 34)
+			{
+				i++;
+				while (input[i] != 34)
+				{
+					if (input[i] == 0)
+					{
+						ft_putendl_fd("unclosed double quote, invalid input", STDERR_FILENO);
+						return (1);
+					}
+					i++;
+				}
+			}
+		i++;
+	}
 	}
 	return (0);
 }
@@ -95,28 +64,43 @@ int	main(int argc, char *argv[], char *envp[])
 	int			j;
 	int			k;
 	int			len;
+	int			exit_code;
 
+	exit_code = 0;
 	(void)argc;
 	(void)argv;
 	stru = ft_calloc(1, sizeof(t_struct));
 	stru->ufd_i = 0;
 	copy_env(envp, stru);
 	signal_handling();
-	//set("?", ft_itoa(0), stru);
+	stru->exit_status = 0; //calloced already
+	set("?", "0", stru);
 	while (1)
 	{
 		stru->input = readline("minishell ## ");
 		if (!stru->input)
 		{
-			printf("exit\n");
+			dprintf(2,"exit\n");
 			break ;
 		}
 		if (strcmp(stru->input, "") == 0)
 			continue ;
-		if (strcmp(stru->input, "exit") == 0)
+		if (strncmp(stru->input, "exit ", 5) == 0 || strcmp(stru->input, "exit") == 0)
 		{
-			printf("exit\n");
-			break ;
+			if (stru->input[5] != '\0')
+			{
+				if (stru->input[5] == ' ' || !ft_isdigit(stru->input[5]))
+				{
+					dprintf(2,"exit: %s numeric argument required\n", stru->input + 5);
+					exit_code = 0;
+				}
+				else
+				{
+					exit_code = atoi(stru->input + 5);
+				}
+			}
+			dprintf(2,"exit\n");
+			exit(exit_code);
 		}
 		if (quote_errors(stru->input))
 		{
@@ -131,22 +115,23 @@ int	main(int argc, char *argv[], char *envp[])
 		while (stru->input_by_pipes[len])
 			len++;
 		stru->reassembled_commands = ft_calloc((len + 1 + 1), sizeof(char *));
-		stru->filefds = ft_calloc((2 * len) + 2, sizeof(int )); //pointer because it will be an array with one potential infile and one potential outile
+		stru->filefds = ft_calloc((2 * len) + 2, sizeof(int ));
 		stru->pids = ft_calloc(len + 1, sizeof(pid_t));
-		while (stru->input_by_pipes[i])			//needs to be parsed for redirection operators
+		while (stru->input_by_pipes[i])
 		{
-			stru->split_by_space = space_split(stru->input_by_pipes[i]); //needs to reduce to one space, needs to leave quoted spaces intact
-			open_files(stru,i);//opens files and saves fds in struct
-			rem_redir(stru->split_by_space); //removes redirection operators and files from split_by_space
+			stru->split_by_space = space_split(stru->input_by_pipes[i]);
+			open_files(stru, i);
+			rem_redir(stru->split_by_space);
 			k = 0;
 			while (stru->split_by_space[k])
 				k++;
 			stru->reassembled_commands[j] = line_expansion(concat_strings(stru->split_by_space, k), stru);
-			//print stru->reassembled_commands[j]
 			if (stru->reassembled_commands[j] == NULL)
 				break ;
 			i++;
 			j++;
+			free_2d(stru->split_by_space);
+			free(stru->split_by_space);
 		}
 		terminate_filefds(stru, i);
 		if (stru->reassembled_commands[j] == NULL)
@@ -163,24 +148,29 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		else if (strncmp(stru->reassembled_commands[0], "cd", 2) == 0 && i == 1)
 		{
-			cd_command(stru, stru->split_by_space);
+			cd_command(stru, ft_split(stru->reassembled_commands[0], ' ')); // ft_split(stru->reassembled_commands[0], ' ')
 		}
 		else if (strncmp(stru->reassembled_commands[0], "export", 6) == 0)
 		{
-			export_command(stru->split_by_space[1], stru);
+			export_command(stru->reassembled_commands[1], stru);
 		}
 		else
 		{
-			global_sig = 1;
+			g_global_sig = 1;
 			subprocesses(len, stru->reassembled_commands, envp, stru);
 		}
-		global_sig = 0;
+		g_global_sig = 0;
 		unset(stru->env_copy, "?");
-		set("?", ft_itoa(stru->exit_status), stru);
+		stru->str = ft_itoa(stru->exit_status);
+		set("?", stru->str, stru);
+		free(stru->str);
 		//wait(NULL);
 		free_loopend(stru, len);
+
 	}
 	free_2d(stru->env_copy);
+	free(stru->env_copy);
+	free(stru->exit_statuses);
 	free(stru);
 	return (0);
 }

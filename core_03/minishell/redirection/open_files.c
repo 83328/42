@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:48 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 14:35:49 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:20:09 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 		return (1);
 	}
 	signal(SIGINT, sigint_handler_heredoc);
-	while ((stru->line = readline("heredoc ## ")) != NULL && global_sig == 0)
+	while ((stru->line = readline("heredoc ## ")) != NULL && g_global_sig == 0)
 	{
 		if (strcmp(stru->line, "") == 0)
 		{
@@ -46,7 +46,7 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 	stru->filefds[index][0] = heredoc_fd;
 	//close(heredoc_fd);
 	//free(line);
-	global_sig = 0;
+	g_global_sig = 0;
 	return (0);
 }
 

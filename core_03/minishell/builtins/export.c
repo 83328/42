@@ -101,5 +101,5 @@ char	**char2d_realloc(char **ptr, int new_size, int old_size)
 	}
 	if (ptr != NULL)
 		free(ptr);
-	return ret;
+	return (ret);
 }

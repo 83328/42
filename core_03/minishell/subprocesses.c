@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:21 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 16:40:42 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:31:23 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *s
 {
 	int	i;
 
-	global_sig = 1;
+	g_global_sig = 1;
 	i = 0;
 	stru->pipefds = create_pipes(len - 1);
 	//signal(SIGQUIT, sigquit_handler_command);
@@ -69,9 +69,9 @@ void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *s
 	if (stru->flag == 130)
 		ft_putendl_fd("", 2);
 	stru->exit_statuses[i] = 0;
-	stru->exit_status = stru->exit_statuses[i-1];
+	stru->exit_status = stru->exit_statuses[i -1];
 	signal(SIGINT, sigint_handler_default);
-	signal(SIGQUIT,SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 pid_t	subprocess(int pos, char **reassembled_commands, char **env, t_struct *stru, int len)

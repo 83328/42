@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:33 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:10:46 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:01:22 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ void	echo_command(char *str)
 	}
 	str = &str[i];
 	printf("%s", str);
+/* 	while (str[j] != '\0')
+		{
+			// If the character is '$', print it as a character
+			if (str[j] == '$')
+			{
+				printf("%c", '$');
+			}
+			else
+				printf("%c", str[j]);
+			j++;
+		} */
 	if (print_newline)
 	{
 		printf("\n"); 

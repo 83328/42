@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:41:46 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 16:56:49 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:20:09 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define INFILE 0
 # define OUTFILE 1
 
-extern int	global_sig;
+extern int	g_global_sig;
 
 typedef struct s_struct
 {
@@ -55,6 +55,8 @@ typedef struct s_struct
 	int		exit_status; //leave out
 	int		*exit_statuses; //leave out
 	int		flag; //leave out
+	int		line_pos;
+	char	*str;
 }			t_struct;
 
 void	execute_command(char **split_by_space);
@@ -79,7 +81,7 @@ char	*copy_til_squote(char *line, int i);
 char	*ft_concat(char *s1, char *s2);
 char	*ft_getenv(const char *varname, char **env_copy);
 int		ft_heredoc(int index, t_struct *stru, char *delimiter);
-void	*signal_handling();
+void	*signal_handling(void);
 char	**remove_from_2d(char **array, int index);
 int		ft_array_len(char **array);
 int		quote_errors(char *input);
@@ -90,40 +92,33 @@ void	redir_exec(char *command, char **env, int i, t_struct *stru);
 void	mod_execve(char *command, char **env, t_struct *stru);
 void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *stru);
 void	set(char *name, char *value, t_struct *big);
-int		unset(char **envp, const char *varname);
+int		unset(char **env_cp, const char *varname);
 
 void	resize_env_copy(t_struct *stru);
 char	**char2d_realloc(char **ptr, int size, int old_size);
 char	*ft_str_revndup(const char *str, int n);
-
+int		contains_echo(char *str);
 //builtins
 int		is_builtin(char *cmd);
 
 //echo
-// int echo_command(int ac, char *av[]);
 void	echo_command(char *str);
 
 //pwd
 void	pwd_command(void);
 
 //cd
-//char **cd_command(char **args, char **env);
 void	update_env_var(char *var, char *new_value, char **envp);
 void	cd_command(t_struct *stru, char *args[]);
 
 //env
 void	env_command(t_struct *stru);
 //unset
-//int unset_command(char *variable);
-int		unset_command(char **env_cp, const char *varname);
+
 //export
-//void	export_command(char **args);
-//void	export_command(char *name, char *value, t_struct *stru);
 void	export_command(char *value, t_struct *stru);
 int		is_valid_identifier(char *s);
 void	add_to_env(t_struct *stru, char *new_var);
-//void	add_to_envcopy(char *name, char *value, t_struct *stru);
-//void	rebuild_environ(char **env_copy, int size);
 
 //test_utils
 void	print_string_array(char **strArray);
@@ -133,8 +128,6 @@ void	print_file_content(int fd);
 //utils.c
 void	error_exit(char *msg);
 void	free_loopend(t_struct *stru, int len);
-/*void	free_child(t_struct *stru);
-void	free_exit(t_struct *stru); */
 
 //freeing.c
 void	free(void *ptr);

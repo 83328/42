@@ -64,5 +64,6 @@ char	**pipe_split(char *input)
 	i = 0;
 	real_pipe_indices = find_real_pipes(input);
 	split_by_pipes = split_by_index(input, real_pipe_indices);
+	free(real_pipe_indices);
 	return (split_by_pipes);
 }

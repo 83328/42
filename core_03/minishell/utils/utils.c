@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:54 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 16:05:47 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:41:28 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,20 @@ void	error_exit(char *msg)
 
 void	free_loopend(t_struct *stru, int len)
 {
-	free(stru->input);
+	//free(stru->input);
 	free_2d(stru->input_by_pipes);
-	free_2d(stru->split_by_space);
+	free(stru->input_by_pipes);
+	//free_2d(stru->split_by_space);
 	free_2d(stru->reassembled_commands);
+	free(stru->reassembled_commands);
 	free(stru->pids);
 	free(stru->filefds);
-	//free(stru->pipefds);
 	//free_filefds(stru);
+	printf("%p\n", stru->pipefds);
 	free_2dint(stru->pipefds, len);
+	printf("%p\n", stru->pipefds);
+	free(stru->pipefds); // TODO: PROBLEM HERE
+	stru->pipefds = NULL;
 }
 /*
 void	free_child(t_struct *stru)
