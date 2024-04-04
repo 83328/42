@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:27 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 16:03:18 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:17:30 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ char	**split_by_index(char *input, int *real_indices)
 	split_by_index[i] = ft_substr(input, start, end - start);
 	i++;
 	split_by_index[i] = NULL;
-	print_string_array(split_by_index);
 	return (split_by_index);
 }

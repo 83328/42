@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:45:31 by dgacic            #+#    #+#             */
-/*   Updated: 2023/01/19 10:45:38 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/04 14:35:56 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	n = ft_strlen(little);
 	while (*big && n <= len)
 	{
-		if (*big == *little && strncmp(big, little, n) == 0)
+		if (*big == *little && ft_strncmp(big, little, n) == 0)
 			return ((char *)big);
 		big++;
 		len--;

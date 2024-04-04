@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:19:00 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 13:53:51 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:33:21 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ char	*ft_getenv(const char *varname, char **env_copy)
 	while (env_copy[i] != NULL) 
 	{
 		current = env_copy[i];
-		if (ft_strncmp(varname, current, strlen(varname)) == 0 && current[strlen(varname)] == '=')
+		if (ft_strncmp(varname, current, 
+				ft_strlen(varname)) == 0 && current[ft_strlen(varname)] == '=')
 		{
-			return (&current[strlen(varname) + 1]);
+			return (&current[ft_strlen(varname) + 1]);
 		}
 		i++;
 	}

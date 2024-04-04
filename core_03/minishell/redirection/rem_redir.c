@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:54 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 14:27:48 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:32:19 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	rem_redir(char **split_by_spaces)
 	i = 0;
 	while (split_by_spaces[i])
 	{
-		if (split_by_spaces[i][0] == '<' || split_by_spaces[i][0] == '>' || strcmp(split_by_spaces[i], "<<") == 0 || strcmp(split_by_spaces[i], ">>") == 0)
+		if (split_by_spaces[i][0] == '<' || split_by_spaces[i][0] == '>' || 
+				ft_strcmp(split_by_spaces[i], "<<") == 0 || 
+					ft_strcmp(split_by_spaces[i], ">>") == 0)
 		{
 			rem_string(split_by_spaces, i + 1);
 			rem_string(split_by_spaces, i);

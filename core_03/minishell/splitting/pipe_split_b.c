@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_check.c                                    :+:      :+:    :+:   */
+/*   pipe_split_b.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/03 11:33:32 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/03 11:33:37 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/04 15:50:23 by alimpens          #+#    #+#             */
+/*   Updated: 2024/04/04 15:52:54 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_builtin(char *cmd)
+int	count_pipes(char *input)
 {
-	if (ft_strcmp(cmd, "echo") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "cd") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "pwd") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "export") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "unset") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "env") == 0)
-		return (1);
-	return (0); 
+	int	num_pipes;
+	int	i;
+
+	num_pipes = 0;
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '|')
+			num_pipes++;
+		i++;
+	}
+	return (num_pipes);
 }

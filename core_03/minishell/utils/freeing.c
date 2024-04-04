@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:15:13 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/02 20:38:53 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/03 10:54:27 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_2dint(int **array, int len)
 			i++;
 		}
 	}
-	//free(array);
 }
 
 // void	free_ufds(t_struct *stru)

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:18:53 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/27 15:32:59 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:32:08 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	copy_env(char *envp[], t_struct *str)
 		size++;
 	}
 	str->env_copy_size = size + 1;
-	str->env_copy = malloc(sizeof(char*) * (size + 1));
+	str->env_copy = malloc(sizeof(char *) * (size + 1));
 	while (i < size)
 	{
 		str->env_copy[i] = strdup(envp[i]);

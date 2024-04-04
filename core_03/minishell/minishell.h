@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:41:46 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/01 19:20:09 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:23:58 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,32 @@ extern int	g_global_sig;
 
 typedef struct s_struct
 {
-	char	**env_copy; //DONT FREE
-	int		env_copy_size; //DONT FREE
-	char	*input; //free
-	char	**split_by_space; //free
-	char	**reassembled_commands; //free
-	char	**input_by_pipes; //free
-	int		(*filefds)[2]; //free
-	int		**pipefds; //free
-	pid_t	*pids; //unsure
-	char	*line; //leave out
-	int		unused_fds[8192]; //free
+	char	**env_copy;
+	int		env_copy_size;
+	char	*input;
+	char	**split_by_space;
+	char	**reassembled_commands;
+	char	**input_by_pipes;
+	int		(*filefds)[2];
+	int		**pipefds;
+	pid_t	*pids;
+	char	*line;
+	int		unused_fds[8192];
 	int		ufd_i;
-	int		exit_status; //leave out
-	int		*exit_statuses; //leave out
-	int		flag; //leave out
+	int		exit_status;
+	int		*exit_statuses;
+	int		flag;
 	int		line_pos;
 	char	*str;
 }			t_struct;
+
+typedef struct s_state
+{
+	int	i;
+	int	j;
+	int	squoteflag;
+	int	dquoteflag;
+}	t_state;
 
 void	execute_command(char **split_by_space);
 void	sigint_handler_default(int sig); 
@@ -73,8 +81,12 @@ void	open_files(t_struct *stru, int index);
 void	terminate_filefds(t_struct *stru, int index);
 void	rem_redir(char **split_by_spaces);
 char	**pipe_split(char *input);
+int		count_pipes(char *input);
 char	**split_by_index(char *input, int *indices);
 char	**space_split(char *string);
+char	*toggle_quote_flags(char *string, t_state *state);
+char	*reduce_spaces(char *string, char *reduced_string, t_state *state);
+char	*remove_trailing_space(char *string);
 char	*line_expansion(char *line, t_struct *stru);
 char	*copy_til_dquote(char *line, int i);
 char	*copy_til_squote(char *line, int i);
@@ -88,9 +100,17 @@ int		quote_errors(char *input);
 
 char	*concat_strings(char **strings, int numstrings);
 void	redir_exec(char *command, char **env, int i, t_struct *stru);
-//void	mod_execve(char *command, char **env);
 void	mod_execve(char *command, char **env, t_struct *stru);
-void	subprocesses(int len, char **reassembled_commands, char **envp, t_struct *stru);
+void	handle_builtin_commands(char **args, char **env, t_struct *stru);
+void	handle_unset_command(char **args, char **env, char *command);
+void	handle_other_commands(char **args, char **env, char *command);
+int		ft_strichr(char *str, char c);
+char	*path_join(char *path, char *executable);
+char	**not_ft_split(char *str, char sep);
+int		open_file(char *filename, int mode);
+char	*get_path(char *command, char **env);
+void	subprocesses(int len, char **reassembled_commands, 
+			char **envp, t_struct *stru);
 void	set(char *name, char *value, t_struct *big);
 int		unset(char **env_cp, const char *varname);
 

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:39:48 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/01 19:20:09 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:38:47 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 	signal(SIGINT, sigint_handler_heredoc);
 	while ((stru->line = readline("heredoc ## ")) != NULL && g_global_sig == 0)
 	{
-		if (strcmp(stru->line, "") == 0)
+		if (ft_strcmp(stru->line, "") == 0)
 		{
 			write(heredoc_fd, "\n", 1);
 			continue ;
 		}
-		if (strcmp(stru->line, delimiter) == 0)
+		if (ft_strcmp(stru->line, delimiter) == 0)
 		{
 			free(stru->line);
 			break ;
 		}
-		write(heredoc_fd, stru->line, strlen(stru->line));
+		write(heredoc_fd, stru->line, ft_strlen(stru->line));
 		write(heredoc_fd, "\n", 1);
 		free(stru->line);
 	}
@@ -86,7 +86,7 @@ void	open_files(t_struct *stru, int index)
 					stru->unused_fds[stru->ufd_i++] = stru->filefds[index][1];
 				}
 				stru->filefds[index][1] = open(stru->split_by_space[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-				if (stru->filefds[index][1]  == -1)
+				if (stru->filefds[index][1] == -1)
 				{
 					printf("Error opening file\n");
 					return ;

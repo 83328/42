@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:40:12 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/27 17:02:10 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:12:02 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ char	*dollars_expansion(char *string, t_struct *stru);
 // 	return (line);
 // }
 
-
 char	*line_expansion(char *line, t_struct *stru)
 {
-	// printf("line_expansion%s\n", line);
 	char	*cop_line;
 	char	*str;
 	char	*app_str;
@@ -129,7 +127,6 @@ char	*dollars_expansion(char *string, t_struct *stru)
 		i = 0;
 		while (string[i] != 0)
 		{
-//			if (string[i] == '$' && contains_echo(string) == 0)
 			if (string[i] == '$')
 			{
 				still_dollars = 1;
@@ -162,7 +159,60 @@ char	*dollars_expansion(char *string, t_struct *stru)
 	return (0);
 } */
 
+char	*copy_initial_and_value(char *str, char *cop_line, char *value, int start, int val_len)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (i < start)
+	{
+		str[i] = cop_line[i];
+		i++;
+	}
+	while (i < val_len + start)
+	{
+		str[i] = value[j];
+		i++;
+		j++;
+	}
+	return (str);
+}
+
+char	*copy_remaining(char *str, char *cop_line, int start, int var_len)
+{
+	int		i;
+	int		j;
+
+	i = start + var_len;
+	j = 0;
+	while (j < (int)((ft_strlen(cop_line) - var_len - 1 - start)))
+	{
+		str[i] = cop_line[j + start + var_len + 1];
+		i++;
+		j++;
+	}
+	str[i] = 0;
+	return (str);
+}
+
 char	*expand_var(char *str, char *value, int start, int var_len)
+{
+	int		val_len;
+	char	*cop_line;
+
+	val_len = ft_strlen(value);
+	cop_line = ft_strdup(str);
+	free(str);
+	str = malloc(sizeof(char) * (ft_strlen(cop_line) + val_len + 1));
+	str = copy_initial_and_value(str, cop_line, value, start, val_len);
+	str = copy_remaining(str, cop_line, start, var_len);
+	free(cop_line);
+	return (str);
+}
+
+/* char	*expand_var(char *str, char *value, int start, int var_len)
 {
 	int		i;
 	int		j;
@@ -195,7 +245,7 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 	}
 	str[i] = 0;
 	return (str);
-}
+} */
 
 char	*get_p_var(char *string, int start)
 {
@@ -207,14 +257,18 @@ char	*get_p_var(char *string, int start)
 	i = start;
 	j = 0;
 	var_len = 0;
-	while (string[i] != 0 && (string[i] != ' ' && string[i] != 't' && string[i] != 'n' && string[i] != 'r' && string[i] != 'v' && string[i] != 'f'))
+	while (string[i] != 0 && (string[i] != ' ' && string[i] != 't' 
+			&& string[i] != 'n' && string[i] != 'r' && string[i] != 'v' 
+			&& string[i] != 'f'))
 	{
 		var_len++;
 		i++;
 	}
 	p_var = malloc(sizeof(char *) * (var_len + 1));
 	i = start;
-	while (string[i] != 0 && (string[i] != ' ' && string[i] != 't' && string[i] != 'n' && string[i] != 'r' && string[i] != 'v' && string[i] != 'f'))
+	while (string[i] != 0 && (string[i] != ' ' && string[i] != 't' 
+			&& string[i] != 'n' && string[i] != 'r' && 
+			string[i] != 'v' && string[i] != 'f'))
 	{
 		p_var[j] = string[i];
 		i++;

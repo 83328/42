@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:38:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 16:05:20 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:22:27 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,26 @@ void	print_file_content(int fd)
 {
 	char	buffer[4096];
 	ssize_t	bytesread;
+	ssize_t	writeresult;
 
-	while ((bytesread = read(fd, buffer, sizeof(buffer))) > 0)
+	while (1)
 	{
-		write(STDOUT_FILENO, buffer, bytesread);
-	}
-	if (bytesread == -1)
-	{
-		perror("Error reading file");
+		bytesread = read(fd, buffer, sizeof(buffer));
+		if (bytesread == -1)
+		{
+			perror("Error reading file");
+			break ;
+		}
+		if (bytesread == 0)
+		{
+			break ;
+		}
+		writeresult = write(STDOUT_FILENO, buffer, bytesread);
+		if (writeresult == -1)
+		{
+			perror("Error writing to stdout");
+			break ;
+		}
 	}
 	close(fd);
 }

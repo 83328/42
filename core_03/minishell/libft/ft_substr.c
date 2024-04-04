@@ -6,13 +6,12 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:46:20 by dgacic            #+#    #+#             */
-/*   Updated: 2024/03/25 16:48:33 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:19:47 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+/* char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*dst;
 	size_t	i;
@@ -40,9 +39,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	dst[i] = '\0';
 	return (dst);
-}
+} */
 
-/* char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*dst;
 	size_t	i;
@@ -67,4 +66,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		dst[i - 1] = s[start + i - 1];
 	dst[i - 1] = '\0';
 	return (dst);
-} */
+}

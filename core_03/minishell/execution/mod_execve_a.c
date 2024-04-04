@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mod_execve.c                                       :+:      :+:    :+:   */
+/*   mod_execve_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:40:20 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/02 20:12:12 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/04 10:54:42 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*path_join(char *path, char *executable)
 	int		i;
 	int		j;
 
-	ret = malloc(sizeof(char) * (ft_strichr(path, 0) + ft_strichr(executable, 0) + 2));
+	ret = malloc(sizeof(char) * (ft_strichr(path, 
+					0) + ft_strichr(executable, 0) + 2));
 	i = 0;
 	j = 0;
 	while (path[j])
@@ -85,7 +86,8 @@ int	open_file(char *filename, int mode)
 		return (open(filename, O_RDONLY));
 	}
 	else
-		return (open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
+		return (open(filename, O_CREAT | O_RDWR | 
+				O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
 }
 
 char	*get_path(char *command, char **env)
@@ -114,7 +116,7 @@ char	*get_path(char *command, char **env)
 	return (command);
 }
 
-void	mod_execve(char *command, char **env, t_struct *stru)
+/* void	mod_execve(char *command, char **env, t_struct *stru)
 {
 	char	**args;
 	char	*path;
@@ -128,8 +130,6 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 	{
 		if (ft_strcmp(args[0], "echo") == 0)
 			echo_command(command);
-		//if (ft_strcmp(args[0], "cd") == 0)
-		//	cd_command(stru, args);
 		else if (ft_strcmp(args[0], "pwd") == 0)
 			pwd_command();
 		else if (ft_strcmp(args[0], "unset") == 0)
@@ -157,4 +157,4 @@ void	mod_execve(char *command, char **env, t_struct *stru)
 		write(STDERR, ": command not found\n", 20);
 		exit(127);
 	}
-}
+} */
