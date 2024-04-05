@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:44:48 by dgacic            #+#    #+#             */
-/*   Updated: 2023/01/19 10:44:50 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/05 12:08:09 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	int	count;
 
 	count = 0;
+	if (!s)
+		return (0);
 	while (*s)
 	{
 		count++;

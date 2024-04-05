@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <dgacic@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 19:47:12 by dgacic            #+#    #+#             */
-/*   Updated: 2023/12/18 19:47:15 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/05 12:12:29 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strcpy(char *s1, const char *s2)
 	int	i;
 
 	i = 0;
+	if (!s2)
+		return (s1);
 	while (s2[i])
 	{
 		s1[i] = s2[i];

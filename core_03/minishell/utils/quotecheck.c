@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_utils.c                                       :+:      :+:    :+:   */
+/*   quotecheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,59 +9,57 @@
 /*   Updated: 2024/04/05 06:37:25 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../minishell.h"
 
-void	print_string_array(char **str_array)
+int	is_unclosed_quote(char *input, char quote_type, const char *error_message)
 {
 	int	i;
 
 	i = 0;
-	while (str_array[i] != NULL)
+	while (input[i] != '\0')
 	{
-		printf("\nstrArr[%d] #%s#", i, str_array[i]);
+		if (input[i] == quote_type)
+		{
+			i++;
+			while (input[i] != quote_type)
+			{
+				if (input[i] == '\0')
+				{
+					write(STDERR_FILENO, error_message \
+					, ft_strlen(error_message));
+					return (1);
+				}
+				i++;
+			}
+		}
 		i++;
 	}
-	printf("\n");
+	return (0);
 }
 
-void	print_int_array(int *int_array)
+int	quote_errors(char *input)
 {
-	int	i;
+	if (is_unclosed_quote(input, '\'', "unclosed single quote\n"))
+		return (1);
+	if (is_unclosed_quote(input, '"', "unclosed double quote\n"))
+		return (1);
+	return (0);
+}
 
-	i = 0;
-	while (int_array[i] != -1)
+int	check_unclosed_double_quotes(char *input, int i)
+{
+	if (input[i] == 34)
 	{
-		printf("\nintArr[%d] %i", i, int_array[i]);
 		i++;
-	}
-	printf("\n");
-}
-
-void	print_file_content(int fd)
-{
-	char	buffer[4096];
-	ssize_t	bytesread;
-	ssize_t	writeresult;
-
-	while (1)
-	{
-		bytesread = read(fd, buffer, sizeof(buffer));
-		if (bytesread == -1)
+		while (input[i] != 34)
 		{
-			perror("Error reading file");
-			break ;
-		}
-		if (bytesread == 0)
-		{
-			break ;
-		}
-		writeresult = write(STDOUT_FILENO, buffer, bytesread);
-		if (writeresult == -1)
-		{
-			perror("Error writing to stdout");
-			break ;
+			if (input[i] == 0)
+			{
+				ft_putendl_fd("unclosed double quote", STDERR_FILENO);
+				return (1);
+			}
+			i++;
 		}
 	}
-	close(fd);
+	return (0);
 }

@@ -12,23 +12,6 @@
 
 #include "../minishell.h"
 
-/* void	update_env_var(char *var, char *new_value, char **envp)
-{
-	int		i;
-	char	*entry;
-
-	i = 0;
-	while ((entry = envp[i]) != NULL)
-	{
-		if (ft_strncmp(entry, var, ft_strlen(var)) == 0)
-		{
-			free(entry);
-			envp[i] = ft_strjoin(var, new_value);
-		}
-		i++;
-	}
-} */
-
 void	update_env_var(char *var, char *new_value, char **envp)
 {
 	int		i;

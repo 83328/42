@@ -12,35 +12,6 @@
 
 #include "../minishell.h"
 
-/* void	export_command(char *value, t_struct *stru)
-{
-	char	*new_var;
-	int		i;
-
-	i = 0;
-	new_var = value;
-	if (!new_var)
-	{
-		fprintf(stderr, "Memory allocation failed\n");
-		return ;
-	}
-	while (stru->env_copy[i])
-	{
-		i++;
-		if (i >= stru->env_copy_size - 1)
-		{
-			resize_env_copy(stru);
-			if (!stru->env_copy)
-			{
-				free(new_var);
-				fprintf(stderr, "Memory allocation failed\n");
-				return ;
-			}
-		}
-	}
-	stru->env_copy[i] = new_var;
-	stru->env_copy[i + 1] = NULL;
-} */
 void	shift_env_copy(char **env_copy, int start_index)
 {
 	int	i;

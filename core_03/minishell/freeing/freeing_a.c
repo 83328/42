@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freeing.c                                          :+:      :+:    :+:   */
+/*   freeing_a.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 14:15:13 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/03 10:54:27 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/05 06:37:25 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/05 14:10:15 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,34 @@ void	free_2dint(int **array, int len)
 	}
 }
 
-// void	free_ufds(t_struct *stru)
-// {
-// 	int	i;
-// 	i=0;
-// 	while (stru->unused_fds[i] != -1)
-// 	{
-// 		free(stru->unused_fds[i]);
-// 		i++;
-// 	}
-// 	//free(stru->unused_fds[i]);
-// }
+void	free_env_copy(t_struct *s)
+{
+	int	i;
 
-// void	free_filefds(t_struct *stru)
-// {
-// 	int	i;
-// 	i=0;
-// 	while (stru->filefds[i][0] != -1 ||  stru->filefds[i][1] != -1)
-// 	{
-// 		if (stru->filefds[i][0] != 0)
-// 			free(stru->filefds[i][0]);
-// 		if (stru->filefds[i][1] != 0)
-// 			free(stru->filefds[i][1]);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	if (s->env_copy != NULL)
+	{
+		while (i < s->env_copy_size && s->env_copy[i] != NULL)
+		{
+			free(s->env_copy[i]);
+			i++;
+		}
+		free(s->env_copy);
+	}
+}
+
+void	free_split_by_space(t_struct *s)
+{
+	int	i;
+
+	i = 0;
+	if (s->split_by_space != NULL)
+	{
+		while (s->split_by_space[i] != NULL)
+		{
+			free(s->split_by_space[i]);
+			i++;
+		}
+		free(s->split_by_space);
+	}
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/24 19:38:54 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/03 11:28:46 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/05 06:37:25 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/05 06:37:25 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,14 @@ void	free_loopend(t_struct *stru, int len)
 	free(stru->filefds);
 	free_2dint(stru->pipefds, len);
 	free(stru->pipefds);
+	free(stru->str);
 	stru->pipefds = NULL;
+}
+
+void	init_vars(t_vars *vars)
+{
+	vars->i = 0;
+	vars->j = 0;
+	vars->k = 0;
+	vars->len = 0;
 }

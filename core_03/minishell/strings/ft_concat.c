@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/24 19:39:14 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/26 16:00:38 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/05 06:37:43 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/05 12:13:58 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_concat(char *s1, char *s2)
 	int		len2;
 	char	*cop_s1;
 
+	if (!s1)
+		return (s2);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	cop_s1 = ft_strdup(s1);

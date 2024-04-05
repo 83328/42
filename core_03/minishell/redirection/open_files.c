@@ -3,51 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/24 19:39:48 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/04 16:38:47 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/05 06:38:29 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/05 06:38:29 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_heredoc(int index, t_struct *stru, char *delimiter)
+void	ft_infile(t_struct *stru, int i, int index)
 {
-	const char	*filename = "heredoc_out.txt";
-	int			heredoc_fd;
+	if (stru->split_by_space[i + 1])
+	{
+		if (stru->filefds[index][0] != 0)
+			stru->unused_fds[stru->ufd_i++] = stru->filefds[index][0];
+		stru->filefds[index][0] \
+		= open(stru->split_by_space[i + 1], O_RDONLY);
+		if (stru->filefds[index][0] == -1)
+		{
+			printf("\nError opening file\n");
+			return ;
+		}
+	}
+	else
+		printf("\nno file after <");
+}
 
-	heredoc_fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (heredoc_fd == -1) 
+void	ft_append(t_struct *stru, int i, int index)
+{
+	if (stru->split_by_space[i + 1])
 	{
-		perror("Error opening heredoc");
-		return (1);
+		if (stru->filefds[index][1] != 0)
+		{
+			stru->unused_fds[stru->ufd_i++] = stru->filefds[index][1];
+		}
+		stru->filefds[index][1] \
+		= open(stru->split_by_space[i + 1], \
+		O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (stru->filefds[index][1] == -1)
+		{
+			printf("Error opening file\n");
+			return ;
+		}
 	}
-	signal(SIGINT, sigint_handler_heredoc);
-	while ((stru->line = readline("heredoc ## ")) != NULL && g_global_sig == 0)
+	else
+		printf("\nno file after >> ");
+}
+
+void	ft_outfile(t_struct *stru, int i, int index)
+{
+	if (stru->split_by_space[i + 1])
 	{
-		if (ft_strcmp(stru->line, "") == 0)
+		if (stru->filefds[index][1] != 0)
 		{
-			write(heredoc_fd, "\n", 1);
-			continue ;
+			printf("\nfd to unused");
+			stru->unused_fds[stru->ufd_i++] = stru->filefds[index][1];
 		}
-		if (ft_strcmp(stru->line, delimiter) == 0)
+		stru->filefds[index][1] \
+		= open(stru->split_by_space[i + 1], \
+		O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (stru->filefds[index][1] == -1)
 		{
-			free(stru->line);
-			break ;
+			printf("Error opening file\n");
+			return ;
 		}
-		write(heredoc_fd, stru->line, ft_strlen(stru->line));
-		write(heredoc_fd, "\n", 1);
-		free(stru->line);
 	}
-	signal(SIGINT, sigint_handler_default);
-	close(heredoc_fd);
-	heredoc_fd = open(filename, O_RDWR | O_CREAT | O_APPEND, 0644);
-	stru->filefds[index][0] = heredoc_fd;
-	//close(heredoc_fd);
-	//free(line);
-	g_global_sig = 0;
-	return (0);
+	else
+		printf("\nno file after > ");
 }
 
 void	open_files(t_struct *stru, int index)
@@ -58,62 +81,13 @@ void	open_files(t_struct *stru, int index)
 	while (stru->split_by_space[i])
 	{
 		if (ft_strncmp(stru->split_by_space[i], "<<", 2) == 0)
-		{
 			ft_heredoc(index, stru, stru->split_by_space[i + 1]);
-		}
 		else if (stru->split_by_space[i][0] == '<')
-		{
-			if (stru->split_by_space[i + 1])
-			{
-				if (stru->filefds[index][0] != 0)
-					stru->unused_fds[stru->ufd_i++] = stru->filefds[index][0];
-				stru->filefds[index][0] = open(stru->split_by_space[i + 1], O_RDONLY);
-				if (stru->filefds[index][0] == -1)
-				{
-					printf("\nError opening file\n");
-					return ;
-				}
-			}
-			else
-				printf("\nno file after <");
-		}
+			ft_infile(stru, i, index);
 		if (ft_strncmp(stru->split_by_space[i], ">>", 2) == 0)
-		{
-			if (stru->split_by_space[i + 1])
-			{
-				if (stru->filefds[index][1] != 0)
-				{
-					stru->unused_fds[stru->ufd_i++] = stru->filefds[index][1];
-				}
-				stru->filefds[index][1] = open(stru->split_by_space[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-				if (stru->filefds[index][1] == -1)
-				{
-					printf("Error opening file\n");
-					return ;
-				}
-			}
-			else
-				printf("\nno file after >> ");
-		}
+			ft_append(stru, i, index);
 		else if (stru->split_by_space[i][0] == '>')
-		{
-			if (stru->split_by_space[i + 1])
-			{
-				if (stru->filefds[index][1] != 0)
-				{
-					printf("\nfd to unused");
-					stru->unused_fds[stru->ufd_i++] = stru->filefds[index][1];
-				}
-				stru->filefds[index][1] = open(stru->split_by_space[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-				if (stru->filefds[index][1] == -1)
-				{
-					printf("Error opening file\n");
-					return ;
-				}
-			}
-			else
-				printf("\nno file after > ");
-		}
+			ft_outfile(stru, i, index);
 		i++;
 	}
 }
