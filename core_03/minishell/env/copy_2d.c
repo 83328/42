@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:39:21 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:39:21 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:29:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**copy_2d(char **envp, char **envp_copy)
 	i = 0;
 	while (i < count)
 	{
-		envp_copy[i] = strdup(envp[i]);
+		envp_copy[i] = ft_strdup(envp[i]);
 		if (envp_copy[i] == NULL)
 			perror_exit("Memory allocation error");
 		i++;

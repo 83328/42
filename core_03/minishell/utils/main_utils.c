@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:37:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:37:25 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:41:15 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../minishell.h"
 
 t_struct	*startup(int argc, char *argv[], char *envp[], t_struct *stru)
@@ -60,11 +61,18 @@ void	parse_commands(t_struct *stru, t_vars *vars)
 
 void	builtin_or_commands(t_struct *stru, t_vars *vars)
 {
-	if (ft_strncmp(stru->reassembled_commands[0], "cd", 2) == 0 \
-	&& vars->i == 1)
-		cd_command(stru, ft_split(stru->reassembled_commands[0], ' '));
+	char	**split_command;
+
+	if (ft_strncmp(stru->reassembled_commands[0], "cd", 2) == 0 && vars->i == 1)
+	{
+		split_command = ft_split(stru->reassembled_commands[0], ' ');
+		cd_command(stru, split_command);
+		free(split_command);
+	}
 	else if (ft_strncmp(stru->reassembled_commands[0], "export", 6) == 0)
+	{
 		export_command(stru->reassembled_commands[1], stru);
+	}
 	else
 	{
 		g_global_sig = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:39:21 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:39:21 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:30:16 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	copy_env(char *envp[], t_struct *str)
 	str->env_copy = malloc(sizeof(char *) * (size + 1));
 	while (i < size)
 	{
-		str->env_copy[i] = strdup(envp[i]);
+		str->env_copy[i] = ft_strdup(envp[i]);
 		i++;
 	}
 	str->env_copy[size] = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subprocesses.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:37:05 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:37:05 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/05 18:16:09 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	subprocesses(int len, char **reassembled_commands, t_struct *stru)
 	stru->exit_status = stru->exit_statuses[i -1];
 	signal(SIGINT, sigint_handler_default);
 	signal(SIGQUIT, SIG_IGN);
+	free(stru->exit_statuses);
 }
 
 pid_t	subprocess(int pos, char **reassembled_commands, \

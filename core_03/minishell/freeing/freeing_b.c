@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 13:40:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/05 14:09:49 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:23:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,17 @@ void	free_pipefds(t_struct *s)
 void	free_single_pointers(t_struct *s)
 {
 	free(s->input);
+	s->input = NULL;
 	free(s->filefds);
+	s->filefds = NULL;
 	free(s->pids);
+	s->pids = NULL;
 	free(s->line);
+	s->line = NULL;
 	free(s->exit_statuses);
+	s->exit_statuses = NULL;
 	free(s->str);
+	s->str = NULL;
 }
 
 void	free_exit(t_struct *s)

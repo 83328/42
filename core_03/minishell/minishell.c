@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:37:05 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 10:56:24 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:33:56 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	shell_loop(t_struct *stru)
 		builtin_or_commands(stru, vars);
 		free_loopend(stru, vars->len);
 	}
+	free(vars);
 }
 
 int	main(int argc, char *argv[], char *envp[])
