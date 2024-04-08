@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:21:13 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/03 11:57:59 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:58:19 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void	shift_env_copy(char **env_copy, int start_index)
 	}
 }
 
-void	export_command(char *value, t_struct *stru)
+void	export_command(t_struct *stru, char **args)
 {
 	char	*new_var;
 	int		i;
 
 	i = 0;
-	new_var = value;
+	new_var = args[1];
 	if (!new_var)
 	{
-		fprintf(stderr, "Memory allocation failed\n");
+		fprintf(stderr, "Memory allocation failed \n");
 		return ;
 	}
 	while (stru->env_copy[i])
@@ -44,13 +44,42 @@ void	export_command(char *value, t_struct *stru)
 		if (!stru->env_copy)
 		{
 			free(new_var);
-			fprintf(stderr, "Memory allocation failed\n");
+			fprintf(stderr, "Memory allocation failed \n");
 			return ;
 		}
 	}
 	stru->env_copy[i] = new_var;
 	stru->env_copy[i + 1] = NULL;
 }
+
+/* void	export_command(char *value, t_struct *stru)
+{
+	char	*new_var;
+	int		i;
+
+	i = 0;
+	new_var = value;
+	if (!new_var)
+	{
+		fprintf(stderr, "Memory allocation failed \n");
+		return ;
+	}
+	while (stru->env_copy[i])
+		i++;
+	if (i >= stru->env_copy_size - 1)
+	{
+		resize_env_copy(stru);
+		if (!stru->env_copy)
+		{
+			free(new_var);
+			fprintf(stderr, "Memory allocation failed \n");
+			return ;
+		}
+	}
+	stru->env_copy[i] = new_var;
+	stru->env_copy[i + 1] = NULL;
+	printf("exported %s\n", new_var);
+} */
 
 void	resize_env_copy(t_struct *stru)
 {

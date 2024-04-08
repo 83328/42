@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:37:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 17:41:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:19:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	builtin_or_commands(t_struct *stru, t_vars *vars)
 	}
 	else if (ft_strncmp(stru->reassembled_commands[0], "export", 6) == 0)
 	{
-		export_command(stru->reassembled_commands[1], stru);
+		split_command = ft_split(stru->reassembled_commands[0], ' ');
+		export_command(stru, split_command);
 	}
 	else
 	{

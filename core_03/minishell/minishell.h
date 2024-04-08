@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:37:05 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 13:59:55 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:17:28 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+# define MAX_TOKENS 100
 
 # define INFILE 0
 # define OUTFILE 1
@@ -162,7 +163,8 @@ void		env_command(t_struct *stru);
 //unset
 
 //export
-void		export_command(char *value, t_struct *stru);
+//void		export_command(char *value, t_struct *stru);
+void		export_command(t_struct *stru, char **args);
 int			is_valid_identifier(char *s);
 void		add_to_env(t_struct *stru, char *new_var);
 

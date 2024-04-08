@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mod_execve_b.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:39:09 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:39:09 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/07 15:48:59 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	handle_builtin_command(char **args, char *command,
 
 	i = 0;
 	if (ft_strcmp(args[0], "echo") == 0)
+	{
 		echo_command(command);
+	}
 	else if (ft_strcmp(args[0], "pwd") == 0)
 		pwd_command();
 	else if (ft_strcmp(args[0], "unset") == 0)

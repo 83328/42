@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:37:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 14:10:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:10:26 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	free_2dint(int **array, int len)
 	}
 }
 
-void	free_env_copy(t_struct *s)
+/* void	free_env_copy(t_struct *s)
 {
 	int	i;
 
@@ -55,6 +55,24 @@ void	free_env_copy(t_struct *s)
 			i++;
 		}
 		free(s->env_copy);
+	}
+} */
+
+void	free_env_copy(t_struct *s)
+{
+	int	i;
+
+	i = 0;
+	if (s->env_copy != NULL)
+	{
+		while (s->env_copy[i])
+		{
+			free(s->env_copy[i]);
+			s->env_copy[i] = NULL;
+			i++;
+		}
+		free(s->env_copy);
+		s->env_copy = NULL;
 	}
 }
 

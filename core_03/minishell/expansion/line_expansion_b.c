@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 10:53:31 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/05 11:52:06 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:18:13 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*process_dollar(char *string, t_struct
 	p_var = get_p_var(string, *i + 1);
 	p_val = ft_getenv(p_var, stru->env_copy);
 	string = expand_string(string, p_var, p_val, *i);
+	free(p_var);
 	return (string);
 }
 

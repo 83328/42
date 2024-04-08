@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:37:43 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 12:13:58 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:40:10 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,23 @@ char	*ft_concat(char *s1, char *s2)
 	free(s2);
 	return (s1);
 }
+
+/* char	*ft_concat(char *s1, char *s2)
+{
+	int		len1;
+	int		len2;
+	char	*result;
+
+	if (!s1)
+		return (s2);
+	if (!s2)
+		return (s1);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = (char *)malloc(len1 + len2 + 1);
+	if (result == NULL)
+		perror_exit("Memory allocation failed");
+	ft_strcpy(result, s1);
+	strcat(result, s2);
+	return (result);
+} */
