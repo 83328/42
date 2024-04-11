@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_til_squote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 06:37:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:37:25 by dgacic           ###   ########.fr       */
+/*   Created: 2024/04/08 21:31:33 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 22:06:25 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int	count_til_squote(char *line, int i)
 		n++;
 	}
 	if (line[i - 1] == 0)
-		perror_exit("1error: unclosed single quotes");
+		perror_exit("error: unclosed single quotes");
 	return (n);
 }

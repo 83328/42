@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 06:38:29 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/08 19:48:53 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/08 21:33:05 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 17:52:32 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 	int			heredoc_fd;
 
 	heredoc_fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (heredoc_fd == -1) 
+	if (heredoc_fd == -1)
 	{
 		perror("Error opening heredoc");
 		return (1);
@@ -43,6 +43,8 @@ void	heredoc_loop(t_struct *stru, int heredoc_fd, char *delimiter)
 		if (strcmp(stru->line, "") == 0)
 		{
 			write(heredoc_fd, "\n", 1);
+			free(stru->line);
+			stru->line = readline("heredoc ## ");
 			continue ;
 		}
 		if (strcmp(stru->line, delimiter) == 0)

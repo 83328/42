@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 06:37:05 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/07 19:17:28 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 20:58:19 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@
 
 extern int	g_global_sig;
 
+typedef struct s_vars
+{
+	int	i;
+	int	j;
+	int	k;
+	int	len;
+}			t_vars;
+
 typedef struct s_struct
 {
 	char	**env_copy;
@@ -62,15 +70,8 @@ typedef struct s_struct
 	int		exit_code;
 	int		i;
 	int		j;
+	t_vars	*vars;
 }			t_struct;
-
-typedef struct s_vars
-{
-	int	i;
-	int	j;
-	int	k;
-	int	len;
-}			t_vars;
 
 typedef struct s_state
 {
@@ -105,6 +106,7 @@ char		**pipe_split(char *input);
 int			count_pipes(char *input);
 char		**split_by_index(char *input, int *indices);
 char		**space_split(char *string);
+int			*find_real_spaces(char *reduced_string);
 char		*toggle_quote_flags(char *string, t_state *state);
 char		*reduce_spaces(char *string, char *reduced_string, t_state *state);
 char		*remove_trailing_space(char *string);
@@ -136,9 +138,10 @@ char		**not_ft_split(char *str, char sep);
 int			open_file(char *filename, int mode);
 char		*get_path(char *command, char **env);
 void		subprocesses(int len, char **reassembled_commands, t_struct *stru);
-void		set(char *name, char *value, t_struct *big);
+//void		set(char *name, char *value, t_struct *big);
+void		set(char *name, char *value, t_struct *stru);
 int			unset(char **env_cp, const char *varname);
-
+char		**split_into_tokens(char *command);
 void		resize_env_copy(t_struct *stru);
 char		**char2d_realloc(char **ptr, int size, int old_size);
 char		*ft_str_revndup(const char *str, int n);
@@ -178,10 +181,13 @@ void		error_exit(char *msg);
 void		init_vars(t_vars *vars);
 
 void		calloc_comms(t_struct *stru, int len);
-void		parse_commands(t_struct *stru, t_vars *vars);
+int			parse_commands(t_struct *stru, t_vars *vars);
 void		builtin_or_commands(t_struct *stru, t_vars *vars);
 void		exit_parse(t_struct *stru);
 t_struct	*startup(int argc, char *argv[], char *envp[], t_struct *stru);
+int			check_for_empty_comms(char **strings);
+char		*reduce_quotes(char *str);
+void		process_command(t_struct *stru, int command_flag);
 
 //freeing.c
 void		free(void *ptr);

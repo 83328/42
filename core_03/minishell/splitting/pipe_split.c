@@ -5,12 +5,65 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 06:38:01 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 10:52:37 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/08 21:32:43 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 11:21:34 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	process_input(char *input, int *real_pipe_indices, int *nth_pipe)
+{
+	int		i;
+	char	flag;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '\"' || input[i] == '\'')
+		{
+			flag = input[i];
+			i++;
+			while (input[i] != flag)
+				i++;
+		}
+		if (input[i] == '|')
+		{
+			real_pipe_indices[*nth_pipe] = i;
+			(*nth_pipe)++;
+		}
+		i++;
+	}
+}
+
+int	*find_real_pipes(char *input)
+{
+	int	i;
+	int	*real_pipe_indices;
+	int	nth_pipe;
+	int	num_pipes;
+
+	i = 0;
+	num_pipes = 0;
+	if (input[0] == '|')
+	{
+		fprintf(stderr, "Error: pipe at beginning of command");
+		_exit(EXIT_FAILURE);
+	}
+	while (input[i])
+	{
+		if (input[i] == '|')
+			num_pipes++;
+		i++;
+	}
+	real_pipe_indices = ft_calloc(num_pipes + 1, sizeof(int));
+	nth_pipe = 0;
+	process_input(input, real_pipe_indices, &nth_pipe);
+	if (input[i -1] == '|')
+		perror_exit("ends on pipe"); 
+	real_pipe_indices[nth_pipe] = -1;
+	return (real_pipe_indices);
+}
 
 /* int	*find_real_pipes(char *input)
 {
@@ -54,58 +107,6 @@
 	real_pipe_indices[nth_pipe] = -1;
 	return (real_pipe_indices);
 } */
-
-void	check_pipe_at_beginning(char *input)
-{
-	if (input[0] == '|')
-		perror_exit("Error: pipe at beginning of command");
-}
-
-void	find_pipes_indices(char *input, int *real_pipe_indices)
-{
-	int		i;
-	int		nth_pipe;
-	char	flag;
-
-	i = 0;
-	nth_pipe = 0;
-	flag = input[i];
-	while (input[i])
-	{
-		if (input[i] == '\"' || input[i] == '\'')
-		{
-			i++;
-			while (input[i] != flag)
-				i++;
-		}
-		if (input[i] == '|')
-		{
-			real_pipe_indices[nth_pipe] = i;
-			nth_pipe++;
-		}
-		i++;
-	}
-}
-
-void	check_pipe_at_end(char *input, int *real_pipe_indices, int num_pipes)
-{
-	if (input[real_pipe_indices[num_pipes - 1] + 1] == '\0')
-		perror_exit("ends on pipe");
-}
-
-int	*find_real_pipes(char *input)
-{
-	int	num_pipes;
-	int	*real_pipe_indices;
-
-	num_pipes = count_pipes(input);
-	real_pipe_indices = ft_calloc(num_pipes + 1, sizeof(int));
-	check_pipe_at_beginning(input);
-	find_pipes_indices(input, real_pipe_indices);
-	check_pipe_at_end(input, real_pipe_indices, num_pipes);
-	real_pipe_indices[num_pipes] = -1;
-	return (real_pipe_indices);
-}
 
 char	**pipe_split(char *input)
 {

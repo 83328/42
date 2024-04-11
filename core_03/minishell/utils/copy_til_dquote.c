@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_til_dquote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 06:37:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/07 16:08:39 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/08 21:31:33 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/08 21:31:33 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*copy_til_dquote(char *line, int i)
 	j = 0;
 	n = count_til_dquote(line, i);
 	ret = ft_calloc(sizeof(char), n + 1);
-	if (ft_strchr(&line[i], '"') == NULL)
+	if (ft_strchr(&line[i], '\"') == NULL)
 		return (NULL);
 	if (ret == (NULL))
 		return (NULL);

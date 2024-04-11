@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 17:21:33 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/07 15:43:38 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/09 02:21:12 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 17:38:54 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,23 @@
 
 void	echo_command(char *str)
 {
-	int	i;
-	int	print_newline;
+	int		i;
+	char	n;
 
-	i = 4;
-	print_newline = 1;
-	if (ft_strncmp(str, "echo", 4) == 0)
+	n = '\n';
+	i = 5;
+	if (ft_strcmp(str, "echo -n") == 0)
+		return ;
+	else if (ft_strncmp(str, "echo -n ", 8) == 0)
 	{
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-		if (ft_strncmp(&str[i], "-n", 2) == 0)
-		{
-			print_newline = 0;
-			i += 2;
-		}
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
+		i += 3;
+		while (str[i] != '\0')
+			write(1, &str[i++], 1);
 	}
-	if (str[i] != '\0')
+	else if (ft_strncmp(str, "echo", 4) == 0)
 	{
-		printf("%s", &str[i]);
-	}
-	if (print_newline)
-	{
-		printf("\n"); 
+		while (str[i] != '\0')
+			write(1, &str[i++], 1);
+		write(1, &n, 1); 
 	}
 }

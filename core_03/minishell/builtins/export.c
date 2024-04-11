@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 17:21:13 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/07 13:58:19 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/08 21:35:14 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 21:56:56 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,48 @@ void	shift_env_copy(char **env_copy, int start_index)
 	}
 }
 
+static void	handle_new_var(t_struct *stru, char *new_var, int i)
+{
+	if (i >= stru->env_copy_size - 1)
+	{
+		resize_env_copy(stru);
+		if (!stru->env_copy)
+		{
+			free(new_var);
+			write(2, "Memory allocation failed \n", 27);
+			return ;
+		}
+	}
+	stru->env_copy[i] = new_var;
+	stru->env_copy[i + 1] = NULL;
+}
+
 void	export_command(t_struct *stru, char **args)
 {
 	char	*new_var;
 	int		i;
 
+	if (args == NULL || args[1] == NULL)
+		return ;
+	i = 0;
+	new_var = args[1];
+	if (!new_var)
+	{
+		fprintf(stderr, "Memory allocation failed \n");
+		return ;
+	}
+	while (stru->env_copy[i])
+		i++;
+	handle_new_var(stru, new_var, i);
+}
+
+/* void	export_command(t_struct *stru, char **args)
+{
+	char	*new_var;
+	int		i;
+
+	if (args == NULL || args[1] == NULL)
+		return ;
 	i = 0;
 	new_var = args[1];
 	if (!new_var)
@@ -50,35 +87,6 @@ void	export_command(t_struct *stru, char **args)
 	}
 	stru->env_copy[i] = new_var;
 	stru->env_copy[i + 1] = NULL;
-}
-
-/* void	export_command(char *value, t_struct *stru)
-{
-	char	*new_var;
-	int		i;
-
-	i = 0;
-	new_var = value;
-	if (!new_var)
-	{
-		fprintf(stderr, "Memory allocation failed \n");
-		return ;
-	}
-	while (stru->env_copy[i])
-		i++;
-	if (i >= stru->env_copy_size - 1)
-	{
-		resize_env_copy(stru);
-		if (!stru->env_copy)
-		{
-			free(new_var);
-			fprintf(stderr, "Memory allocation failed \n");
-			return ;
-		}
-	}
-	stru->env_copy[i] = new_var;
-	stru->env_copy[i + 1] = NULL;
-	printf("exported %s\n", new_var);
 } */
 
 void	resize_env_copy(t_struct *stru)

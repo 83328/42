@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:48:25 by dgacic            #+#    #+#             */
-/*   Updated: 2023/01/25 19:48:28 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/10 14:39:55 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ static int	word_count(const char *str, char c)
 	int	i;
 	int	flip;
 
+	if (c < 32 || c > 126)
+		return (0);
 	i = 0;
 	flip = 0;
-	while (*str)
+	while (str != NULL && *str)
 	{
 		if (*str != c && flip == 0)
 		{

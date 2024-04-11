@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 19:03:16 by alimpens          #+#    #+#             */
-/*   Updated: 2024/03/24 19:04:31 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:50:05 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 	int		len1;
 	int		len2;
 
+	if (s1 == NULL || s2 == NULL)
+		return (1);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	if (len1 > len2)

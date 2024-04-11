@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 13:40:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/05 18:23:57 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/08 21:33:41 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/09 14:26:15 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_input_by_pipes(t_struct *s)
 	{
 		while (s->input_by_pipes[i] != NULL)
 		{
-			free(s->input_by_pipes[i]);
+			free (s->input_by_pipes[i]);
 			i++;
 		}
 		free(s->input_by_pipes);
@@ -76,16 +76,10 @@ void	free_single_pointers(t_struct *s)
 	s->str = NULL;
 }
 
-void	free_exit(t_struct *s)
+void	free_exit(t_struct *stru)
 {
-	if (s != NULL)
-	{
-		free_env_copy(s);
-		free_split_by_space(s);
-		free_reassembled_commands(s);
-		free_input_by_pipes(s);
-		free_pipefds(s);
-		free_single_pointers(s);
-		free(s);
-	}
+	free_2d(stru->env_copy);
+	free(stru->env_copy);
+	free(stru->exit_statuses);
+	free(stru);
 }

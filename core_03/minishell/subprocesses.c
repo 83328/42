@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 06:37:05 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 18:16:09 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 14:23:42 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ int	wait_loop(t_struct *stru, int i)
 	if (WIFSIGNALED(stru->exit_statuses[i]))
 	{
 		stru->exit_statuses[i] = WTERMSIG(stru->exit_statuses[i]) + 128;
+		stru->flag = stru->exit_statuses[i];
+	}
+	else if (WIFEXITED(stru->exit_statuses[i]))
+	{
+		stru->exit_statuses[i] = WEXITSTATUS(stru->exit_statuses[i]);
+		stru->flag = stru->exit_statuses[i];
+	}
+	else if (WIFSTOPPED(stru->exit_statuses[i]))
+	{
+		stru->exit_statuses[i] = WSTOPSIG(stru->exit_statuses[i]) + 128;
 		stru->flag = stru->exit_statuses[i];
 	}
 	i++;
@@ -56,7 +66,6 @@ void	subprocesses(int len, char **reassembled_commands, t_struct *stru)
 	stru->exit_status = stru->exit_statuses[i -1];
 	signal(SIGINT, sigint_handler_default);
 	signal(SIGQUIT, SIG_IGN);
-	free(stru->exit_statuses);
 }
 
 pid_t	subprocess(int pos, char **reassembled_commands, \

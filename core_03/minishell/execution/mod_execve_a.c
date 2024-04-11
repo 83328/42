@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mod_execve_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 06:39:09 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:39:09 by dgacic           ###   ########.fr       */
+/*   Created: 2024/04/08 21:34:45 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/10 13:52:47 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*get_path(char *command, char **env)
 	if (is_builtin(args[0]))
 	{
 		if (ft_strcmp(args[0], "echo") == 0)
-			echo_command(command);
+			_command(command);
 		else if (ft_strcmp(args[0], "pwd") == 0)
 			pwd_command();
 		else if (ft_strcmp(args[0], "unset") == 0)
