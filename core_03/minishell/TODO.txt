@@ -25,3 +25,19 @@ no file after > minishell ## echo "moooooore">>output.txt
 moooooore>>output.txt
 minishell ## echo "moooooore" >>output.txt
 zsh: segmentation fault (core dumped)  ./minishell
+
+
+
+
+
+
+echo " a  $  b " cuts spaces at beginning and end of a string  |x solved
+
+eval missing
+
+
+
+echo "hello""" produces no output
+
+exit multiple args, perror msg and exit(1)
+export wrong input error

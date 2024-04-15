@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:33:05 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/10 17:52:32 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:48:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 	if (heredoc_fd == -1)
 	{
 		perror("Error opening heredoc");
+		stru->exit_status = 1;
 		return (1);
 	}
 	signal(SIGINT, sigint_handler_heredoc);
@@ -38,7 +39,9 @@ int	ft_heredoc(int index, t_struct *stru, char *delimiter)
 void	heredoc_loop(t_struct *stru, int heredoc_fd, char *delimiter)
 {
 	stru->line = readline("heredoc ## ");
-	while (stru->line != NULL && g_global_sig != 4)
+	stru->line = dollars_expansion(stru->line, stru);
+	stru->line = replace_dollar_placeholder(stru->line);
+	while (stru->line != NULL && g_global_sig != 2)
 	{
 		if (strcmp(stru->line, "") == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:34:57 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/09 14:10:53 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:03:16 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	set(char *name, char *value, t_struct *stru)
 	char	*new_var;
 	int		i;
 
+	if (ft_getenv(name, stru->env_copy) != NULL)
+		unset(stru->env_copy, "?");
 	equ = ft_strdup("=");
 	new_var = ft_strdup(name);
 	val_dup = ft_strdup(value);

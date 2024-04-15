@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing_a.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:33:41 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/08 21:33:41 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/12 22:58:56 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,6 @@ void	free_2dint(int **array, int len)
 		}
 	}
 }
-
-/* void	free_env_copy(t_struct *s)
-{
-	int	i;
-
-	i = 0;
-	if (s->env_copy != NULL)
-	{
-		while (i < s->env_copy_size && s->env_copy[i] != NULL)
-		{
-			free(s->env_copy[i]);
-			i++;
-		}
-		free(s->env_copy);
-	}
-} */
 
 void	free_env_copy(t_struct *s)
 {

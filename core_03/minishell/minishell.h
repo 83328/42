@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/10 20:58:19 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:55:03 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_expansion
 void		execute_command(char **split_by_space);
 void		sigint_handler_default(int sig); 
 void		sigint_handler_heredoc(int sig);
-void		sigint_handler_command(int sig);
 void		copy_env(char *envp[], t_struct *str);
 int			mod_execvp(const char *file, char *const argv[], char *PATH);
 void		perror_exit(char *msg);
@@ -148,6 +147,18 @@ char		*ft_str_revndup(const char *str, int n);
 int			contains_echo(char *str);
 char		*expand_var(char *str, char *value, int start, int var_len);
 char		*get_p_var(char *string, int start);
+void		open_files_nospace(t_struct *stru, int index);
+void		rem_redir_nospaces(char **split_by_spaces);
+char		*dollars_expansion(char *string, t_struct *stru);
+char		*replace_dollar_placeholder(char *input_str);
+
+//expansion
+void		inner_loop(int still_dollars, char *string, t_struct *stru, int *i);
+char		*create_new_string(char *input_str, 
+				char *placeholder, char *dollar_sign, int new_len);
+int			calculate_new_length(char *input_str, char *placeholder, 
+				char *dollar_sign);
+
 //builtins
 int			is_builtin(char *cmd);
 
@@ -166,6 +177,9 @@ void		env_command(t_struct *stru);
 //unset
 
 //export
+int			is_valid_identifier(char *arg);
+void		handle_new_var(t_struct *stru, char *new_var, int i);
+void		handle_existing_var(t_struct *stru, char *new_var);
 //void		export_command(char *value, t_struct *stru);
 void		export_command(t_struct *stru, char **args);
 int			is_valid_identifier(char *s);
@@ -188,6 +202,7 @@ t_struct	*startup(int argc, char *argv[], char *envp[], t_struct *stru);
 int			check_for_empty_comms(char **strings);
 char		*reduce_quotes(char *str);
 void		process_command(t_struct *stru, int command_flag);
+char		*remove_quotes(char *arg);
 
 //freeing.c
 void		free(void *ptr);
@@ -210,4 +225,12 @@ void		free_pipefds(t_struct *s);
 void		free_single_pointers(t_struct *s);
 void		free_exit(t_struct *s);
 
+int			len_til_quote(char *str);
+void		count_loop(char *string, int *i, int *var_len);
+void		write_loop(char *string, int *i, int *j, char *p_var);
+char		*get_p_var(char *string, int start);
+char		*expand_var(char *str, char *value, int start, int var_len);
+void		write_til_start(int *i, int *start, char *cop_line, char *str);
+void		write_val(int *i, int *j, char *str, char *value);
+void		increment(int *n, int *i, int *pos);
 #endif

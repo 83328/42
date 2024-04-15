@@ -35,6 +35,10 @@ void	handle_builtin_command(char **args, char *command,
 	}
 	else if (ft_strcmp(args[0], "env") == 0)
 		env_command(stru);
+	free_2d(args);
+	free(args);
+	free_2d(stru->reassembled_commands);
+	free(stru->reassembled_commands);
 	exit(0);
 }
 

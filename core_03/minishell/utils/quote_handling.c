@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 10:07:23 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/10 17:30:28 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:47:06 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,50 +79,26 @@ char	*reduce_quotes(char *str)
 	return (new_str);
 }
 
-/* char	*reduce_quotes(char *str)
+char	*remove_quotes(char *arg)
 {
-	size_t	len;
-	char	*new_str;
-	size_t	i;
-	size_t	j;
-	int		quote_count;
+	char	*new_arg;
+	int		i;
+	int		j;
 
-	len = ft_strlen(str);
-	new_str = (char *)malloc((len + 1) * sizeof(char));
+	new_arg = malloc(strlen(arg) + 1);
+	if (!new_arg)
+		return (NULL);
 	i = 0;
 	j = 0;
-	quote_count = 0;
-	if (new_str == NULL)
+	while (arg[i] != '\0')
 	{
-		perror("Memory allocation failed");
-		exit(EXIT_FAILURE);
-	}
-	while (str[i] != '\0')
-	{
-		if (str[i] != 34)
+		if (arg[i] != '"')
 		{
-			new_str[j] = str[i];
-			i++;
+			new_arg[j] = arg[i];
 			j++;
-			continue ;
 		}
-		while (str[i] == 34)
-		{
-			quote_count++;
-			i++;
-		}
-		if (quote_count % 2 != 0)
-		{
-			while (quote_count-- > 0)
-				new_str[j++] = 34;
-		}
-		else if (quote_count % 2 == 0)
-		{
-			new_str[j++] = 34;
-			new_str[j++] = 34;
-		}
-		quote_count = 0;
+		i++;
 	}
-	new_str[j] = '\0';
-	return (new_str);
-} */
+	new_arg[j] = '\0';
+	return (new_arg);
+}

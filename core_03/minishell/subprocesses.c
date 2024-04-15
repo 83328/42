@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subprocesses.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: dgacic <dgacic@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/10 14:23:42 by alimpens         ###   ########.fr       */
+/*   Created: 2024/04/12 16:40:22 by dgacic            #+#    #+#             */
+/*   Updated: 2024/04/12 16:40:25 by dgacic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	close_fds(int **pipefds,
 
 int	wait_loop(t_struct *stru, int i)
 {
-	signal(SIGINT, SIG_IGN);
 	waitpid(stru->pids[i], &stru->exit_statuses[i], WUNTRACED);
+	signal(SIGINT, SIG_IGN);
 	if (WIFSIGNALED(stru->exit_statuses[i]))
 	{
 		stru->exit_statuses[i] = WTERMSIG(stru->exit_statuses[i]) + 128;
@@ -48,7 +48,6 @@ void	subprocesses(int len, char **reassembled_commands, t_struct *stru)
 	g_global_sig = 1;
 	i = 0;
 	stru->pipefds = create_pipes(len - 1);
-	signal(SIGINT, sigint_handler_command);
 	while (i < len)
 	{
 		stru->pids[i] = subprocess(i, reassembled_commands, stru, len);
@@ -58,14 +57,14 @@ void	subprocesses(int len, char **reassembled_commands, t_struct *stru)
 	i = 0;
 	close_fds(stru->pipefds, stru->filefds, stru->unused_fds, len);
 	stru->exit_statuses = calloc(len +1, sizeof(int));
+	signal(SIGINT, SIG_IGN);
 	while (stru->pids[i] != -1)
 		i = wait_loop(stru, i);
-	if (stru->flag == 130)
-		ft_putendl_fd("", 2);
+	if (stru->exit_statuses[i - 1] == 130 && (isatty(STDIN_FILENO)))
+		write (STDOUT_FILENO, "\n", 1);
+	signal(SIGINT, sigint_handler_default);
 	stru->exit_statuses[i] = 0;
 	stru->exit_status = stru->exit_statuses[i -1];
-	signal(SIGINT, sigint_handler_default);
-	signal(SIGQUIT, SIG_IGN);
 }
 
 pid_t	subprocess(int pos, char **reassembled_commands, \

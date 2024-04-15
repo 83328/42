@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:35:14 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/10 21:56:56 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:04:33 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,35 @@ void	shift_env_copy(char **env_copy, int start_index)
 	}
 }
 
-static void	handle_new_var(t_struct *stru, char *new_var, int i)
+void	export_command(t_struct *stru, char **args)
 {
-	if (i >= stru->env_copy_size - 1)
+	int	i;
+
+	i = 1;
+	if (args == NULL)
 	{
-		resize_env_copy(stru);
-		if (!stru->env_copy)
+		return ;
+	}
+	if (args[i] == NULL)
+	{
+		return ;
+	}
+	while (args[i])
+	{
+		if (!is_valid_identifier(args[i]))
 		{
-			free(new_var);
-			write(2, "Memory allocation failed \n", 27);
+			write(2, "export: `", 9);
+			write(2, args[i], strlen(args[i]));
+			write(2, "`: not a valid identifier\n", 27);
+			stru->exit_status = 1;
 			return ;
 		}
+		handle_existing_var(stru, args[i]);
+		i++;
 	}
-	stru->env_copy[i] = new_var;
-	stru->env_copy[i + 1] = NULL;
 }
 
-void	export_command(t_struct *stru, char **args)
+/* void	export_command(t_struct *stru, char **args)
 {
 	char	*new_var;
 	int		i;
@@ -57,7 +69,7 @@ void	export_command(t_struct *stru, char **args)
 	while (stru->env_copy[i])
 		i++;
 	handle_new_var(stru, new_var, i);
-}
+} */
 
 /* void	export_command(t_struct *stru, char **args)
 {

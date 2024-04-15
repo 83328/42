@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:32:43 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/10 11:21:34 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:50:13 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,49 +64,6 @@ int	*find_real_pipes(char *input)
 	real_pipe_indices[nth_pipe] = -1;
 	return (real_pipe_indices);
 }
-
-/* int	*find_real_pipes(char *input)
-{
-	int	flag;
-	int	i;
-	int	*real_pipe_indices;
-	int	nth_pipe;
-	int	num_pipes;
-
-	i = 0;
-	num_pipes = 0;
-	if (input[0] == '|')
-		perror_exit("Error: pipe at beginning of command");
-	while (input[i])
-	{
-		if (input[i] == '|')
-			num_pipes++;
-		i++;
-	}
-	real_pipe_indices = ft_calloc(num_pipes + 1, sizeof(int));
-	i = 0;
-	nth_pipe = 0;
-	while (input[i])
-	{
-		if (input[i] == '\"' || input[i] == '\'')
-		{
-			flag = input[i];
-			i++;
-			while (input[i] != flag)
-				i++;
-		}
-		if (input[i] == '|')
-		{
-			real_pipe_indices[nth_pipe] = i;
-			nth_pipe++;
-		}
-		i++;
-	}
-	if (input[i -1] == '|')
-		perror_exit("ends on pipe"); 
-	real_pipe_indices[nth_pipe] = -1;
-	return (real_pipe_indices);
-} */
 
 char	**pipe_split(char *input)
 {

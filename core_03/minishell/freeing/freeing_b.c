@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:33:41 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/09 14:26:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/12 22:50:51 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ void	free_exit(t_struct *stru)
 {
 	free_2d(stru->env_copy);
 	free(stru->env_copy);
-	free(stru->exit_statuses);
+	if (stru->exit_statuses != NULL)
+		free(stru->exit_statuses);
+	if (stru->input != NULL)
+		free(stru->input);
+	free(stru->vars);
 	free(stru);
 }

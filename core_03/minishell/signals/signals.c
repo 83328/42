@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgacic <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 06:38:15 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/05 06:38:15 by dgacic           ###   ########.fr       */
+/*   Updated: 2024/04/12 19:07:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ void	sigint_handler_default(int sig)
 {
 	if (sig == SIGINT)
 	{
-		rl_replace_line("", 0);
 		printf("\n");
-		printf("minishell ## ");
-		g_global_sig = 0;
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+		g_global_sig = 2;
 	}
 }
 
