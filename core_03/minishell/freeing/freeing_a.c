@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:33:41 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/12 22:58:56 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:34:14 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	free_split_by_space(t_struct *s)
 			i++;
 		}
 		free(s->split_by_space);
+		s->split_by_space = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:31:33 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/12 18:59:14 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:05:14 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	block2(t_struct *stru)
 	}
 }
 
-void	builtin_or_commands(t_struct *stru, t_vars *vars)
+/* void	builtin_or_commands(t_struct *stru, t_vars *vars)
 {
 	char	**split_command;
 
@@ -70,4 +70,75 @@ void	builtin_or_commands(t_struct *stru, t_vars *vars)
 	else
 		block1(stru, vars);
 	block2(stru);
+} */
+
+void	process_cd_command(t_struct *stru)
+{
+	if (ft_strlen(stru->reassembled_commands[0]) > 2 
+		&& stru->reassembled_commands[0][2] != ' ')
+	{
+		fprintf(stderr, "Error: Invalid command\n");
+		return ;
+	}
+	if (ft_strlen(stru->reassembled_commands[0]) == 2)
+		process_command(stru, 3);
+	else
+		process_command(stru, 1);
 }
+
+void	builtin_or_commands(t_struct *stru, t_vars *vars)
+{
+	char	**split_command;
+
+	if (ft_strncmp(stru->reassembled_commands[0], "cd", 2) == 0 \
+		&& vars->i == 1)
+	{
+		process_cd_command(stru);
+	}
+	else if (ft_strncmp(stru->reassembled_commands[0], "export ", 7) == 0)
+		process_command(stru, 2);
+	else if (ft_strncmp(stru->reassembled_commands[0], "unset ", 6) == 0)
+	{
+		split_command = NULL;
+		split_command = ft_split(stru->reassembled_commands[0], ' ');
+		unset(stru->env_copy, split_command[1]);
+		free(split_command);
+		return ;
+	}
+	else
+		block1(stru, vars);
+	block2(stru);
+}
+
+/* void	builtin_or_commands(t_struct *stru, t_vars *vars)
+{
+	char	**split_command;
+
+	if (ft_strncmp(stru->reassembled_commands[0], "cd", 2) == 0 \
+		&& vars->i == 1)
+	{
+		if (ft_strlen(stru->reassembled_commands[0]) > 2 
+			&& stru->reassembled_commands[0][2] != ' ')
+		{
+			fprintf(stderr, "Error: Invalid command\n");
+			return ;
+		}
+		if (ft_strlen(stru->reassembled_commands[0]) == 2)
+			process_command(stru, 3);
+		else
+			process_command(stru, 1);
+	}
+	else if (ft_strncmp(stru->reassembled_commands[0], "export ", 7) == 0)
+		process_command(stru, 2);
+	else if (ft_strncmp(stru->reassembled_commands[0], "unset ", 6) == 0)
+	{
+		split_command = NULL;
+		split_command = ft_split(stru->reassembled_commands[0], ' ');
+		unset(stru->env_copy, split_command[1]);
+		free(split_command);
+		return ;
+	}
+	else
+		block1(stru, vars);
+	block2(stru);
+} */

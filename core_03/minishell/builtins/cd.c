@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:35:14 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/11 14:00:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:08:38 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,7 @@ void	update_env_var(char *var, char *new_value, char **envp)
 	}
 }
 
-/* void	handle_cd(char *old_pwd, char *home_path, char *args[])
-{
-	char	*last_slash;
-
-	last_slash = strrchr(old_pwd, '/');
-	if (args[1] == NULL || ft_strcmp(args[1], "..") == 0)
-	{
-		if (last_slash != NULL)
-			*last_slash = '\0'; 
-		chdir(old_pwd);
-	}
-	else if (ft_strcmp(args[1], "~") == 0)
-		chdir(home_path);
-	else
-		chdir(args[1]);
-}
-
-void	cd_command(t_struct *stru, char *args[])
+/* void	cd_command(t_struct *stru, char *args[])
 {
 	char	*old_pwd;
 	char	*home_path;
@@ -86,7 +69,7 @@ int	handle_cd(char *old_pwd, char *home_path, char *args[])
 	return (ret);
 }
 
-void	check_directory_exists(t_struct *stru, char *args[])
+int	check_directory_exists(t_struct *stru, char *args[])
 {
 	if (args[1] && strcmp(args[1], "~") != 0 && access(args[1], F_OK) == -1)
 	{
@@ -94,8 +77,9 @@ void	check_directory_exists(t_struct *stru, char *args[])
 		write(2, args[1], strlen(args[1]));
 		write(2, "\n", 1);
 		stru->exit_status = 1;
-		exit(1);
+		return (0);
 	}
+	return (1);
 }
 
 void	cd_command(t_struct *stru, char *args[])
@@ -104,14 +88,15 @@ void	cd_command(t_struct *stru, char *args[])
 	char	*home_path;
 	char	*current_dir;
 	int		ret;
+	int		dir_exists;
 
 	old_pwd = getcwd(NULL, 0);
 	home_path = ft_getenv("HOME", stru->env_copy);
-	check_directory_exists(stru, args);
+	dir_exists = check_directory_exists(stru, args);
 	ret = handle_cd(old_pwd, home_path, args);
 	current_dir = getcwd(NULL, 0);
 	set("PWD", current_dir, stru);
-	if (ret == -1)
+	if (ret == -1 && dir_exists)
 	{
 		write(2, "cd: error, directory change failed\n", 35);
 		stru->exit_status = 1;
