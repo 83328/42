@@ -60,7 +60,7 @@ int	*find_real_pipes(char *input)
 	nth_pipe = 0;
 	process_input(input, real_pipe_indices, &nth_pipe);
 	if (input[i -1] == '|')
-		perror_exit("ends on pipe"); 
+		perror_exit("ends on pipe");
 	real_pipe_indices[nth_pipe] = -1;
 	return (real_pipe_indices);
 }
@@ -69,9 +69,7 @@ char	**pipe_split(char *input)
 {
 	char	**split_by_pipes;
 	int		*real_pipe_indices;
-	int		i;
 
-	i = 0;
 	real_pipe_indices = find_real_pipes(input);
 	split_by_pipes = split_by_index(input, real_pipe_indices);
 	free(real_pipe_indices);

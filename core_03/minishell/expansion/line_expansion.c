@@ -93,12 +93,12 @@ int	calculate_new_length(char *input_str, char *placeholder, char *dollar_sign)
 		current += strlen(placeholder);
 		current = strstr(current, placeholder);
 	}
-	return (strlen(input_str) + (placeholder_count * 
-			strlen(dollar_sign)) - (placeholder_count * 
+	return (strlen(input_str) + (placeholder_count * \
+			strlen(dollar_sign)) - (placeholder_count * \
 			strlen(placeholder)) + 1);
 }
 
-char	*create_new_string(char *input_str, 
+char	*create_new_string(char *input_str,
 	char *placeholder, char *dollar_sign, int new_len)
 {
 	char	*new_str;

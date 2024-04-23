@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	handle_builtin_command(char **args, char *command, 
+void	handle_builtin_command(char **args, char *command, \
 			char **env, t_struct *stru)
 {
 	int	i;
@@ -59,10 +59,8 @@ void	handle_other_commands(char **args, char **env, char *command)
 void	mod_execve(char *command, char **env, t_struct *stru)
 {
 	char	**args;
-	int		result;
 
 	args = not_ft_split(command, ' ');
-	result = 0;
 	if (is_builtin(args[0]))
 	{
 		handle_builtin_command(args, command, env, stru);

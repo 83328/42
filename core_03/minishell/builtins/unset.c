@@ -31,8 +31,8 @@ int	unset(char **env_cp, const char *varname)
 	i = 0;
 	while (env_cp[i] != NULL)
 	{
-		if (ft_strncmp(env_cp[i], varname, 
-				ft_strlen(varname)) == 0 && 
+		if (ft_strncmp(env_cp[i], varname, \
+				ft_strlen(varname)) == 0 && \
 			env_cp[i][ft_strlen(varname)] == '=')
 		{
 			free(env_cp[i]);

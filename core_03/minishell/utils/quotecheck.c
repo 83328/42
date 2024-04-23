@@ -64,11 +64,11 @@ int	quote_errors(char *input)
 		if (input[i] == 34 || input[i] == 39)
 		{
 			if (input[i] == 34)
-				quote_ret = check_quotes(input, &i, 
-						34, "unclosed double quotes\n");
+				quote_ret = check_quotes(input, &i, \
+					34, "unclosed double quotes\n");
 			else if (input[i] == 39)
-				quote_ret = check_quotes(input, &i, 
-						39, "unclosed single quotes\n");
+				quote_ret = check_quotes(input, &i, \
+					39, "unclosed single quotes\n");
 			i++;
 		}
 		else

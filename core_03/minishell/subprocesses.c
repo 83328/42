@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-pid_t	subprocess(int pos, 
+pid_t	subprocess(int pos, \
 			char **reassembled_commands, t_struct *stru, int len);
 int		**create_pipes(int len);
-void	close_fds(int **pipefds, 
+void	close_fds(int **pipefds, \
 			int (*filefds)[2], int unused_fds[8192], int len);
 
 int	wait_loop(t_struct *stru, int i)
@@ -77,6 +77,7 @@ pid_t	subprocess(int pos, char **reassembled_commands, \
 	{
 		dup_io(stru->pipefds, stru->filefds, reassembled_commands, pos);
 		close_fds(stru->pipefds, stru->filefds, stru->unused_fds, len);
+		free(stru->exit_statuses);
 		mod_execve(reassembled_commands[pos], stru->env_copy, stru);
 		perror_exit("child process failed");
 	}

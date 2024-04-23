@@ -30,7 +30,7 @@ char	*path_join(char *path, char *executable)
 	int		i;
 	int		j;
 
-	ret = malloc(sizeof(char) * (ft_strichr(path, 
+	ret = malloc(sizeof(char) * (ft_strichr(path, \
 					0) + ft_strichr(executable, 0) + 2));
 	i = 0;
 	j = 0;
@@ -86,7 +86,7 @@ int	open_file(char *filename, int mode)
 		return (open(filename, O_RDONLY));
 	}
 	else
-		return (open(filename, O_CREAT | O_RDWR | 
+		return (open(filename, O_CREAT | O_RDWR | \
 				O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
 }
 

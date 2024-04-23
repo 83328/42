@@ -90,7 +90,7 @@ typedef struct s_expansion
 }	t_expansion;
 
 void		execute_command(char **split_by_space);
-void		sigint_handler_default(int sig); 
+void		sigint_handler_default(int sig);
 void		sigint_handler_heredoc(int sig);
 void		copy_env(char *envp[], t_struct *str);
 int			mod_execvp(const char *file, char *const argv[], char *PATH);
@@ -122,7 +122,7 @@ int			quote_errors(char *input);
 void		dup_io(int **pipefds, \
 			int (*filefds)[2], char **reassembled_commands, int pos);
 void		dup_input(int **pipefds, int (*filefds)[2], int pos);
-void		dup_output(int **pipefds, 
+void		dup_output(int **pipefds,
 				int (*filefds)[2], char **reassembled_commands, int pos);
 
 char		*concat_strings(char **strings, int numstrings);
@@ -153,10 +153,10 @@ char		*dollars_expansion(char *string, t_struct *stru);
 char		*replace_dollar_placeholder(char *input_str);
 
 //expansion
-void		inner_loop(int still_dollars, char *string, t_struct *stru, int *i);
-char		*create_new_string(char *input_str, 
+void		inner_loop(char *string, t_struct *stru, int *i);
+char		*create_new_string(char *input_str,
 				char *placeholder, char *dollar_sign, int new_len);
-int			calculate_new_length(char *input_str, char *placeholder, 
+int			calculate_new_length(char *input_str, char *placeholder,
 				char *dollar_sign);
 
 //builtins

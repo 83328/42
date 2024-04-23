@@ -19,6 +19,7 @@ void	set_null(t_struct *stru)
 	stru->filefds = NULL;
 	stru->pipefds = NULL;
 	stru->str = NULL;
+	stru->exit_statuses = NULL;
 }
 
 void	one_offs(t_struct *stru)

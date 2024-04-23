@@ -12,19 +12,6 @@
 
 #include "../minishell.h"
 
-/* void	free_2d(char **array)
-{
-	int i;
-
-	i = 0;
-	while (array[i])
-	{
-			free(array[i]);
-			i++;
-	}
-	free(array);
-} */
-
 int	ft_array_len(char **array)
 {
 	int	i;
@@ -55,7 +42,7 @@ char	**remove_from_2d(char **array, int index)
 		new_array[i -1] = ft_strdup(array[i]);
 		i++;
 	}
-	new_array[i -1] = NULL; 
+	new_array[i -1] = NULL;
 	free_2d(array);
 	return (new_array);
 }

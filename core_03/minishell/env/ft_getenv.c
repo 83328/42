@@ -18,10 +18,10 @@ char	*ft_getenv(const char *varname, char **env_copy)
 	int		i;
 
 	i = 0;
-	while (env_copy[i] != NULL) 
+	while (env_copy[i] != NULL)
 	{
 		current = env_copy[i];
-		if (ft_strncmp(varname, current, 
+		if (ft_strncmp(varname, current,
 				ft_strlen(varname)) == 0 && current[ft_strlen(varname)] == '=')
 		{
 			return (&current[ft_strlen(varname) + 1]);

@@ -31,7 +31,7 @@ char	*remove_trailing_space(char *string)
 	return (clipped_string);
 }
 
-void	process_string_space_split(char *string, char *reduced_string, 
+void	process_string_space_split(char *string, char *reduced_string, \
 	int *i, int *j)
 {
 	int	squoteflag;
@@ -47,7 +47,7 @@ void	process_string_space_split(char *string, char *reduced_string,
 			(*i)++;
 			(*j)++;
 		}
-		while (string[*i] && string[*i] == ' ' && 
+		while (string[*i] && string[*i] == ' ' && \
 			squoteflag < 0 && dquoteflag < 0)
 			(*i)++;
 		if (string[*i] && (string[*i] == '\"' || string[*i] == '\''))

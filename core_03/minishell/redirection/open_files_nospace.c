@@ -76,12 +76,12 @@ void	open_files_nospace(t_struct *stru, int index)
 	i = 0;
 	while (stru->split_by_space[i])
 	{
-		if (ft_strncmp(stru->split_by_space[i], "<<", 2) 
+		if (ft_strncmp(stru->split_by_space[i], "<<", 2) \
 			== 0 && stru->split_by_space[i][2] != 0)
 		{
 			ft_heredoc(index, stru, &stru->split_by_space[i][2]);
 		}
-		else if (ft_strncmp(stru->split_by_space[i], "<", 1) 
+		else if (ft_strncmp(stru->split_by_space[i], "<", 1) \
 			== 0 && stru->split_by_space[i][1] != '<')
 		{
 			ft_infile_nospace(stru, i, index);

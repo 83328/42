@@ -108,7 +108,7 @@ void	resize_env_copy(t_struct *stru)
 
 	old_size = stru->env_copy_size;
 	stru->env_copy_size = stru->env_copy_size * 2;
-	stru->env_copy = char2d_realloc(stru->env_copy, 
+	stru->env_copy = char2d_realloc(stru->env_copy, \
 			stru->env_copy_size, old_size);
 	i = old_size;
 	while (i < stru->env_copy_size)

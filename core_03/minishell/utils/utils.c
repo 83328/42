@@ -31,6 +31,8 @@ void	free_loopend(t_struct *stru, int len)
 	free_2d(stru->reassembled_commands);
 	free(stru->reassembled_commands);
 	free(stru->pids);
+	if (stru->exit_statuses != NULL)
+		free(stru->exit_statuses);
 	if (stru->filefds != NULL)
 		free(stru->filefds);
 	if (stru->pipefds != NULL)

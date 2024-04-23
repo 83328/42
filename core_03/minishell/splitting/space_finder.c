@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	process_reduced_string(char *reduced_string, 
+void	process_reduced_string(char *reduced_string, \
 	int *real_space_indices, int *nth_space)
 {
 	int		i;

@@ -53,7 +53,7 @@ void	handle_existing_var(t_struct *stru, char *new_var)
 	var_name = strtok(strdup(new_var), "=");
 	while (stru->env_copy[i])
 	{
-		if (strncmp(stru->env_copy[i], var_name, strlen(var_name)) == 0 
+		if (strncmp(stru->env_copy[i], var_name, strlen(var_name)) == 0 \
 			&& stru->env_copy[i][strlen(var_name)] == '=')
 		{
 			free(stru->env_copy[i]);

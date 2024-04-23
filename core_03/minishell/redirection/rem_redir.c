@@ -31,12 +31,14 @@ void	rem_redir(char **split_by_spaces)
 	i = 0;
 	while (split_by_spaces[i])
 	{
-		if (ft_strcmp(split_by_spaces[i], "<") == 0 || 
-			(ft_strcmp(split_by_spaces[i], ">") == 0 || 
-				ft_strcmp(split_by_spaces[i], "<<") == 0 || 
-				ft_strcmp(split_by_spaces[i], ">>") == 0))
+		if (ft_strcmp(split_by_spaces[i], "<") == 0 || \
+			(ft_strcmp(split_by_spaces[i], ">") == 0 || \
+			ft_strcmp(split_by_spaces[i], "<<") == 0 || \
+			ft_strcmp(split_by_spaces[i], ">>") == 0))
 		{
+			free(split_by_spaces[i + 1]);
 			rem_string(split_by_spaces, i + 1);
+			free(split_by_spaces[i]);
 			rem_string(split_by_spaces, i);
 			i = 0;
 			continue ;
@@ -52,11 +54,12 @@ void	rem_redir_nospaces(char **split_by_spaces)
 	i = 0;
 	while (split_by_spaces[i])
 	{
-		if (ft_strncmp(split_by_spaces[i], "<", 1) == 0 || 
-			ft_strncmp(split_by_spaces[i], ">", 1) == 0 || 
-			ft_strncmp(split_by_spaces[i], "<<", 2) == 0 || 
+		if (ft_strncmp(split_by_spaces[i], "<", 1) == 0 || \
+			ft_strncmp(split_by_spaces[i], ">", 1) == 0 || \
+			ft_strncmp(split_by_spaces[i], "<<", 2) == 0 || \
 			ft_strncmp(split_by_spaces[i], ">>", 2) == 0)
 		{
+			free(split_by_spaces[i]);
 			rem_string(split_by_spaces, i);
 			i = 0;
 			continue ;

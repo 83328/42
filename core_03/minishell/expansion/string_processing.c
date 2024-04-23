@@ -21,10 +21,11 @@ char	*replace_dollar_placeholder(char *input_str)
 
 	placeholder = "DOLLA_SIGN_PLACEHOLDER";
 	dollar_sign = "$";
-	new_len = calculate_new_length(input_str, placeholder, 
+	new_len = calculate_new_length(input_str, placeholder,
 			dollar_sign);
-	new_str = create_new_string(input_str, placeholder, 
+	new_str = create_new_string(input_str, placeholder,
 			dollar_sign, new_len);
+	free(input_str);
 	return (new_str);
 }
 
@@ -39,7 +40,7 @@ char	*dollars_expansion(char *string, t_struct *stru)
 	{
 		still_dollars = 0;
 		i = 0;
-		inner_loop(still_dollars, string, stru, &i);
+		inner_loop(string, stru, &i);
 	}
 	return (string);
 }
@@ -73,7 +74,7 @@ char	*remove_var(char *str, char *value, int start, int var_len)
 	return (str);
 }
 
-void	inner_loop(int still_dollars, char *string, t_struct *stru, int *i)
+void	inner_loop(char *string, t_struct *stru, int *i)
 {
 	char	*p_var;
 	char	*p_val;
@@ -82,7 +83,6 @@ void	inner_loop(int still_dollars, char *string, t_struct *stru, int *i)
 	{
 		if (string[*i] == '$')
 		{
-			still_dollars = 1;
 			p_var = get_p_var(string, *i + 1);
 			p_val = ft_getenv(p_var, stru->env_copy);
 			if (p_val != NULL)

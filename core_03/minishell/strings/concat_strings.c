@@ -19,11 +19,11 @@ char	*calculate_total_length(char **strings, int numstrings)
 
 	totallength = 0;
 	i = 0;
-	if (strings[0] == NULL || numstrings <= 0 || strings == NULL) 
+	if (strings[0] == NULL || numstrings <= 0 || strings == NULL)
 	{
 		return (ft_calloc(1, sizeof(char)));
 	}
-	while (i < numstrings) 
+	while (i < numstrings)
 	{
 		totallength += ft_strlen(strings[i]);
 		i++;

@@ -36,7 +36,7 @@ void	handle_arg(t_struct *stru, char *arg, int *i, int *space_count)
 					break ;
 				(*space_count)++;
 			}
-			else if ((arg[*i] == '+' || arg[*i] == '-') && 
+			else if ((arg[*i] == '+' || arg[*i] == '-') && \
 				ft_isdigit(arg[*i + 1]))
 			{
 				(*i)++;
@@ -79,9 +79,10 @@ void	check_exit_args(t_struct *stru, char *arg)
 	i = 0;
 	space_count = 0;
 	handle_arg(stru, new_arg, &i, &space_count);
-	if ((ft_isdigit(new_arg[0]) || (new_arg[0] == '+' && 
-				ft_isdigit(new_arg[1])) || 
-			(new_arg[0] == '-' && ft_isdigit(new_arg[1]))) && space_count == 0)
+	if ((ft_isdigit(new_arg[0]) || (new_arg[0] == '+' && \
+				ft_isdigit(new_arg[1])) || \
+			(new_arg[0] == '-' && ft_isdigit(new_arg[1]))) \
+			&& space_count == 0)
 		set_exit_code(stru, new_arg);
 	free(new_arg);
 }
