@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:43:55 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/15 11:48:13 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:22:38 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*dollars_expansion(char *string, t_struct *stru)
 	{
 		still_dollars = 0;
 		i = 0;
-		inner_loop(string, stru, &i);
+		string = inner_loop(string, stru, &i); // TODO: check memory leak / free needed ?
 	}
 	return (string);
 }
@@ -74,7 +74,7 @@ char	*remove_var(char *str, char *value, int start, int var_len)
 	return (str);
 }
 
-void	inner_loop(char *string, t_struct *stru, int *i)
+char	*inner_loop(char *string, t_struct *stru, int *i)
 {
 	char	*p_var;
 	char	*p_val;
@@ -99,4 +99,5 @@ void	inner_loop(char *string, t_struct *stru, int *i)
 		else
 			(*i)++;
 	}
+	return (string);
 }

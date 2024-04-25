@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/15 11:55:03 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:01:01 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ char		*dollars_expansion(char *string, t_struct *stru);
 char		*replace_dollar_placeholder(char *input_str);
 
 //expansion
-void		inner_loop(char *string, t_struct *stru, int *i);
+char		*inner_loop(char *string, t_struct *stru, int *i);
 char		*create_new_string(char *input_str,
 				char *placeholder, char *dollar_sign, int new_len);
 int			calculate_new_length(char *input_str, char *placeholder,
