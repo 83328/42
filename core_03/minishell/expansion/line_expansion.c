@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:34:31 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/24 17:03:14 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:08:40 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*process_quotes(char *cop_line, char *str, t_struct *stru, int *i)
 		stru->line_pos += ft_strlen(app_str) + 1;
 	}
 	str = ft_concat(str, app_str);
+	//
+	free(app_str);
 	return (str);
 }
 

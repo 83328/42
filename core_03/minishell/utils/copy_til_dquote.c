@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:31:33 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/15 11:37:25 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:17:17 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*copy_til_dquote(char *line, int i)
 	if (line[i] == '\0')
 	{
 		write(1, "error: unclosed double quotes\n", 30);
-		free(ret);
+		free(ret);// TODO: this free might not be enough
 		return (NULL);
 	}
 	ret[j] = '\0';
