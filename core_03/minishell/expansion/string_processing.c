@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:43:55 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/30 12:05:25 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:46:59 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*replace_dollar_placeholder(char *input_str)
 	dollar_sign = "$";
 	new_len = calculate_new_length(input_str, placeholder,
 			dollar_sign);
+	if (new_len < 1)
+		return (input_str);
 	new_str = create_new_string(input_str, placeholder,
 			dollar_sign, new_len);
 	free(input_str);
@@ -57,7 +59,7 @@ char	*dollars_expansion(char *string, t_struct *stru)
 		if (contains_dollars(string))
 			still_dollars = 1;
 		i = 0;
-		string = inner_loop(string, stru, &i); // TODO: check memory leak / free needed ?
+		string = inner_loop(string, stru, &i);
 	}
 	return (string);
 }
@@ -105,13 +107,12 @@ char	*inner_loop(char *string, t_struct *stru, int *i)
 			if (p_val != NULL)
 			{
 				string = expand_var(string, p_val, *i, ft_strlen(p_var));
+				free (p_var);
 				break ;
 			}
-			else
-			{
-				string = remove_var(string, "", *i, ft_strlen(p_var));
-				break ;
-			}
+			string = remove_var(string, "", *i, ft_strlen(p_var));
+			free (p_var);
+			break ;
 		}
 		else
 			(*i)++;

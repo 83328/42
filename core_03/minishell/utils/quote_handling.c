@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 10:07:23 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/15 13:47:06 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:25:49 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char	*reduce_quotes(char *str)
 	j = 0;
 	process_string(str, new_str, &i, &j);
 	new_str[j] = '\0';
+	free (str);
 	return (new_str);
 }
 

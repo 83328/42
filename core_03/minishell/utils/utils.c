@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:31:33 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/12 13:54:40 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:26:00 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_for_empty_comms(char **strings)
 	int	i;
 
 	i = 0;
-	if (strings[i] != NULL && strings[i][0] == '\0')
+	if (strings && strings[i] != NULL && strings[i][0] == '\0')
 	{
 		return (1);
 	}

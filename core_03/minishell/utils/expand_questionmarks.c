@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 21:31:48 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/30 12:31:52 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:34:21 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,47 @@ char	*malloc_and_check(int len)
 	return (new_str);
 }
 
+void	expand_dollar_question(t_expansion *exp)
+{
+	size_t	k;
+
+	k = 0;
+	while (exp->numerical_string[k] != '\0')
+		exp->new_str[exp->j++] = exp->numerical_string[k++];
+	exp->i += 2;
+}
+
+void	expand_regular_char(t_expansion *exp)
+{
+	exp->new_str[exp->j++] = exp->str[exp->i++];
+}
+
 char	*expand_questionmarks(char *str, const char *numerical_string)
+{
+	t_expansion	exp;
+
+	exp.str = str;
+	exp.numerical_string = numerical_string;
+	exp.len = ft_strlen(str);
+	if (exp.len < 1)
+		return (str);
+	exp.new_str = malloc_and_check(exp.len);
+	exp.i = 0;
+	exp.j = 0;
+	while (exp.i < exp.len)
+	{
+		if (exp.str[exp.i] == '$' && exp.str[exp.i + 1] 
+			== '?' && exp.i + 1 < exp.len)
+			expand_dollar_question(&exp);
+		else
+			expand_regular_char(&exp);
+	}
+	exp.new_str[exp.j] = '\0';
+	free(str);
+	return (exp.new_str);
+}
+
+/* char	*expand_questionmarks(char *str, const char *numerical_string)
 {
 	size_t	len;
 	size_t	j;
@@ -34,6 +74,8 @@ char	*expand_questionmarks(char *str, const char *numerical_string)
 	size_t	k;
 
 	len = ft_strlen(str);
+	if (len < 1)
+		return (str);
 	new_str = malloc_and_check(len);
 	i = 0;
 	j = 0;
@@ -52,4 +94,4 @@ char	*expand_questionmarks(char *str, const char *numerical_string)
 	new_str[j] = '\0';
 	free(str);
 	return (new_str);
-}
+} */

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:32:03 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/17 14:00:25 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:25:38 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 	return (s1);
 } */
 
-char	*ft_concat(char *s1, char *s2)
+char	*ft_concat_free(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;
@@ -45,8 +45,32 @@ char	*ft_concat(char *s1, char *s2)
 	result = (char *)malloc(len1 + len2 + 1);
 	if (result == NULL)
 		perror_exit("Memory allocation failed");
+	if (len1 > 0)
+		ft_strcpy(result, s1);
+	if (len2 > 0)
+		ft_strcat(result, s2);
+	free(s1);
+	free(s2);
+	return (result);
+}
+
+char	*ft_concat(char *s1, const char *s2)
+{
+	int		len1;
+	int		len2;
+	char	*result;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = (char *)malloc(len1 + len2 + 1);
+	if (result == NULL)
+		perror_exit("Memory allocation failed");
+	if (len1 > 0)
+		ft_strcpy(result, s1);
+	if (len2 > 0)
+		ft_strcat(result, s2);
 	ft_strcpy(result, s1);
-	strcat(result, s2);
+	ft_strcat(result, s2);
 	return (result);
 }
 

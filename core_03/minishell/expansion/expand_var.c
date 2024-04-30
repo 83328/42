@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:40:22 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/15 11:34:59 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:24:33 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*expand_var(char *str, char *value, int start, int var_len)
 		i++;
 		j++;
 	}
+	free(cop_line);
 	str[i] = 0;
 	return (str);
 }

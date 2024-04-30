@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:31:33 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/12 13:56:58 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:43:51 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	is_unclosed_quote(char *input, char quote_type, const char *error_message)
 	return (0);
 }
 
-int	check_quotes(char *input, int *i, char quote_type, char *error_message)
+int	check_quotes(const char *input, int *i, 
+	char quote_type, char *error_message)
 {
 	(*i)++;
 	while (input[*i] != quote_type)
@@ -53,31 +54,32 @@ int	check_quotes(char *input, int *i, char quote_type, char *error_message)
 	return (0);
 }
 
-int	quote_errors(char *input)
+int	quote_errors(const char *str)
 {
-	int	i;
-	int	quote_ret;
+	int		i;
+	int		quote_ret;
+	char	*input;
 
+	input = (char *)str;
 	i = 0;
+	quote_ret = 0;
 	while (input[i] != 0)
 	{
 		if (input[i] == 34 || input[i] == 39)
 		{
 			if (input[i] == 34)
-				quote_ret = check_quotes(input, &i, \
-					34, "unclosed double quotes\n");
+				quote_ret = check_quotes(input, &i, 34, 
+						"unclosed double quotes\n");
 			else if (input[i] == 39)
-				quote_ret = check_quotes(input, &i, \
-					39, "unclosed single quotes\n");
+				quote_ret = check_quotes(input, &i, 39, 
+						"unclosed single quotes\n");
 			i++;
 		}
 		else
 			i++;
 	}
 	if (quote_ret == -1)
-	{
 		return (1);
-	}
 	return (0);
 }
 

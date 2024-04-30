@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/24 17:01:01 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:20:24 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,15 @@ typedef struct s_state
 
 typedef struct s_expansion
 {
-	char	*str;
-	char	*cop_line;
-	int		start;
-	int		var_len;
+	char		*str;
+	char		*cop_line;
+	int			start;
+	int			var_len;
+	char		*new_str;
+	const char	*numerical_string;
+	size_t		i;
+	size_t		j;
+	size_t		len;
 }	t_expansion;
 
 void		execute_command(char **split_by_space);
@@ -112,13 +117,14 @@ char		*remove_trailing_space(char *string);
 char		*line_expansion(char *line, t_struct *stru);
 char		*copy_til_dquote(char *line, int i);
 char		*copy_til_squote(char *line, int i);
-char		*ft_concat(char *s1, char *s2);
+char		*ft_concat(char *s1, const char *s2);
+char		*ft_concat_free(char *s1, char *s2);
 char		*ft_getenv(const char *varname, char **env_copy);
 int			ft_heredoc(int index, t_struct *stru, char *delimiter);
 void		*signal_handling(void);
 char		**remove_from_2d(char **array, int index);
 int			ft_array_len(char **array);
-int			quote_errors(char *input);
+int			quote_errors(const char *input);
 void		dup_io(int **pipefds, \
 			int (*filefds)[2], char **reassembled_commands, int pos);
 void		dup_input(int **pipefds, int (*filefds)[2], int pos);
@@ -152,6 +158,8 @@ void		rem_redir_nospaces(char **split_by_spaces);
 char		*dollars_expansion(char *string, t_struct *stru);
 char		*replace_dollar_placeholder(char *input_str);
 char		*expand_questionmarks(char *str, const char *exitstr);
+void		throw_error(char *arg);
+void		exit_with_arg(t_struct *stru, char *arg);
 
 //expansion
 char		*inner_loop(char *string, t_struct *stru, int *i);

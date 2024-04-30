@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:34:31 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/30 11:49:47 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:24:41 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ char	*process_quotes(char *cop_line, char *str, t_struct *stru, int *i)
 		app_str = dollars_expansion(app_str, stru);
 		stru->line_pos += ft_strlen(app_str) + 1;
 	}
-	str = ft_concat(str, app_str);
-	free(app_str);
+	str = ft_concat_free(str, app_str);
 	return (str);
 }
 
@@ -50,7 +49,7 @@ char	*process_no_quotes(char *cop_line, char *str, t_struct *stru, int *i)
 	app_str = ft_substr(cop_line, *i, n);
 	app_str = dollars_expansion(app_str, stru);
 	*i += ft_strlen(app_str) - 1;
-	str = ft_concat(str, app_str);
+	str = ft_concat_free(str, app_str);
 	(*i)++;
 	return (str);
 }
@@ -78,6 +77,7 @@ char	*line_expansion(char *line, t_struct *stru)
 	}
 	free(line);
 	free(cop_line);
+	cop_line = NULL;
 	str = replace_dollar_placeholder(str);
 	return (str);
 }

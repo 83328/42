@@ -51,80 +51,14 @@ void	handle_arg(t_struct *stru, char *arg, int *i, int *space_count)
 	}
 }
 
-void	set_exit_code(t_struct *stru, char *arg)
-{
-	if (arg[0] == '-')
-	{
-		stru->exit_code = 256 + ft_atoi(arg + 1) * -1;
-	}
-	else if (arg[0] == '+' || arg[0] == '-')
-	{
-		stru->exit_code = ft_atoi(arg + 1);
-	}
-	else
-	{
-		stru->exit_code = ft_atoi(arg);
-	}
-}
-
 void	check_exit_args(t_struct *stru, char *arg)
 {
 	char	*new_arg;
-	int		i;
-	int		space_count;
 
 	new_arg = remove_quotes(arg);
-	if (!new_arg)
-		return ;
-	i = 0;
-	space_count = 0;
-	handle_arg(stru, new_arg, &i, &space_count);
-	if ((ft_isdigit(new_arg[0]) || (new_arg[0] == '+' && \
-				ft_isdigit(new_arg[1])) || \
-			(new_arg[0] == '-' && ft_isdigit(new_arg[1]))) \
-			&& space_count == 0)
-		set_exit_code(stru, new_arg);
-	free(new_arg);
+	throw_error(new_arg);
+	exit_with_arg(stru, new_arg);
 }
-
-/* void	check_exit_args(t_struct *stru, char *arg)
-{
-	int	i;
-	int	space_count;
-
-	i = 0;
-	space_count = 0;
-	handle_arg(stru, arg, &i, &space_count);
-	if ((ft_isdigit(arg[0]) || (arg[0] == '+' && ft_isdigit(arg[1])) || 
-			(arg[0] == '-' && ft_isdigit(arg[1]))) && space_count == 0)
-		set_exit_code(stru, arg);
-} */
-
-/* void	check_exit_args(t_struct *stru, char *arg)
-{
-	int	i;
-	int	space_count;
-
-	i = 0;
-	space_count = 0;
-	while (arg[i] != '\0')
-	{
-		if (!ft_isdigit(arg[i]))
-		{
-			if (arg[i] == ' ')
-			{
-				if (arg[i + 1] == '\0')
-					break ;
-				space_count++;
-			}
-			handle_exit_error(stru, space_count);
-			break ;
-		}
-		i++;
-	}
-	if (ft_isdigit(arg[0]) && space_count == 0)
-		stru->exit_code = ft_atoi(arg);
-} */
 
 void	exit_parse(t_struct *stru)
 {
