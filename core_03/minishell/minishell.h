@@ -151,6 +151,7 @@ void		open_files_nospace(t_struct *stru, int index);
 void		rem_redir_nospaces(char **split_by_spaces);
 char		*dollars_expansion(char *string, t_struct *stru);
 char		*replace_dollar_placeholder(char *input_str);
+char		*expand_questionmarks(char *str, const char *exitstr);
 
 //expansion
 char		*inner_loop(char *string, t_struct *stru, int *i);

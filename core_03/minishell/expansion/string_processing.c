@@ -6,11 +6,13 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:43:55 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/25 10:22:38 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:05:25 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*inner_loop(char *string, t_struct *stru, int *i);
 
 char	*replace_dollar_placeholder(char *input_str)
 {
@@ -29,6 +31,19 @@ char	*replace_dollar_placeholder(char *input_str)
 	return (new_str);
 }
 
+int	contains_dollars(const char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str == '$')
+		{
+			return (1);
+		}
+		str++;
+	}
+	return (0);
+}
+
 char	*dollars_expansion(char *string, t_struct *stru)
 {
 	int		i;
@@ -39,6 +54,8 @@ char	*dollars_expansion(char *string, t_struct *stru)
 	while (still_dollars == 1)
 	{
 		still_dollars = 0;
+		if (contains_dollars(string))
+			still_dollars = 1;
 		i = 0;
 		string = inner_loop(string, stru, &i); // TODO: check memory leak / free needed ?
 	}

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:34:31 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/29 17:08:40 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:49:47 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ char	*process_quotes(char *cop_line, char *str, t_struct *stru, int *i)
 		stru->line_pos += ft_strlen(app_str) + 1;
 	}
 	str = ft_concat(str, app_str);
-	//
 	free(app_str);
 	return (str);
 }
 
-char	*process_no_quotes(char *cop_line, char *str, int *i)
+char	*process_no_quotes(char *cop_line, char *str, t_struct *stru, int *i)
 {
 	char	*app_str;
 	int		n;
 
 	n = len_til_quote(cop_line + *i);
 	app_str = ft_substr(cop_line, *i, n);
+	app_str = dollars_expansion(app_str, stru);
 	*i += ft_strlen(app_str) - 1;
 	str = ft_concat(str, app_str);
 	(*i)++;
@@ -74,7 +74,7 @@ char	*line_expansion(char *line, t_struct *stru)
 		if (cop_line[i] == 39 || cop_line[i] == 34)
 			str = process_quotes(cop_line, str, stru, &i);
 		else if (cop_line[i] != 39 && cop_line[i] != 34)
-			str = process_no_quotes(cop_line, str, &i);
+			str = process_no_quotes(cop_line, str, stru, &i);
 	}
 	free(line);
 	free(cop_line);

@@ -24,10 +24,7 @@ int	len_til_quote(char *str)
 
 void	count_loop(char *string, int *i, int *var_len)
 {
-	while (string[*i] != 0 && (string[*i] != ' ' \
-		&& string[*i] != 't' && string[*i] != 'n' \
-		&& string[*i] != 'r' && string[*i] != 'v' \
-		&& string[*i] != 'f'))
+	while (ft_isalnum(string[*i]))
 	{
 		(*var_len)++;
 		(*i)++;
@@ -36,10 +33,7 @@ void	count_loop(char *string, int *i, int *var_len)
 
 void	write_loop(char *string, int *i, int *j, char *p_var)
 {
-	while (string[*i] != 0 && (string[*i] != ' ' \
-		&& string[*i] != 't' && string[*i] != 'n' \
-		&& string[*i] != 'r' && string[*i] != 'v' \
-		&& string[*i] != 'f'))
+	while (ft_isalnum(string[*i]))
 	{
 		p_var[*j] = string[*i];
 		(*i)++;

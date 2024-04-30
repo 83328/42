@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/24 16:34:11 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:31:14 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	one_offs(t_struct *stru)
 	add_history(stru->input);
 	init_vars(stru->vars);
 	set_null(stru);
+	stru->input = expand_questionmarks(stru->input, ft_getenv("?", 
+				stru->env_copy));
 }
 
 void	readline_and_check(t_struct *stru)
