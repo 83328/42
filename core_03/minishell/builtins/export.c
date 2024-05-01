@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:35:14 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/12 14:04:33 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 21:49:04 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,82 +24,51 @@ void	shift_env_copy(char **env_copy, int start_index)
 	}
 }
 
+char	*get_var(const char *input)
+{
+	const char	*equal_sign;
+	size_t		val_length;
+	char		*val; 
+
+	equal_sign = strchr(input, '=');
+	if (equal_sign == NULL)
+		return (NULL);
+	val_length = equal_sign - input;
+	val = (char *) malloc((val_length + 1) * sizeof(char));
+	if (val == NULL)
+		return (NULL);
+	strncpy(val, input, val_length);
+	val[val_length] = '\0';
+	return (val);
+}
+
 void	export_command(t_struct *stru, char **args)
 {
-	int	i;
+	int		i;
+	char	*value;
+	char	*var;
 
 	i = 1;
-	if (args == NULL)
+	while (args[i] != NULL)
 	{
-		return ;
-	}
-	if (args[i] == NULL)
-	{
-		return ;
-	}
-	while (args[i])
-	{
-		if (!is_valid_identifier(args[i]))
+		value = ft_strdup(args[i]);
+		var = get_var(value);
+		if (!one_equal(value) || !alnum_or_equal(value))
 		{
-			write(2, "export: `", 9);
-			write(2, args[i], strlen(args[i]));
-			write(2, "`: not a valid identifier\n", 27);
+			write(2, "wrong export args\n", 19);
+			free(value);
 			stru->exit_status = 1;
-			return ;
 		}
-		handle_existing_var(stru, args[i]);
+		else
+		{
+			if (ft_getenv(var, stru->env_copy) != NULL)
+				unset(stru->env_copy, var);
+			export_set(value, stru);
+		}
+		free(var);
 		i++;
 	}
 }
-
-/* void	export_command(t_struct *stru, char **args)
-{
-	char	*new_var;
-	int		i;
-
-	if (args == NULL || args[1] == NULL)
-		return ;
-	i = 0;
-	new_var = args[1];
-	if (!new_var)
-	{
-		fprintf(stderr, "Memory allocation failed \n");
-		return ;
-	}
-	while (stru->env_copy[i])
-		i++;
-	handle_new_var(stru, new_var, i);
-} */
-
-/* void	export_command(t_struct *stru, char **args)
-{
-	char	*new_var;
-	int		i;
-
-	if (args == NULL || args[1] == NULL)
-		return ;
-	i = 0;
-	new_var = args[1];
-	if (!new_var)
-	{
-		fprintf(stderr, "Memory allocation failed \n");
-		return ;
-	}
-	while (stru->env_copy[i])
-		i++;
-	if (i >= stru->env_copy_size - 1)
-	{
-		resize_env_copy(stru);
-		if (!stru->env_copy)
-		{
-			free(new_var);
-			fprintf(stderr, "Memory allocation failed \n");
-			return ;
-		}
-	}
-	stru->env_copy[i] = new_var;
-	stru->env_copy[i + 1] = NULL;
-} */
 
 void	resize_env_copy(t_struct *stru)
 {

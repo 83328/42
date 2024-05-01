@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:43:55 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/30 16:46:59 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:37:11 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ char	*replace_dollar_placeholder(char *input_str)
 
 int	contains_dollars(const char *str)
 {
-	while (*str != '\0')
+	int	i;
+
+	i = 0;
+	while (str && str[i] != '\0')
 	{
-		if (*str == '$')
+		if (str[i] == '$')
 		{
 			return (1);
 		}
-		str++;
+		i++;
 	}
 	return (0);
 }
@@ -89,7 +92,7 @@ char	*remove_var(char *str, char *value, int start, int var_len)
 		i++;
 		j++;
 	}
-	str[i] = 0;
+	blocktest(str, value, cop_line, i);
 	return (str);
 }
 
@@ -98,7 +101,7 @@ char	*inner_loop(char *string, t_struct *stru, int *i)
 	char	*p_var;
 	char	*p_val;
 
-	while (string[*i] != 0)
+	while (string && string[*i] != 0)
 	{
 		if (string[*i] == '$')
 		{
@@ -110,7 +113,7 @@ char	*inner_loop(char *string, t_struct *stru, int *i)
 				free (p_var);
 				break ;
 			}
-			string = remove_var(string, "", *i, ft_strlen(p_var));
+			string = remove_var(string, NULL, *i, ft_strlen(p_var));
 			free (p_var);
 			break ;
 		}

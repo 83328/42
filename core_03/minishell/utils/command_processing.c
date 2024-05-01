@@ -44,15 +44,15 @@ int	parse_commands(t_struct *stru, t_vars *vars)
 			vars->k++;
 		stru->reassembled_commands[vars->j] = \
 		line_expansion(concat_strings(stru->split_by_space, vars->k), stru);
+		free_2d(stru->split_by_space);
+		free(stru->split_by_space);
 		if (stru->reassembled_commands[vars->j] == NULL)
 			break ;
 		vars->i++;
 		vars->j++;
-		free_2d(stru->split_by_space);
-		free(stru->split_by_space);
 	}
 	terminate_filefds(stru, vars->i);
-	return (check_for_empty_comms(stru->reassembled_commands));
+	return (check_for_empty_comms(stru, stru->reassembled_commands));
 }
 
 void	process_command(t_struct *stru, int command_flag)
@@ -77,6 +77,7 @@ void	process_command(t_struct *stru, int command_flag)
 		else
 			printf("cd: HOME not set\n");
 	}
+	free_2d(split_command);
 	free(split_command);
 }
 

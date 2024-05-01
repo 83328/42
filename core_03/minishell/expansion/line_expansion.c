@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:34:31 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/30 16:24:41 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:54:39 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,24 @@ char	*line_expansion(char *line, t_struct *stru)
 	char	*str;
 	int		n;
 	int		i;
+	int		size_of_str;
 
 	cop_line = ft_strdup(line);
+	size_of_str = ft_strlen(cop_line);
 	i = 0;
 	n = 0;
 	while (cop_line[i] != 0 && cop_line[i] != 39 && cop_line[i] != 34)
 		increment(&n, &i, &(stru->line_pos));
 	str = ft_strndup(cop_line, n);
 	str = dollars_expansion(str, stru);
-	while (cop_line [i] && cop_line[i + 1] != 0)
+	while (i <= size_of_str && cop_line [i] && cop_line[i + 1] != 0)
 	{
 		if (cop_line[i] == 39 || cop_line[i] == 34)
 			str = process_quotes(cop_line, str, stru, &i);
 		else if (cop_line[i] != 39 && cop_line[i] != 34)
 			str = process_no_quotes(cop_line, str, stru, &i);
 	}
-	free(line);
-	free(cop_line);
-	cop_line = NULL;
+	free_malloced(line, cop_line);
 	str = replace_dollar_placeholder(str);
 	return (str);
 }
@@ -87,6 +87,8 @@ int	calculate_new_length(char *input_str, char *placeholder, char *dollar_sign)
 	int		placeholder_count;
 	char	*current;
 
+	if (!input_str)
+		return (0);
 	placeholder_count = 0;
 	current = strstr(input_str, placeholder);
 	while (current != NULL)

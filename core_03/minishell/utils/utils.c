@@ -32,7 +32,10 @@ void	free_loopend(t_struct *stru, int len)
 	free(stru->reassembled_commands);
 	free(stru->pids);
 	if (stru->exit_statuses != NULL)
+	{
 		free(stru->exit_statuses);
+		stru->exit_statuses = NULL;
+	}
 	if (stru->filefds != NULL)
 		free(stru->filefds);
 	if (stru->pipefds != NULL)
@@ -52,13 +55,19 @@ void	init_vars(t_vars *vars)
 	vars->len = 0;
 }
 
-int	check_for_empty_comms(char **strings)
+int	check_for_empty_comms(t_struct *stru, char **strings)
 {
 	int	i;
 
 	i = 0;
 	if (strings && strings[i] != NULL && strings[i][0] == '\0')
 	{
+		if (stru->reassembled_commands != NULL)
+		{
+			free_2d(stru->reassembled_commands);
+			free(stru->reassembled_commands);
+		}
+		free_mult(stru);
 		return (1);
 	}
 	while (strings[i] != NULL)

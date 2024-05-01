@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:30:25 by dgacic            #+#    #+#             */
-/*   Updated: 2024/04/30 18:20:24 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:56:37 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void		set(char *name, char *value, t_struct *stru);
 int			unset(char **env_cp, const char *varname);
 char		**split_into_tokens(char *command);
 void		resize_env_copy(t_struct *stru);
-char		**char2d_realloc(char **ptr, int size, int old_size);
+char		**char2d_realloc(char **ptr, int new_size, int old_size);
 char		*ft_str_revndup(const char *str, int n);
 int			contains_echo(char *str);
 char		*expand_var(char *str, char *value, int start, int var_len);
@@ -160,6 +160,11 @@ char		*replace_dollar_placeholder(char *input_str);
 char		*expand_questionmarks(char *str, const char *exitstr);
 void		throw_error(char *arg);
 void		exit_with_arg(t_struct *stru, char *arg);
+void		export_set(char *value, t_struct *stru);
+void		resize_env_copy(t_struct *stru);
+
+int			one_equal(const char *str);
+int			alnum_or_equal(const char *str);
 
 //expansion
 char		*inner_loop(char *string, t_struct *stru, int *i);
@@ -208,10 +213,11 @@ int			parse_commands(t_struct *stru, t_vars *vars);
 void		builtin_or_commands(t_struct *stru, t_vars *vars);
 void		exit_parse(t_struct *stru);
 t_struct	*startup(int argc, char *argv[], char *envp[], t_struct *stru);
-int			check_for_empty_comms(char **strings);
+int			check_for_empty_comms(t_struct *stru, char **strings);
 char		*reduce_quotes(char *str);
 void		process_command(t_struct *stru, int command_flag);
 char		*remove_quotes(char *arg);
+void		blocktest(char *str, char *value, char *cop_line, int i);
 
 //freeing.c
 void		free(void *ptr);
@@ -220,6 +226,7 @@ void		free_ufds(t_struct *stru);
 void		free_filefds(t_struct *stru);
 void		free_exit(t_struct *s);
 void		free_loopend(t_struct *stru, int len);
+void		free_malloced(char *line, char *cop_line);
 
 //freeing_a.c
 void		free_2d(char **array);
@@ -233,6 +240,8 @@ void		free_input_by_pipes(t_struct *s);
 void		free_pipefds(t_struct *s);
 void		free_single_pointers(t_struct *s);
 void		free_exit(t_struct *s);
+
+void		free_mult(t_struct *stru);
 
 int			len_til_quote(char *str);
 void		count_loop(char *string, int *i, int *var_len);
