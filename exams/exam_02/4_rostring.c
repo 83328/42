@@ -68,7 +68,7 @@ void	ft_rostring(char *str)
 int	main(int ac, char **av)
 {
 	if (ac >= 2)
-		ft_rostring(av[1]);malloc
+		ft_rostring(av[1]);
 		//passed the exam with this one, the subject was unclear about this
 	write (1, "\n", 1);
 }
