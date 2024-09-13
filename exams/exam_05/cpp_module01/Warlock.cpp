@@ -1,3 +1,7 @@
+/*****************************************************************
+********* This code passed the exam on September 13, 2024 ********
+*****************************************************************/
+
 #include "Warlock.hpp"
 
 Warlock::Warlock(std::string const &name, std::string const &title)

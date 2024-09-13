@@ -1,3 +1,7 @@
+/*****************************************************************
+********* This code passed the exam on September 13, 2024 ********
+*****************************************************************/
+
 #include "Warlock.hpp"
 #include "ASpell.hpp"
 #include "ATarget.hpp"
