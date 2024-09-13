@@ -4,7 +4,6 @@
 
 class Dummy : public ATarget
 {
-	
 	public:
 		Dummy();
 		ATarget* clone() const;

@@ -7,5 +7,5 @@ Dummy::Dummy() : ATarget("Target Practice Dummy")
 
 ATarget* Dummy::clone() const
 {
-	return (new Dummy(*this));
+	return(new Dummy(*this));
 }

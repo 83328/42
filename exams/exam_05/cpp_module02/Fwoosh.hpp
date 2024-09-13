@@ -4,9 +4,7 @@
 
 class Fwoosh : public ASpell
 {
-	
 	public:
 		Fwoosh();
 		ASpell* clone() const;
-
 };
