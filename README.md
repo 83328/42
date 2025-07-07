@@ -1,6 +1,6 @@
 # 42 School Projects
 
-Welcome to my 42 School project repository! This collection represents my journey through the curriculum of 42, a revolutionary coding school.
+Welcome to my 42 School project repository! This collection represents my journey through the curriculum of the coding school 42.
 
 ## What is 42 School?
 
@@ -17,13 +17,15 @@ The curriculum covers fundamental programming concepts, algorithms, system admin
 
 ## About This Repository
 
-This repository contains my projects from the 42 curriculum, organized by core levels:
+This repository contains my projects from the 42 curriculum, organized by core levels, represented by the circles in this overview of the curriculum (the center point is core_00, and the outer circle is core_06):
+![42 Curriculum](media/curriculum.png)
 
 - **00_basics/** - Introduction to C programming and basic concepts
 - **core_02/** - Advanced algorithms and data structures (push_swap, so_long)
 - **core_03/** - System programming and Unix concepts (minishell, philosophers)
 - **core_04/** - Object-oriented programming with C++ and graphics (cub3d)
 - **core_05/** - Advanced C++ concepts and exception handling
+- **core_06/** - Final core project (ft_transcendence), which can be found in a separate [repository](https://github.com/83328/pong_game)
 - **exams/** - Solutions to various exam exercises
 
 ## Learning Journey Disclaimer
